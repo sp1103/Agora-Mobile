@@ -1,3 +1,8 @@
+import 'package:agora_mobile/Pages/favorites_page.dart';
+import 'package:agora_mobile/Pages/home_page.dart';
+import 'package:agora_mobile/Pages/legislation_page.dart';
+import 'package:agora_mobile/Pages/politicain_page.dart';
+import 'package:agora_mobile/Pages/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class NavFrame extends StatefulWidget {
@@ -8,7 +13,15 @@ class NavFrame extends StatefulWidget {
 }
 
 class _NavState extends State<NavFrame> {
-  int _selectedIndex = 2; //Start on home page
+  int _selectedIndex = 2; // Start on home page
+  static const List<Widget> _widgetOptions = // All the pages for the bottom nav bar
+    <Widget>[
+      PoliticianPage(),
+      FavoritesPage(),
+      HomePage(),
+      LegislationPage(),
+      ProfilePage()
+    ];
 
   void _onMenuPressed() {
     //Add stuff that happens when the menu button is pressed
@@ -30,7 +43,7 @@ class _NavState extends State<NavFrame> {
         title: Image.asset('assets/Agora_Logo.png', width: 50, height: 50),
         
       ),
-      body: Center(child: Text("Hello from $_selectedIndex")),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.people), label: "Politicians"),

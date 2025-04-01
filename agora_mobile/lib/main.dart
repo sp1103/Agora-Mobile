@@ -1,4 +1,6 @@
+import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'nav_frame.dart';
 
 ///Starts Agora. Does Nothing else.
@@ -13,13 +15,16 @@ class Agora extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Agora Entry',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        useMaterial3: true,
+    return ChangeNotifierProvider(
+      create: (context) => AgoraAppState(),
+      child: MaterialApp(
+        title: 'Agora Entry',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+          useMaterial3: true,
+        ),
+        home: NavFrame()
       ),
-      home: NavFrame()
     );
   }
 }
