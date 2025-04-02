@@ -40,7 +40,7 @@ class _NavState extends State<NavFrame> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: _onMenuPressed, icon: Icon(Icons.menu, color: Colors.black)),
-        title: Image.asset('assets/Agora_Logo.png', width: 50, height: 50),
+        title: Image.asset('assets/Agora_Logo.png', width: 55, height: 55),
         
       ),
       body: Center(child: _widgetOptions.elementAt(_selectedIndex)),

@@ -7,6 +7,7 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     var app_state = context.watch<AgoraAppState>();
 
     return Text("Favorites");
