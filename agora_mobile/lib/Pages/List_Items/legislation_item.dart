@@ -32,20 +32,14 @@ class LegislationItem implements ListItem {
                 ),
               ],
             ),
-            SizedBox(
-              height: 8,      
-            ),
+            SizedBox(height: 8),
             Text(
               legislation.name,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.indigo),
             ),
-            SizedBox(
-              height: 8,      
-            ),
+            SizedBox(height: 8),
             Text(legislation.shortDescription),
-            SizedBox(
-              height: 8,      
-            ),
+            SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: legislation.issueCategories
@@ -55,9 +49,7 @@ class LegislationItem implements ListItem {
                 ))
               .toList()
             ),
-            SizedBox(
-              height: 10,
-            ),
+            SizedBox(height: 10),
             Row(
               children: [
                 IconButton(
