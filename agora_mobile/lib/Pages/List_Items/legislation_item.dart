@@ -1,6 +1,9 @@
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Types/legislation.dart';
+import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 class LegislationItem implements ListItem {
 
   final Legislation legislation;
@@ -9,6 +12,8 @@ class LegislationItem implements ListItem {
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<AgoraAppState>();
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 3,
@@ -53,8 +58,8 @@ class LegislationItem implements ListItem {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.add_circle, color: Colors.black),
+                  onPressed: () { appState.toggleFavorite(this); },
+                  icon: Icon(appState.isFavorite(this) ? Icons.check_circle : Icons.add_circle, color: Colors.black),
                 ),
                 IconButton(
                   onPressed: () {},

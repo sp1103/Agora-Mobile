@@ -25,4 +25,12 @@ class Legislation {
 
   Map<String, dynamic> toJson() => _$LegislationToJson(this);
 
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) || (other is Legislation && runtimeType == other.runtimeType && legislationID == other.legislationID);
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, legislationID);
+
 }

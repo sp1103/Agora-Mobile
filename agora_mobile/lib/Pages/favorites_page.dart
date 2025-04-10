@@ -7,11 +7,20 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    var app_state = context.watch<AgoraAppState>();
+    var appState = context.watch<AgoraAppState>();
+    var favorites = appState.favoritesList;
 
-    return Text("Favorites");
+    return ListView.builder(
+      restorationId: "favorites",
+      itemCount: favorites.length,
 
+      itemBuilder: (context, index) {
+        final item = favorites[index];
+
+        return ListTile(
+          title: item.build(context),
+        );
+      }
+    );
   }
-
 }
