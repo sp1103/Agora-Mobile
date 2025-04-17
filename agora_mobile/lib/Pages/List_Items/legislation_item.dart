@@ -24,30 +24,30 @@ class LegislationItem implements ListItem {
           children: [
             Row(
               children: [
-                Image.network(legislation.image, height: 24, width: 24.04),
+                Image.network(legislation.body_image, height: 24, width: 24.04),
                 Spacer(),
                 Text(
-                  legislation.govLevel,
+                  legislation.body,
                   style: TextStyle(fontWeight: FontWeight.bold)
                 ),
                 Spacer(flex: 20),
                 Text(
-                  "${legislation.date.month}.${legislation.date.day}.${legislation.date.year}",
+                  legislation.last_action_date,
                   style: TextStyle(color:Colors.black)
                 ),
               ],
             ),
             SizedBox(height: 8),
             Text(
-              legislation.name,
+              legislation.bill_name,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.indigo),
             ),
             SizedBox(height: 8),
-            Text(legislation.shortDescription),
+            Text(legislation.summary),
             SizedBox(height: 8),
             Wrap(
               spacing: 8,
-              children: legislation.issueCategories
+              children: legislation.interests_arr
                 .map((issueCategory) => Chip(
                   label: Text(issueCategory),
                   backgroundColor: Colors.grey.shade300,
@@ -71,7 +71,7 @@ class LegislationItem implements ListItem {
                 ),
                 Spacer(flex: 20),
                 Text(
-                  legislation.billNumber,
+                  legislation.bill_num.toString(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

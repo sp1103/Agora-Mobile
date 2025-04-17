@@ -24,10 +24,10 @@ class PoliticianItem implements ListItem {
           children: [
             Row(
               children: [
-                Image.network(politician.sealLink, height: 24, width: 24.04),
+                Image.network(politician.gov_body_image, height: 24, width: 24.04),
                 SizedBox(width: 2),
                 Text(
-                  politician.role,
+                  politician.leadership,
                   style: TextStyle(fontWeight: FontWeight.bold)
                 ),
               ],
@@ -37,7 +37,7 @@ class PoliticianItem implements ListItem {
               children: [
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage(politician.imageLink),
+                  backgroundImage: NetworkImage(politician.leg_image_path),
                 ),
                 SizedBox(width: 8),
                 Expanded(
@@ -45,11 +45,11 @@ class PoliticianItem implements ListItem {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        politician.name,
+                        politician.p_name,
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.indigo),
                       ),
                       SizedBox(height: 2),
-                      Text(politician.shortBio, softWrap: true, overflow: TextOverflow.ellipsis, maxLines: 3),
+                      Text(politician.summary, softWrap: true, overflow: TextOverflow.ellipsis, maxLines: 3),
                     ],
                   ),
                 ),

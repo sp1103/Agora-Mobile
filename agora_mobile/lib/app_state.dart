@@ -1,9 +1,11 @@
+import 'package:agora_mobile/Database/agora_remote.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
-import 'package:agora_mobile/Types/legislation.dart';
-import 'package:agora_mobile/Types/politician.dart';
+//import 'package:agora_mobile/Types/legislation.dart';
+//import 'package:agora_mobile/Types/politician.dart';
 import 'package:flutter/material.dart';
+//import 'dart:developer'; //For testing 
 
 class AgoraAppState extends ChangeNotifier{
 
@@ -17,33 +19,34 @@ class AgoraAppState extends ChangeNotifier{
 
   AgoraAppState() {
     //Load Database stuff here
-
+    getHome();
+    getPolician();
+    getLegislation();
 
     //Testing
-    home.clear();
-    legislation.clear();
-    politician.clear();
-    favorites.clear();
-    favoritesList.clear();
-    _loadDummyData();
+    //_loadDummyData();
   }
 
   /*
-  Update home page with new data from database
+  Gets a list depending on menu setting of trending
   */
-  void updateHome() {
+  void getHome() async{
+    home = await AgoraRemote.fetchTrendingBills();
+    notifyListeners();
   }
 
   /*
-  Update legislation page with new data from database
+  Gets all legislation in databse for startup
   */
-  void updateLegislation() {
+  void getLegislation() async {
+    legislation = await AgoraRemote.fetchBills();
   }
 
   /*
-  Update politician page with new data from database
+  Gets all politicians in database for startup
   */
-  void updatePolician() {
+  void getPolician() async {
+    politician = await AgoraRemote.fetchLegisltors();
   }
 
   /*
@@ -73,21 +76,21 @@ class AgoraAppState extends ChangeNotifier{
 
 // TESTING -----------------------------------------------------------------------------------------------------
 
-  void _loadDummyData() {
+  // void _loadDummyData() {
 
-    for (int i = 0; i < 20; i++) {
+  //   for (int i = 0; i < 20; i++) {
 
-      Legislation legislationDummy = Legislation(legislationID: i, billNumber: "H. R. 8281", name: "SAVE Act", shortDescription: "This bill requires individuals to provide documentary proof of U.S. citizenship in order to register to vote in federal elections.", date: DateTime(2024, 7, 10), fullContent: "h", govLevel: "US Congress", govLink: "h", state: "Federal", image: "https://tse1.mm.bing.net/th/id/OIP.DdPweGtpNTo-i9AmSE4lzwAAAA?rs=1&pid=ImgDetMain", issueCategories: ["Citizenship", "Voting"]);
-      Politician politicianDummy = Politician(politicianID: i, name: "Derek Brown", role: "Attorney General of Utah", imageLink: "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Derek_Brown.jpg", sealLink: "https://ballotpedia.s3.amazonaws.com/images/thumb/1/1f/UT_Atty_Gen_logo.JPG/225px-UT_Atty_Gen_logo.JPG", shortBio: "Derek Brown (Republican Party) is the Attorney General of Utah. He assumed office on January 7, 2025. His current term ends on January 1, 2029.", state: "Utah");
+  //     //Legislation legislationDummy = Legislation(legislationID: i, billNumber: "H. R. 8281", name: "SAVE Act", shortDescription: "This bill requires individuals to provide documentary proof of U.S. citizenship in order to register to vote in federal elections.", date: DateTime(2024, 7, 10), fullContent: "h", govLevel: "US Congress", govLink: "h", state: "Federal", image: "https://tse1.mm.bing.net/th/id/OIP.DdPweGtpNTo-i9AmSE4lzwAAAA?rs=1&pid=ImgDetMain", issueCategories: ["Citizenship", "Voting"]);
+  //     //Politician politicianDummy = Politician(politicianID: i, name: "Derek Brown", role: "Attorney General of Utah", imageLink: "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Derek_Brown.jpg", sealLink: "https://ballotpedia.s3.amazonaws.com/images/thumb/1/1f/UT_Atty_Gen_logo.JPG/225px-UT_Atty_Gen_logo.JPG", shortBio: "Derek Brown (Republican Party) is the Attorney General of Utah. He assumed office on January 7, 2025. His current term ends on January 1, 2029.", state: "Utah");
 
-      home.add(LegislationItem(legislationDummy));
-      home.add(PoliticianItem(politicianDummy));
+  //     //home.add(LegislationItem(legislationDummy));
+  //     //home.add(PoliticianItem(politicianDummy));
 
-      legislation.add(LegislationItem(legislationDummy));
+  //     //legislation.add(LegislationItem(legislationDummy));
 
-      politician.add(PoliticianItem(politicianDummy));
-    }
-    notifyListeners();
-  }
+  //     //politician.add(PoliticianItem(politicianDummy));
+  //   }
+  //   notifyListeners();
+  // }
 
 }
