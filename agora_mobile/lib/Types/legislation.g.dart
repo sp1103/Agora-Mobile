@@ -7,32 +7,26 @@ part of 'legislation.dart';
 // **************************************************************************
 
 Legislation _$LegislationFromJson(Map<String, dynamic> json) => Legislation(
-      legislationID: (json['legislationID'] as num).toInt(),
-      billNumber: json['billNumber'] as String,
-      name: json['name'] as String,
-      shortDescription: json['shortDescription'] as String,
-      date: DateTime.parse(json['date'] as String),
+      bill_id: (json['bill_id'] as num).toInt(),
+      bill_num: (json['bill_num'] as num).toInt(),
+      bill_name: json['bill_name'] as String,
+      summary: json['summary'] as String,
+      last_action_date: json['last_action_date'] as String,
       fullContent: json['fullContent'] as String?,
-      govLevel: json['govLevel'] as String,
-      govLink: json['govLink'] as String,
-      state: json['state'] as String,
-      image: json['image'] as String,
-      issueCategories: (json['issueCategories'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
+      bill_origin: json['bill_origin'] as String,
+      govLink: json['govLink'] as String?,
+      state: json['state'] as String?,
     );
 
 Map<String, dynamic> _$LegislationToJson(Legislation instance) =>
     <String, dynamic>{
-      'legislationID': instance.legislationID,
-      'billNumber': instance.billNumber,
-      'name': instance.name,
-      'shortDescription': instance.shortDescription,
-      'date': instance.date.toIso8601String(),
+      'bill_id': instance.bill_id,
+      'bill_num': instance.bill_num,
+      'bill_name': instance.bill_name,
+      'summary': instance.summary,
+      'last_action_date': instance.last_action_date,
       'fullContent': instance.fullContent,
-      'govLevel': instance.govLevel,
+      'bill_origin': instance.bill_origin,
       'govLink': instance.govLink,
       'state': instance.state,
-      'image': instance.image,
-      'issueCategories': instance.issueCategories,
     };

@@ -4,16 +4,15 @@ part 'politician.g.dart';
 @JsonSerializable()
 class Politician {
 
-  final int politicianID;
-  final String name;
-  final String role;
-  final String imageLink;
-  final String sealLink;
-  final String shortBio;
-  final String state;
+  final int pID;
+  final String p_name;
+  final String leadership;
+  final String leg_image_path;
+  final String gov_body_image = "https://tse3.mm.bing.net/th/id/OIP.DD5VbC2cx2pSmq6lcr_JaQHaHa?rs=1&pid=ImgDetMain";
+  final String summary = "A Politician";
   final String type = "politician";
 
-  Politician({required this.politicianID, required this.name, required this.role, required this.imageLink, required this.sealLink, required this.shortBio, required this.state});
+  Politician({required this.pID, required this.p_name, required this.leadership, required this.leg_image_path});
 
   factory Politician.fromJSON(Map<String, dynamic> json) => _$PoliticianFromJson(json);
 
@@ -21,9 +20,9 @@ class Politician {
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || (other is Politician && runtimeType == other.runtimeType && politicianID == other.politicianID);
+    return identical(this, other) || (other is Politician && runtimeType == other.runtimeType && pID == other.pID);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, politicianID);
+  int get hashCode => Object.hash(runtimeType, pID);
 }

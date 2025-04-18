@@ -7,22 +7,16 @@ part of 'politician.dart';
 // **************************************************************************
 
 Politician _$PoliticianFromJson(Map<String, dynamic> json) => Politician(
-      politicianID: (json['politicianID'] as num).toInt(),
-      name: json['name'] as String,
-      role: json['role'] as String,
-      imageLink: json['imageLink'] as String,
-      sealLink: json['sealLink'] as String,
-      shortBio: json['shortBio'] as String,
-      state: json['state'] as String,
+      pID: (json['pID'] as num).toInt(),
+      p_name: json['p_name'] as String,
+      leadership: json['leadership'] as String,
+      leg_image_path: json['leg_image_path'] as String,
     );
 
 Map<String, dynamic> _$PoliticianToJson(Politician instance) =>
     <String, dynamic>{
-      'politicianID': instance.politicianID,
-      'name': instance.name,
-      'role': instance.role,
-      'imageLink': instance.imageLink,
-      'sealLink': instance.sealLink,
-      'shortBio': instance.shortBio,
-      'state': instance.state,
+      'pID': instance.pID,
+      'p_name': instance.p_name,
+      'leadership': instance.leadership,
+      'leg_image_path': instance.leg_image_path,
     };

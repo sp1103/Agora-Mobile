@@ -2,6 +2,7 @@ import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 
 class LegislationItem implements ListItem {
@@ -24,30 +25,33 @@ class LegislationItem implements ListItem {
           children: [
             Row(
               children: [
-                Image.network(legislation.image, height: 24, width: 24.04),
+                Image.network(legislation.body_image, height: 24, width: 24.04),
                 Spacer(),
                 Text(
-                  legislation.govLevel,
+                  legislation.bill_origin,
                   style: TextStyle(fontWeight: FontWeight.bold)
                 ),
-                Spacer(flex: 20),
-                Text(
-                  "${legislation.date.month}.${legislation.date.day}.${legislation.date.year}",
-                  style: TextStyle(color:Colors.black)
-                ),
+                Spacer(flex: 2),
+                // Text(
+                //   legislation.last_action_date,
+                //   style: TextStyle(color:Colors.black)
+                // ),
               ],
             ),
             SizedBox(height: 8),
             Text(
-              legislation.name,
+              legislation.bill_name,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.indigo),
             ),
             SizedBox(height: 8),
-            Text(legislation.shortDescription),
+            SizedBox(
+              height: 100,
+              child: Html(data: legislation.summary)
+            ),
             SizedBox(height: 8),
             Wrap(
               spacing: 8,
-              children: legislation.issueCategories
+              children: legislation.interests_arr
                 .map((issueCategory) => Chip(
                   label: Text(issueCategory),
                   backgroundColor: Colors.grey.shade300,
@@ -71,7 +75,7 @@ class LegislationItem implements ListItem {
                 ),
                 Spacer(flex: 20),
                 Text(
-                  legislation.billNumber,
+                  legislation.bill_num.toString(),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
