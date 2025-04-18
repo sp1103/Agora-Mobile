@@ -10,7 +10,7 @@ class Legislation {
   final String summary; //The short description of a bill about 1 sentence
   final String last_action_date; //Date that the bill was updated 
   final String? fullContent; //Full content of the bill
-  final String body; //The goverment level US COngress, Utah Congress, etc. 
+  final String bill_origin; //The goverment level US COngress, Utah Congress, etc. 
   final String? govLink; //Link to gov site
   final String? state; //State of bill
   final String body_image = "https://tse3.mm.bing.net/th/id/OIP.DD5VbC2cx2pSmq6lcr_JaQHaHa?rs=1&pid=ImgDetMain"; //Crest of goverment level in URL
@@ -18,7 +18,7 @@ class Legislation {
   final String type = "legislation";
 
   Legislation({required this.bill_id, required this.bill_num, required this.bill_name, 
-  required this.summary, required this.last_action_date, this.fullContent, required this.body, 
+  required this.summary, required this.last_action_date, this.fullContent, required this.bill_origin, 
   this.govLink, this.state});
 
   factory Legislation.fromJSON(Map<String, dynamic> json) => _$LegislationFromJson(json);

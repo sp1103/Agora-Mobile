@@ -2,6 +2,7 @@ import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 
 class LegislationItem implements ListItem {
@@ -27,14 +28,14 @@ class LegislationItem implements ListItem {
                 Image.network(legislation.body_image, height: 24, width: 24.04),
                 Spacer(),
                 Text(
-                  legislation.body,
+                  legislation.bill_origin,
                   style: TextStyle(fontWeight: FontWeight.bold)
                 ),
-                Spacer(flex: 20),
-                Text(
-                  legislation.last_action_date,
-                  style: TextStyle(color:Colors.black)
-                ),
+                Spacer(flex: 2),
+                // Text(
+                //   legislation.last_action_date,
+                //   style: TextStyle(color:Colors.black)
+                // ),
               ],
             ),
             SizedBox(height: 8),
@@ -43,7 +44,10 @@ class LegislationItem implements ListItem {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.indigo),
             ),
             SizedBox(height: 8),
-            Text(legislation.summary),
+            SizedBox(
+              height: 100,
+              child: Html(data: legislation.summary)
+            ),
             SizedBox(height: 8),
             Wrap(
               spacing: 8,
