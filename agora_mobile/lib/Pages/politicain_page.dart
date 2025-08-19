@@ -2,6 +2,7 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// Creates a page that contains polticians 
 class PoliticianPage extends StatelessWidget {
   const PoliticianPage({super.key});
 

@@ -27,31 +27,26 @@ class AgoraAppState extends ChangeNotifier{
     //_loadDummyData();
   }
 
-  /*
-  Gets a list depending on menu setting of trending
-  */
+
+  /// Gets a list depending on menu setting of trending
   void getHome() async{
     home = await AgoraRemote.fetchTrendingBills();
     notifyListeners();
   }
 
-  /*
-  Gets all legislation in databse for startup
-  */
+
+  /// Gets all legislation in databse for startup
   void getLegislation() async {
     legislation = await AgoraRemote.fetchBills();
   }
 
-  /*
-  Gets all politicians in database for startup
-  */
+  /// Gets all politicians in database for startup
   void getPolician() async {
     politician = await AgoraRemote.fetchLegisltors();
   }
 
-  /*
-  Adds an item to favorties list if it isn't already or removes item from favorites list otherwise
-  */
+
+  /// Adds an item to favorties list if it isn't already or removes item from favorites list otherwise
   void toggleFavorite(ListItem selected) {
     if (favorites.contains(selected)) {
       favorites.remove(selected);
@@ -65,9 +60,8 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
   }
 
-  /*
-  Returns whether or not a ListItem is in the favorites set
-  */
+
+  /// Returns whether or not a ListItem is in the favorites set
   bool isFavorite(ListItem item) {
     return favorites.contains(item);
   }

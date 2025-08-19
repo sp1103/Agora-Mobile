@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'nav_frame.dart';
 
-///Starts Agora. Does Nothing else.
+/// Starts Agora. Does Nothing else.
 void main() {
   //WidgetsFlutterBinding.ensureInitialized();
   runApp(Agora());
 }
 
-///Simply creates the nav_frame which will hold the pages
+/// Simply creates the nav_frame which will hold the pages
 class Agora extends StatelessWidget {
   const Agora({super.key});
 
