@@ -2,6 +2,7 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// Creates the favorites page where items that had favorite toggled on will appear
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
 

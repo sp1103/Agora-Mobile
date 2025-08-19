@@ -4,12 +4,16 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
+/// This class implements an abstract ListItem. This one in particular contains a politician type and
+/// has the details on how to display a single politician object. (i.e. one row of data)
 class PoliticianItem implements ListItem {
 
-  final Politician politician;
+  final Politician politician; //The acutual data for the object is contained in a JSON serializable type
 
   PoliticianItem(this.politician);
 
+  //Builds the little card in the list for a single politician 
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AgoraAppState>();

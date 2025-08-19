@@ -2,6 +2,7 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// Creates a home page that contains a mix of trending legislation and polticians
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
