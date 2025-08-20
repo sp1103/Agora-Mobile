@@ -2,20 +2,25 @@ import 'package:agora_mobile/Database/agora_remote.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
-//import 'package:agora_mobile/Types/legislation.dart';
-//import 'package:agora_mobile/Types/politician.dart';
 import 'package:flutter/material.dart';
 //import 'dart:developer'; //For testing 
+//import 'package:agora_mobile/Types/legislation.dart';
+//import 'package:agora_mobile/Types/politician.dart';
 
 class AgoraAppState extends ChangeNotifier{
 
 
   //These will be what the pages are based on
-  var home = <ListItem>[]; //Items for the homepage
-  var legislation = <LegislationItem>[]; //Items for the legislation page
-  var politician = <PoliticianItem>[]; //Items for the politician page
-  Set<ListItem> favorites = {}; //Items for the favorites page optimized for fast lookup
-  var favoritesList = <ListItem>[]; //Items for the favorties page optimized for fast display
+  /// Items for the homepage
+  var home = <ListItem>[]; 
+  /// Items for the legislation page
+  var legislation = <LegislationItem>[];
+  /// Items for the politician page
+  var politician = <PoliticianItem>[]; 
+  /// Items for the favorites page optimized for fast lookup
+  Set<ListItem> favorites = {}; 
+  /// Items for the favorties page optimized for fast display
+  var favoritesList = <ListItem>[]; 
 
   AgoraAppState() {
     //Load Database stuff here
@@ -27,13 +32,11 @@ class AgoraAppState extends ChangeNotifier{
     //_loadDummyData();
   }
 
-
   /// Gets a list depending on menu setting of trending
   void getHome() async{
     home = await AgoraRemote.fetchTrendingBills();
     notifyListeners();
   }
-
 
   /// Gets all legislation in databse for startup
   void getLegislation() async {
@@ -44,7 +47,6 @@ class AgoraAppState extends ChangeNotifier{
   void getPolician() async {
     politician = await AgoraRemote.fetchLegisltors();
   }
-
 
   /// Adds an item to favorties list if it isn't already or removes item from favorites list otherwise
   void toggleFavorite(ListItem selected) {
@@ -59,7 +61,6 @@ class AgoraAppState extends ChangeNotifier{
     }
     notifyListeners();
   }
-
 
   /// Returns whether or not a ListItem is in the favorites set
   bool isFavorite(ListItem item) {
