@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 /// This class implements an abstract ListItem. This one in particular contains a legislation type and
 /// has the details on how to display a single legislation object. (i.e. one row of data)
 class LegislationItem implements ListItem {
-  final Legislation
-      legislation; //The acutual data for the object is contained in a JSON serializable type
+  
+  final Legislation legislation; //The acutual data for the object is contained in a JSON serializable type
 
   LegislationItem(this.legislation);
 

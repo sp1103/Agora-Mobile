@@ -26,7 +26,7 @@ class AgoraRemote {
     const startDate = "1900-01-01";
     var endDate = DateTime.now().toIso8601String().split("T")[0];
 
-    final url = Uri.parse('https://agoraserver.ddns.net:45288/api/get_legislators?start_date="$startDate"&end_date="$endDate"');
+    final url = Uri.parse('https://agoraserver.ddns.net:61941/api/get_legislators?start_date="$startDate"&end_date="$endDate"');
 
     final response = await httpClient.get(url);
 
@@ -46,7 +46,7 @@ class AgoraRemote {
     const startDate = "2023-01-01";
     var endDate = DateTime.now().toIso8601String().split("T")[0];
 
-    final url = Uri.parse('https://agoraserver.ddns.net:45288/api/get_bills?start_date="$startDate"&end_date="$endDate"');
+    final url = Uri.parse('https://agoraserver.ddns.net:61941/api/get_bills?start_date="$startDate"&end_date="$endDate"');
 
     final response = await httpClient.get(url);
 
@@ -63,7 +63,7 @@ class AgoraRemote {
 
   /// Returns a list of trending bills
   static Future<List<LegislationItem>> fetchTrendingBills() async {
-    final url = Uri.parse('https://agoraserver.ddns.net:45288/api/get_trending_legislation');
+    final url = Uri.parse('https://agoraserver.ddns.net:61941/api/get_trending_legislation');
 
     final response = await httpClient.get(url);
 
@@ -80,7 +80,7 @@ class AgoraRemote {
 
   /// Returns a list of trending politicians 
   static Future<List<PoliticianItem>> fetchTrendingPoliticians() async {
-    final url = Uri.parse('https://agoraserver.ddns.net:45288/api/get_trending_politicians');
+    final url = Uri.parse('https://agoraserver.ddns.net:61941/api/get_trending_politicians');
 
     final response = await httpClient.get(url);
 

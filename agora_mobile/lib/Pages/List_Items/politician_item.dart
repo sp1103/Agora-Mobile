@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 /// This class implements an abstract ListItem. This one in particular contains a politician type and
 /// has the details on how to display a single politician object. (i.e. one row of data)
 class PoliticianItem implements ListItem {
-  final Politician
-      politician; //The acutual data for the object is contained in a JSON serializable type
+  
+  final Politician politician; //The acutual data for the object is contained in a JSON serializable type
 
   PoliticianItem(this.politician);
 
