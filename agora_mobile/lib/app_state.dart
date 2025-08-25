@@ -3,10 +3,6 @@ import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
 import 'package:flutter/material.dart';
-//For testing 
-//import 'dart:developer';
-//import 'package:agora_mobile/Types/legislation.dart';
-//import 'package:agora_mobile/Types/politician.dart';
 
 class AgoraAppState extends ChangeNotifier{
 
@@ -28,9 +24,6 @@ class AgoraAppState extends ChangeNotifier{
     getHome();
     getPolician();
     getLegislation();
-
-    //Testing
-    //_loadDummyData();
   }
 
   /// Gets a list depending on menu setting of trending
@@ -49,6 +42,8 @@ class AgoraAppState extends ChangeNotifier{
   void getPolician() async {
     politician = await AgoraRemote.fetchLegisltors();
   }
+
+  // FAVORITES OPERATIONS ------------------------------------------------------------------------------------------
 
   /// Adds an item to favorties list if it isn't already or removes item from favorites list otherwise
   void toggleFavorite(ListItem selected) {
@@ -69,24 +64,8 @@ class AgoraAppState extends ChangeNotifier{
     return favorites.contains(item);
   }
 
+  // NAVIGATION ---------------------------------------------------------------------------------------------------
 
-
-// TESTING -----------------------------------------------------------------------------------------------------
-
-  // void _loadDummyData() {
-
-  //   for (int i = 0; i < 20; i++) {
-
-  //     Legislation legislationDummy = Legislation(bill_id: i, bill_num: 8281, bill_name: "SAVE Act", summary: "This bill requires individuals to provide documentary proof of U.S. citizenship in order to register to vote in federal elections.", last_action_date: "7-10-24", fullContent: "h", bill_origin: "US Congress", govLink: "h", state: "Federal");
-  //     Politician politicianDummy = Politician(pID: i, p_name: "Derek Brown", leadership: "Attorney General of Utah", leg_image_path: "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Derek_Brown.jpg");
-  //     home.add(LegislationItem(legislationDummy));
-  //     home.add(PoliticianItem(politicianDummy));
-
-  //     legislation.add(LegislationItem(legislationDummy));
-
-  //     politician.add(PoliticianItem(politicianDummy));
-  //   }
-  //   notifyListeners();
-  // }
+  
 
 }
