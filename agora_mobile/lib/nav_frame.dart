@@ -28,11 +28,13 @@ class NavFrame extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: appState.navigationMenuPressed, icon: Icon(Icons.menu, color: Colors.black)), //Creates the three line menu button
+        leading: appState.detailPage == null 
+        ? IconButton(onPressed: appState.navigationMenuPressed, icon: Icon(Icons.menu, color: Colors.black)) //If there is no details page show a menu button
+        : IconButton(onPressed: appState.closeDetails, icon: Icon(Icons.arrow_back, color: Colors.black)), //If details page show back button
         title: Image.asset('assets/Agora_Logo.png', width: 55, height: 55), //Adds the Agora logo
         
       ),
-      body: Center(child: _widgetOptions.elementAt(appState.navigationIndex)), //Creates the bottom bar with the icons for the pages
+      body: Center(child: appState.detailPage ?? _widgetOptions.elementAt(appState.navigationIndex)), //Creates the bottom bar with the icons for the pages or the details page
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.people), label: "Politicians"),
@@ -46,7 +48,7 @@ class NavFrame extends StatelessWidget {
         selectedItemColor: const Color.fromARGB(255, 0, 60, 163),
         unselectedItemColor: Colors.black,
         onTap: appState.navigationItemTapped,
-      ),
+      ), //Show nothing if details page is showing
     );
   }  
 }

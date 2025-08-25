@@ -1,3 +1,4 @@
+import 'package:agora_mobile/Pages/Dynamic_Pages/dynamic_legislation.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/app_state.dart';
@@ -31,7 +32,7 @@ class LegislationItem implements ListItem {
       elevation: 3,
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () {},
+        onTap: () {appState.openDetails(DynamicLegislation(legislation: legislation));},
         splashColor: Colors.blue.withAlpha(30),
         child: Padding(
           padding: const EdgeInsets.all(12.0),

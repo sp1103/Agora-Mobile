@@ -19,6 +19,8 @@ class AgoraAppState extends ChangeNotifier{
   var favoritesList = <ListItem>[]; 
   /// Index of what page in navigation we are on
   int navigationIndex = 2; // Start on home page
+  /// The detail page if applicable
+  Widget? detailPage;
 
   AgoraAppState() {
     //Load Database stuff here
@@ -74,6 +76,17 @@ class AgoraAppState extends ChangeNotifier{
   /// When an icon is tapped update which view we are on
   void navigationItemTapped(int index) {
     navigationIndex = index;
+    detailPage = null;
+    notifyListeners();
+  }
+
+  void openDetails(Widget page) {
+    detailPage = page;
+    notifyListeners();
+  }
+
+  void closeDetails() {
+    detailPage = null; 
     notifyListeners();
   }
 

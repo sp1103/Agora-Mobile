@@ -1,3 +1,4 @@
+import 'package:agora_mobile/Pages/Dynamic_Pages/dynamic_politician.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/app_state.dart';
@@ -30,7 +31,7 @@ class PoliticianItem implements ListItem {
       elevation: 3,
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () {},
+        onTap: () {appState.openDetails(DynamicPolitician(politician: politician));},
         splashColor: Colors.blue.withAlpha(30),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
