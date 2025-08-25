@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 class AgoraAppState extends ChangeNotifier{
 
-
   //These will be what the pages are based on
   /// Items for the homepage
   var home = <ListItem>[]; 
@@ -18,6 +17,8 @@ class AgoraAppState extends ChangeNotifier{
   Set<Object> favorites = {}; 
   /// Items for the favorties page optimized for fast display
   var favoritesList = <ListItem>[]; 
+  /// Index of what page in navigation we are on
+  int navigationIndex = 2; // Start on home page
 
   AgoraAppState() {
     //Load Database stuff here
@@ -66,6 +67,15 @@ class AgoraAppState extends ChangeNotifier{
 
   // NAVIGATION ---------------------------------------------------------------------------------------------------
 
-  
+  void navigationMenuPressed() {
+    //Add stuff that happens when the menu button is pressed
+  }
+
+  /// When an icon is tapped update which view we are on
+  void navigationItemTapped(int index) {
+    navigationIndex = index;
+    notifyListeners();
+  }
+
 
 }
