@@ -48,7 +48,7 @@ class NavFrame extends StatelessWidget {
         selectedItemColor: const Color.fromARGB(255, 0, 60, 163),
         unselectedItemColor: Colors.black,
         onTap: appState.navigationItemTapped,
-      ), //Show nothing if details page is showing
+      ),
     );
   }  
 }

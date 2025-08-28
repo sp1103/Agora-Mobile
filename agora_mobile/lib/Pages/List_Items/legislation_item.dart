@@ -5,6 +5,7 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 /// This class implements an abstract ListItem. This one in particular contains a legislation type and
 /// has the details on how to display a single legislation object. (i.e. one row of data)
@@ -41,7 +42,13 @@ class LegislationItem implements ListItem {
             children: [
               Row(
                 children: [
-                  Image.network(legislation.body_image, height: 24, width: 24.04),
+                  CachedNetworkImage(
+                    imageUrl: legislation.body_image,
+                    height: 24,
+                    width: 24.04,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
+                  ),
                   Spacer(),
                   Text(legislation.bill_origin,
                       style: TextStyle(fontWeight: FontWeight.bold)),

@@ -4,6 +4,7 @@ import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 /// This class implements an abstract ListItem. This one in particular contains a politician type and
 /// has the details on how to display a single politician object. (i.e. one row of data)
@@ -40,8 +41,13 @@ class PoliticianItem implements ListItem {
             children: [
               Row(
                 children: [
-                  Image.network(politician.gov_body_image,
-                      height: 24, width: 24.04),
+                  CachedNetworkImage(
+                    imageUrl: politician.gov_body_image,
+                    height: 24,
+                    width: 24.04,
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
+                  ),
                   SizedBox(width: 2),
                   Text(politician.leadership,
                       style: TextStyle(fontWeight: FontWeight.bold)),
@@ -52,7 +58,7 @@ class PoliticianItem implements ListItem {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: NetworkImage(politician.leg_image_path),
+                    backgroundImage: CachedNetworkImageProvider(politician.leg_image_path)
                   ),
                   SizedBox(width: 8),
                   Expanded(

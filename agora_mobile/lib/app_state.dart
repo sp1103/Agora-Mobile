@@ -80,15 +80,16 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
   }
 
+  /// Opens the details page of a selected item
   void openDetails(Widget page) {
     detailPage = page;
     notifyListeners();
   }
 
+  /// Closes the details page of an item
   void closeDetails() {
     detailPage = null; 
     notifyListeners();
   }
-
 
 }
