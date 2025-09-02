@@ -31,7 +31,7 @@ class Legislation {
   final String bill_origin; 
   final String? govLink; 
   final String? state; 
-  final String body_image = "https://tse3.mm.bing.net/th/id/OIP.DD5VbC2cx2pSmq6lcr_JaQHaHa?rs=1&pid=ImgDetMain"; 
+  final String? body_image; 
   final List<String> interests_arr = []; 
   final String type = "legislation"; //Used only for hashing
 
@@ -39,7 +39,7 @@ class Legislation {
   //All of this is things required for the JSON
   Legislation({required this.bill_id, required this.bill_num, required this.bill_name, 
   required this.summary, required this.last_action_date, this.fullContent, required this.bill_origin, 
-  this.govLink, this.state});
+  this.govLink, this.state, required this.body_image});
 
   factory Legislation.fromJSON(Map<String, dynamic> json) => _$LegislationFromJson(json);
 

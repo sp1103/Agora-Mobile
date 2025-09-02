@@ -32,7 +32,7 @@ class AgoraAppState extends ChangeNotifier{
   /// Gets a list depending on menu setting of trending
   void getHome() async{
     home.addAll(await AgoraRemote.fetchTrendingBills());
-    //home.addAll(await AgoraRemote.fetchTrendingPoliticians());
+    home.addAll(await AgoraRemote.fetchTrendingPoliticians());
     notifyListeners();
   }
 

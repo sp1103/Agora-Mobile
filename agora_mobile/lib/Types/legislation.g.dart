@@ -16,6 +16,7 @@ Legislation _$LegislationFromJson(Map<String, dynamic> json) => Legislation(
       bill_origin: json['bill_origin'] as String,
       govLink: json['govLink'] as String?,
       state: json['state'] as String?,
+      body_image: json['body_image'] as String?,
     );
 
 Map<String, dynamic> _$LegislationToJson(Legislation instance) =>
@@ -29,4 +30,5 @@ Map<String, dynamic> _$LegislationToJson(Legislation instance) =>
       'bill_origin': instance.bill_origin,
       'govLink': instance.govLink,
       'state': instance.state,
+      'body_image': instance.body_image,
     };

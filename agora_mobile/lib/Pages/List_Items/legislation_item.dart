@@ -42,13 +42,9 @@ class LegislationItem implements ListItem {
             children: [
               Row(
                 children: [
-                  CachedNetworkImage(
-                    imageUrl: legislation.body_image,
-                    height: 24,
-                    width: 24.04,
-                    placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
-                  ),
+                  Uri.parse(legislation.body_image ?? '').isAbsolute
+                  ? CachedNetworkImage(imageUrl: legislation.body_image ?? '', height: 24, width: 24.04)
+                  : Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
                   Spacer(),
                   Text(legislation.bill_origin,
                       style: TextStyle(fontWeight: FontWeight.bold)),

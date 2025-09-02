@@ -41,13 +41,9 @@ class PoliticianItem implements ListItem {
             children: [
               Row(
                 children: [
-                  CachedNetworkImage(
-                    imageUrl: politician.gov_body_image,
-                    height: 24,
-                    width: 24.04,
-                    placeholder: (context, url) => CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
-                  ),
+                  Uri.parse(politician.gov_body_image ?? '').isAbsolute
+                  ? CachedNetworkImage(imageUrl: politician.gov_body_image!, height: 24, width: 24.04)
+                  : Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
                   SizedBox(width: 2),
                   Text(politician.leadership,
                       style: TextStyle(fontWeight: FontWeight.bold)),
@@ -58,7 +54,10 @@ class PoliticianItem implements ListItem {
                 children: [
                   CircleAvatar(
                     radius: 40,
-                    backgroundImage: CachedNetworkImageProvider(politician.leg_image_path)
+                    backgroundImage: 
+                    Uri.parse(politician.leg_image_path ?? '').isAbsolute
+                    ? CachedNetworkImageProvider(politician.leg_image_path!)
+                    : const AssetImage('assets/No_Photo.png'),
                   ),
                   SizedBox(width: 8),
                   Expanded(

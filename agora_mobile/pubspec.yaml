@@ -66,6 +66,8 @@ flutter:
 
   assets:
     - assets/Agora_Logo.png
+    - assets/US_Seal.png
+    - assets/No_Photo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
