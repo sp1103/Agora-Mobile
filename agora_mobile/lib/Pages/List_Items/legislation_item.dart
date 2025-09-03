@@ -79,7 +79,7 @@ class LegislationItem implements ListItem {
                 children: [
                   IconButton(
                     onPressed: () {
-                      appState.toggleFavorite(this);
+                      appState.toggleFavorite(this, legislation.bill_id, legislation.type, false);
                     },
                     icon: Icon(
                         appState.isFavorite(this)

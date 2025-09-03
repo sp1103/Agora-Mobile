@@ -86,7 +86,7 @@ class PoliticianItem implements ListItem {
                 children: [
                   IconButton(
                     onPressed: () {
-                      appState.toggleFavorite(this);
+                      appState.toggleFavorite(this, politician.pID, politician.type, false);
                     },
                     icon: Icon(
                         appState.isFavorite(this)

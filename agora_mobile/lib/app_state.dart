@@ -1,3 +1,4 @@
+import 'package:agora_mobile/Database/agora_local.dart';
 import 'package:agora_mobile/Database/agora_remote.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
@@ -24,6 +25,7 @@ class AgoraAppState extends ChangeNotifier{
 
   AgoraAppState() {
     //Load Database stuff here
+    loadFavorites();
     getHome();
     getPolician();
     getLegislation();
@@ -49,15 +51,19 @@ class AgoraAppState extends ChangeNotifier{
   // FAVORITES OPERATIONS ------------------------------------------------------------------------------------------
 
   /// Adds an item to favorties list if it isn't already or removes item from favorites list otherwise
-  void toggleFavorite(ListItem selected) {
+  void toggleFavorite(ListItem selected, int id, String type, bool loading) {
     if (favorites.contains(selected)) {
       favorites.remove(selected);
       favoritesList.remove(selected);
-      //update local database
+      if (!loading) {
+        AgoraLocal.removeFavorite(id);
+      }
     } else {
       favorites.add(selected);
       favoritesList.add(selected);
-      //update local database
+      if (!loading) {
+        AgoraLocal.insertFavorite(id, type);
+      }
     }
     notifyListeners();
   }
@@ -69,7 +75,19 @@ class AgoraAppState extends ChangeNotifier{
 
   // FAVORITES DATABASE OPERATIONS --------------------------------------------------------------------------------
 
-  
+  /// Load favorites from Agora local database
+  void loadFavorites() async {
+    var favoriteMaps = await AgoraLocal.getFavorites();
+
+    for (var favoriteMap in favoriteMaps) {
+      if (favoriteMap["type"] == "legislation") {
+        toggleFavorite(await AgoraRemote.getBillByID(favoriteMap["id"]), 0, "", true);
+      }
+      else {
+        toggleFavorite(await AgoraRemote.getPoliticianByID(favoriteMap["id"]), 0, "", true);
+      }
+    }
+  }
 
   // NAVIGATION ---------------------------------------------------------------------------------------------------
 
