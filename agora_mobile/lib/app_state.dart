@@ -67,6 +67,10 @@ class AgoraAppState extends ChangeNotifier{
     return favorites.contains(item);
   }
 
+  // FAVORITES DATABASE OPERATIONS --------------------------------------------------------------------------------
+
+  
+
   // NAVIGATION ---------------------------------------------------------------------------------------------------
 
   void navigationMenuPressed() {
