@@ -11,8 +11,22 @@ class ProfilePage extends StatelessWidget {
     // ignore: unused_local_variable
     var appState = context.watch<AgoraAppState>();
 
-    return Text("Profile");
-
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
+        child: Column(
+          children: [
+            Center(
+              child: Row(
+                children: [
+                  Image.asset('assets/Agora_Logo.png', width: 100, height: 100),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
 }

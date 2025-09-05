@@ -1,11 +1,13 @@
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'nav_frame.dart';
 
 /// Starts Agora. Does Nothing else.
-void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(Agora());
 }
 
@@ -18,6 +20,7 @@ class Agora extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => AgoraAppState(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Agora Entry',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
