@@ -7,18 +7,28 @@ part of 'politician.dart';
 // **************************************************************************
 
 Politician _$PoliticianFromJson(Map<String, dynamic> json) => Politician(
-      pID: (json['pID'] as num).toInt(),
-      p_name: json['p_name'] as String,
-      leadership: json['leadership'] as String,
-      leg_image_path: json['leg_image_path'] as String?,
-      gov_body_image: json['gov_body_image'] as String?,
+      bio_id: json['bio_id'] as String,
+      chamber: json['chamber'] as String,
+      congress: (json['congress'] as num).toInt(),
+      current_title: json['current_title'] as String,
+      district: (json['district'] as num).toInt(),
+      image_url: json['image_url'] as String?,
+      name: json['name'] as String,
+      party: json['party'] as String,
+      start_date: json['start_date'] as String,
+      state: json['state'] as String,
     );
 
 Map<String, dynamic> _$PoliticianToJson(Politician instance) =>
     <String, dynamic>{
-      'pID': instance.pID,
-      'p_name': instance.p_name,
-      'leadership': instance.leadership,
-      'leg_image_path': instance.leg_image_path,
-      'gov_body_image': instance.gov_body_image,
+      'bio_id': instance.bio_id,
+      'chamber': instance.chamber,
+      'congress': instance.congress,
+      'current_title': instance.current_title,
+      'district': instance.district,
+      'image_url': instance.image_url,
+      'name': instance.name,
+      'party': instance.party,
+      'start_date': instance.start_date,
+      'state': instance.state,
     };

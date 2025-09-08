@@ -5,7 +5,6 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 /// This class implements an abstract ListItem. This one in particular contains a legislation type and
 /// has the details on how to display a single legislation object. (i.e. one row of data)
@@ -42,12 +41,14 @@ class LegislationItem implements ListItem {
             children: [
               Row(
                 children: [
-                  Uri.parse(legislation.body_image ?? '').isAbsolute
-                  ? CachedNetworkImage(imageUrl: legislation.body_image ?? '', height: 24, width: 24.04)
-                  : Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
+                  Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
                   Spacer(),
-                  Text(legislation.bill_origin,
-                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    legislation.type == "s"
+                    ? "Senate"
+                    : "House of Repersentatives",
+                    style: TextStyle(fontWeight: FontWeight.bold)
+                  ),
                   Spacer(flex: 2),
                   // Text(
                   //   legislation.last_action_date,
@@ -57,7 +58,7 @@ class LegislationItem implements ListItem {
               ),
               SizedBox(height: 8),
               Text(
-                legislation.bill_name,
+                legislation.title,
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -66,20 +67,20 @@ class LegislationItem implements ListItem {
               SizedBox(height: 8),
               SizedBox(height: 100, child: Html(data: legislation.summary)),
               SizedBox(height: 8),
-              Wrap(
-                  spacing: 8,
-                  children: legislation.interests_arr
-                      .map((issueCategory) => Chip(
-                            label: Text(issueCategory),
-                            backgroundColor: Colors.grey.shade300,
-                          ))
-                      .toList()),
+              // Wrap(
+              //     spacing: 8,
+              //     children: legislation.interests_arr
+              //         .map((issueCategory) => Chip(
+              //               label: Text(issueCategory),
+              //               backgroundColor: Colors.grey.shade300,
+              //             ))
+              //         .toList()),
               SizedBox(height: 10),
               Row(
                 children: [
                   IconButton(
                     onPressed: () {
-                      appState.toggleFavorite(this, legislation.bill_id, legislation.type, false);
+                      appState.toggleFavorite(this);
                     },
                     icon: Icon(
                         appState.isFavorite(this)
@@ -97,7 +98,7 @@ class LegislationItem implements ListItem {
                   ),
                   Spacer(flex: 20),
                   Text(
-                    legislation.bill_num.toString(),
+                    legislation.number.toString(),
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],

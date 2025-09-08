@@ -13,7 +13,7 @@ class DynamicLegislation extends StatelessWidget{
   Widget build(BuildContext context) {
     //var appState = context.watch<AgoraAppState>();
 
-    return Text(legislation.bill_name);
+    return Text(legislation.title);
   }
 
 }

@@ -9,25 +9,37 @@ part 'politician.g.dart';
 /// Creates a poltician object that holds all info related to a politician that is generated via JSON from the 
 /// database
 /// 
-///  * pID - ID# of the politician
-///  * p_name - the politician name
-///  * leadership - position in government
-///  * leg_image_path - URL to image of politician
-///  * gov_body_image - Crest of goverment level in URL
-///  * summary - Info about the politician 
+///  * bio_id - ID# of the politician
+///  * chamber - position in government
+///  * congress - session of congress
+///  * current_title - current leadership role
+///  * district - the district they repersent
+///  * img_url - URL to image of politician
+///  * name - the politician name
+///  * party - their party
+///  * starte_date - date they started
+///  * state - state they repersent
 class Politician {
 
-  final int pID;
-  final String p_name;
-  final String leadership;
-  final String? leg_image_path;
-  final String? gov_body_image;
-  final String summary = "A Politician";
+  final String bio_id;
+  final String chamber;
+  // Comitties
+  final int congress;
+  final String current_title;
+  final int district;
+  final String? image_url;
+  final String name;
+  final String party;
+  final String start_date;
+  final String state;
+  // terms_served
   final String type = "politician";
 
 
   //All of this is things required for the JSON Converter
-  Politician({required this.pID, required this.p_name, required this.leadership, required this.leg_image_path, required this.gov_body_image});
+  Politician({required this.bio_id, required this.chamber, required this.congress, required this.current_title, 
+  required this.district, this.image_url, required this.name, required this.party, required this.start_date,
+  required this.state});
 
   factory Politician.fromJSON(Map<String, dynamic> json) => _$PoliticianFromJson(json);
 
@@ -36,10 +48,10 @@ class Politician {
   /// Returns true if two politicians are the same item
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || (other is Politician && runtimeType == other.runtimeType && pID == other.pID);
+    return identical(this, other) || (other is Politician && runtimeType == other.runtimeType && bio_id == other.bio_id);
   }
 
   /// Returns an int for the hash code of a politician object
   @override
-  int get hashCode => Object.hash(runtimeType, pID);
+  int get hashCode => Object.hash(runtimeType, bio_id);
 }

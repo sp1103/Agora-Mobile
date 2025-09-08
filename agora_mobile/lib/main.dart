@@ -8,17 +8,22 @@ import 'nav_frame.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(Agora());
+
+  final appState = AgoraAppState();
+  appState.init();
+
+  runApp(Agora(appState: appState));
 }
 
 /// Simply creates the nav_frame which will hold the pages
 class Agora extends StatelessWidget {
-  const Agora({super.key});
+  final AgoraAppState appState;
+  const Agora({super.key, required this.appState});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AgoraAppState(),
+    return ChangeNotifierProvider.value(
+      value: appState,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Agora Entry',

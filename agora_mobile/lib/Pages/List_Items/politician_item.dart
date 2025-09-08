@@ -41,11 +41,9 @@ class PoliticianItem implements ListItem {
             children: [
               Row(
                 children: [
-                  Uri.parse(politician.gov_body_image ?? '').isAbsolute
-                  ? CachedNetworkImage(imageUrl: politician.gov_body_image!, height: 24, width: 24.04)
-                  : Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
+                  Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
                   SizedBox(width: 2),
-                  Text(politician.leadership,
+                  Text(politician.current_title,
                       style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
@@ -55,8 +53,8 @@ class PoliticianItem implements ListItem {
                   CircleAvatar(
                     radius: 40,
                     backgroundImage: 
-                    Uri.parse(politician.leg_image_path ?? '').isAbsolute
-                    ? CachedNetworkImageProvider(politician.leg_image_path!)
+                    Uri.parse(politician.image_url ?? '').isAbsolute
+                    ? CachedNetworkImageProvider(politician.image_url!)
                     : const AssetImage('assets/No_Photo.png'),
                   ),
                   SizedBox(width: 8),
@@ -65,17 +63,13 @@ class PoliticianItem implements ListItem {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          politician.p_name,
+                          politician.name,
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.indigo),
                         ),
                         SizedBox(height: 2),
-                        Text(politician.summary,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3),
                       ],
                     ),
                   ),
@@ -86,7 +80,7 @@ class PoliticianItem implements ListItem {
                 children: [
                   IconButton(
                     onPressed: () {
-                      appState.toggleFavorite(this, politician.pID, politician.type, false);
+                      appState.toggleFavorite(this);
                     },
                     icon: Icon(
                         appState.isFavorite(this)

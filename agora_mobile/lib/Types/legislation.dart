@@ -10,36 +10,34 @@ part 'legislation.g.dart';
 /// database
 /// 
 /// * bill_id - Unique id for legislation
-/// * bill_num - The number of the bill
-/// * bill_name - The name of the bill
+/// * congress - session of congress
+/// * intro_date - date the bill was introduced
+/// * number - The number of the bill
+/// * stautus - Status of bill
+/// * status_update_date - Date that the bill was updated
 /// * summary - The short description of a bill
-/// * last_action_date - Date that the bill was updated
-/// * fullContent - Full content of the bill
-/// * bill_orgin - The goverment level US COngress, Utah Congress, etc.
-/// * govLink - Link to gov site
-/// * state - State of bill
-/// * body_image - Crest of goverment level in URL
-/// * interests_arr - Categories it falls in i.e. Citizenship, Voting, etc.
+/// * title - The name of the bill
+/// * type - The goverment level US COngress, Utah Congress, etc.
 class Legislation {
 
   final int bill_id;
-  final int bill_num; 
-  final String bill_name; 
+  final int congress;
+  final String intro_date;
+  final int number; 
+  // Sponsor ids 
+  final String status; 
+  final String status_update_date;
   final String summary; 
-  final String last_action_date;
-  final String? fullContent;
-  final String bill_origin; 
-  final String? govLink; 
-  final String? state; 
-  final String? body_image; 
-  final List<String> interests_arr = []; 
-  final String type = "legislation"; //Used only for hashing
+  final String title; 
+  // Topics
+  final String type;
+  final String hashType = "legislation"; //Used only for hashing
 
 
   //All of this is things required for the JSON
-  Legislation({required this.bill_id, required this.bill_num, required this.bill_name, 
-  required this.summary, required this.last_action_date, this.fullContent, required this.bill_origin, 
-  this.govLink, this.state, required this.body_image});
+  Legislation({required this.bill_id, required this.congress, required this.intro_date, 
+  required this.number, required this.status, required this.status_update_date, required this.summary, 
+  required this.title, required this.type});
 
   factory Legislation.fromJSON(Map<String, dynamic> json) => _$LegislationFromJson(json);
 

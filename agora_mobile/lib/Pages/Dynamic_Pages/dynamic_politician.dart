@@ -13,6 +13,6 @@ class DynamicPolitician extends StatelessWidget{
   Widget build(BuildContext context) {
     //var appState = context.watch<AgoraAppState>();
 
-    return Text(politician.p_name);
+    return Text(politician.name);
   }
 }

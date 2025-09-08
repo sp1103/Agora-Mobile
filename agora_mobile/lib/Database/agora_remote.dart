@@ -11,16 +11,15 @@ class AgoraRemote {
 
   /// Returns a list of politicians from the database
   static Future<List<PoliticianItem>> fetchLegisltors() async {
-    const startDate = "1900-01-01";
-    var endDate = DateTime.now().toIso8601String().split("T")[0];
-
-    final url = Uri.parse('https://piece-o-pi.com/api/get_legislators?start_date="$startDate"&end_date="$endDate"');
+    var year = DateTime.now().year.toString();
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?start_year="$year"');
 
     final response = await http.get(url);
 
-    final List<dynamic> data = jsonDecode(response.body);
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["members"] ?? [];
     final items = data
-      .where((json) => json is Map && json.containsKey("pID"))
+      .where((json) => json is Map && json.containsKey("bio_id"))
       .map((json) {
         final politician = Politician.fromJSON(json);
         return PoliticianItem(politician);
@@ -31,10 +30,10 @@ class AgoraRemote {
 
   /// Returns a list of bills from the database
   static Future<List<LegislationItem>> fetchBills() async {
-    const startDate = "2023-01-01";
+    const startDate = "2000-01-01";
     var endDate = DateTime.now().toIso8601String().split("T")[0];
 
-    final url = Uri.parse('https://piece-o-pi.com/api/get_bills?start_date="$startDate"&end_date="$endDate"');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_bills?intro_date=["$startDate","$endDate"]');
 
     final response = await http.get(url);
 
@@ -49,39 +48,14 @@ class AgoraRemote {
     return items;
   }
 
-  /// Returns a bill with the specified bill id
-  static Future<LegislationItem> getBillByID(int id) async {
-    final url = Uri.parse('https://piece-o-pi.com/api/get_bills?ga_id="$id"');
-
-    final response = await http.get(url);
-
-    final List<dynamic> data = jsonDecode(response.body);
-    final legislation = Legislation.fromJSON(data[0]);
-
-    return LegislationItem(legislation);
-
-  }
-
-  /// Returns a poltician with the specified p_id
-  static Future<PoliticianItem> getPoliticianByID(int id) async {
-    final url = Uri.parse('https://piece-o-pi.com/api/get_legislators?p_id="$id"');
-
-    final response = await http.get(url);
-
-    final List<dynamic> data = jsonDecode(response.body);
-    final politician = Politician.fromJSON(data[0]);
-
-    return PoliticianItem(politician);
-
-  }
-
   /// Returns a list of trending bills
   static Future<List<LegislationItem>> fetchTrendingBills() async {
-    final url = Uri.parse('https://piece-o-pi.com/api/get_trending_legislation');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills');
 
     final response = await http.get(url);
 
-    final List<dynamic> data = jsonDecode(response.body);
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["bills"] ?? [];
     final items = data
       .where((json) => json is Map && json.containsKey("bill_id"))
       .map((json) {
@@ -94,13 +68,14 @@ class AgoraRemote {
 
   /// Returns a list of trending politicians 
   static Future<List<PoliticianItem>> fetchTrendingPoliticians() async {
-    final url = Uri.parse('https://piece-o-pi.com/api/get_trending_politicians');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians');
 
     final response = await http.get(url);
 
-    final List<dynamic> data = jsonDecode(response.body);
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["members"] ?? [];
     final items = data
-      .where((json) => json is Map && json.containsKey("pID"))
+      .where((json) => json is Map && json.containsKey("bio_id"))
       .map((json) {
         final politician = Politician.fromJSON(json);
         return PoliticianItem(politician);

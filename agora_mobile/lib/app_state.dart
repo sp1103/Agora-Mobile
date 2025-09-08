@@ -1,9 +1,9 @@
-import 'package:agora_mobile/Database/agora_local.dart';
 import 'package:agora_mobile/Database/agora_remote.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AgoraAppState extends ChangeNotifier{
 
@@ -22,13 +22,23 @@ class AgoraAppState extends ChangeNotifier{
   int navigationIndex = 2; // Start on home page
   /// The detail page if applicable
   Widget? detailPage;
+  /// User of the app
+  User? _user;
+  /// Fetch user of the app
+  User? get user => _user;
 
   AgoraAppState() {
-    //Load Database stuff here
-    loadFavorites();
+    //Setting up Authentication listener
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      _user = user;
+      notifyListeners();
+    });
+  }
+
+  Future<void> init() async{
     getHome();
-    getPolician();
     getLegislation();
+    getPolitcian();
   }
 
   /// Gets a list depending on menu setting of trending
@@ -44,26 +54,20 @@ class AgoraAppState extends ChangeNotifier{
   }
 
   /// Gets all politicians in database for startup
-  void getPolician() async {
+  void getPolitcian() async {
     politician = await AgoraRemote.fetchLegisltors();
   }
 
   // FAVORITES OPERATIONS ------------------------------------------------------------------------------------------
 
   /// Adds an item to favorties list if it isn't already or removes item from favorites list otherwise
-  void toggleFavorite(ListItem selected, int id, String type, bool loading) {
+  void toggleFavorite(ListItem selected) {
     if (favorites.contains(selected)) {
       favorites.remove(selected);
       favoritesList.remove(selected);
-      if (!loading) {
-        AgoraLocal.removeFavorite(id);
-      }
     } else {
       favorites.add(selected);
       favoritesList.add(selected);
-      if (!loading) {
-        AgoraLocal.insertFavorite(id, type);
-      }
     }
     notifyListeners();
   }
@@ -71,22 +75,6 @@ class AgoraAppState extends ChangeNotifier{
   /// Returns whether or not a ListItem is in the favorites set
   bool isFavorite(ListItem item) {
     return favorites.contains(item);
-  }
-
-  // FAVORITES DATABASE OPERATIONS --------------------------------------------------------------------------------
-
-  /// Load favorites from Agora local database
-  void loadFavorites() async {
-    var favoriteMaps = await AgoraLocal.getFavorites();
-
-    for (var favoriteMap in favoriteMaps) {
-      if (favoriteMap["type"] == "legislation") {
-        toggleFavorite(await AgoraRemote.getBillByID(favoriteMap["id"]), 0, "", true);
-      }
-      else {
-        toggleFavorite(await AgoraRemote.getPoliticianByID(favoriteMap["id"]), 0, "", true);
-      }
-    }
   }
 
   // NAVIGATION ---------------------------------------------------------------------------------------------------
@@ -112,6 +100,23 @@ class AgoraAppState extends ChangeNotifier{
   void closeDetails() {
     detailPage = null; 
     notifyListeners();
+  }
+
+  // AUTHENTICATION -----------------------------------------------------------------------------------------------
+
+  /// Creates a new user using email and password
+  Future<void> signUp(String email, String password) async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+  }
+
+  /// Signs in a user that is registered with email and password
+  Future<void> signIn(String email, String password) async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+  }
+
+  /// Signs out a user
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
 }
