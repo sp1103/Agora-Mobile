@@ -16,8 +16,7 @@ class AgoraRemote {
 
     final response = await http.get(url);
 
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    final List<dynamic> data = json["members"] ?? [];
+    final List<dynamic> data = jsonDecode(response.body);
     final items = data
       .where((json) => json is Map && json.containsKey("bio_id"))
       .map((json) {
