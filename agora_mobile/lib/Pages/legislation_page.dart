@@ -3,8 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 /// Creates a page that contains legislation
-class LegislationPage extends StatelessWidget {
+class LegislationPage extends StatefulWidget {
   const LegislationPage({super.key});
+
+  @override
+  State<LegislationPage> createState() => _LegislationPageState();
+
+}
+
+class _LegislationPageState extends State<LegislationPage> { 
+
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +21,7 @@ class LegislationPage extends StatelessWidget {
     var legislation = appState.legislation;
 
     return ListView.builder(
-      restorationId: "legislation",
+      controller: _scrollController,
       itemCount: legislation.length,
 
       itemBuilder: (context, index) {
@@ -23,7 +32,6 @@ class LegislationPage extends StatelessWidget {
         );
       }
     );
-
   }
 
 }

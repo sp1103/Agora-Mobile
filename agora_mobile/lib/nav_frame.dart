@@ -34,8 +34,19 @@ class NavFrame extends StatelessWidget {
         title: Image.asset('assets/Agora_Logo.png', width: 55, height: 55), //Adds the Agora logo
         
       ),
-      body: Center(child: appState.detailPage ?? _widgetOptions.elementAt(appState.navigationIndex)), //Creates the bottom bar with the icons for the pages or the details page
-      bottomNavigationBar: BottomNavigationBar(
+      body: Stack(
+        children: [
+          IndexedStack(index: appState.navigationIndex, children: _widgetOptions),
+          if (appState.detailPage != null)
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: appState.detailPage!,
+              ),
+            ),
+        ]
+      ), 
+      bottomNavigationBar: BottomNavigationBar( //Creates the bottom bar with the icons for the pages or the details page
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.people), label: "Politicians"),
           BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Favorites"),

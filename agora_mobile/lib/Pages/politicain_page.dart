@@ -3,8 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 /// Creates a page that contains polticians 
-class PoliticianPage extends StatelessWidget {
+class PoliticianPage extends StatefulWidget {
   const PoliticianPage({super.key});
+
+  @override
+  State<PoliticianPage> createState() => _PoliticianPageState();
+
+}
+
+class _PoliticianPageState extends State<PoliticianPage> { 
+
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +21,7 @@ class PoliticianPage extends StatelessWidget {
     var politician = appState.politician;
 
     return ListView.builder(
-      restorationId: "politician",
+      controller: _scrollController,
       itemCount: politician.length,
 
       itemBuilder: (context, index) {
@@ -23,7 +32,6 @@ class PoliticianPage extends StatelessWidget {
         );
       }
     );
-
   }
 
 }

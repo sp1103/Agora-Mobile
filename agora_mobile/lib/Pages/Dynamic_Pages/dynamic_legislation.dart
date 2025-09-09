@@ -13,7 +13,10 @@ class DynamicLegislation extends StatelessWidget{
   Widget build(BuildContext context) {
     //var appState = context.watch<AgoraAppState>();
 
-    return Text(legislation.title);
+    return Material(
+      color: Colors.white,
+      child: Text(legislation.title)
+    );
   }
 
 }

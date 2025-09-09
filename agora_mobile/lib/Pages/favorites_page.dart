@@ -3,8 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 /// Creates the favorites page where items that had favorite toggled on will appear
-class FavoritesPage extends StatelessWidget {
+class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key});
+
+  @override
+  State<FavoritesPage> createState() => _FavoritesPageState();
+
+}
+
+class _FavoritesPageState extends State<FavoritesPage> { 
+
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +21,7 @@ class FavoritesPage extends StatelessWidget {
     var favorites = appState.favoritesList;
 
     return ListView.builder(
-      restorationId: "favorites",
+      controller: _scrollController,
       itemCount: favorites.length,
 
       itemBuilder: (context, index) {
@@ -24,4 +33,5 @@ class FavoritesPage extends StatelessWidget {
       }
     );
   }
+
 }

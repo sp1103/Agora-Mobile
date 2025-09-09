@@ -13,6 +13,9 @@ class DynamicPolitician extends StatelessWidget{
   Widget build(BuildContext context) {
     //var appState = context.watch<AgoraAppState>();
 
-    return Text(politician.name);
+    return Material(
+      color: Colors.white,
+      child: Text(politician.name)
+    );
   }
 }

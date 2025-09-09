@@ -35,6 +35,7 @@ class AgoraAppState extends ChangeNotifier{
     });
   }
 
+  ///Initializes the app by loading data from the database
   Future<void> init() async{
     getHome();
     getLegislation();
