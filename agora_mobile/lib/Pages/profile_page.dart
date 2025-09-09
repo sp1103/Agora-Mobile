@@ -1,4 +1,4 @@
-import 'package:agora_mobile/Pages/Account_Pages/log_in.dart';
+import 'package:agora_mobile/Pages/Account_Pages/profile.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,9 +9,11 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
     var appState = context.watch<AgoraAppState>();
 
-    return LogIn();
+    if (appState.user == null) {
+      return appState.loginOrSignUp;
+    }
+    return UserProfile();
   }
 }

@@ -1,9 +1,11 @@
 import 'package:agora_mobile/Database/agora_remote.dart';
+import 'package:agora_mobile/Pages/Account_Pages/log_in.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class AgoraAppState extends ChangeNotifier{
 
@@ -22,6 +24,8 @@ class AgoraAppState extends ChangeNotifier{
   int navigationIndex = 2; // Start on home page
   /// The detail page if applicable
   Widget? detailPage;
+  /// The login page or the sign up page depending on which is shown
+  Widget loginOrSignUp = LogIn();
   /// User of the app
   User? _user;
   /// Fetch user of the app
@@ -103,21 +107,42 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
   }
 
+  void openSignUpOrLogin(Widget page) {
+    loginOrSignUp = page;
+    notifyListeners();
+  }
+
   // AUTHENTICATION -----------------------------------------------------------------------------------------------
 
   /// Creates a new user using email and password
   Future<void> signUp(String email, String password) async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+    }
+    on FirebaseAuthException {
+      //Deal with error
+    }
+    on PlatformException {/* Do Nothing It Works I don't get it */}
   }
 
   /// Signs in a user that is registered with email and password
   Future<void> signIn(String email, String password) async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+    }
+    on FirebaseAuthException {
+      //Deal with error
+    }
   }
 
   /// Signs out a user
   Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
+    try {
+      await FirebaseAuth.instance.signOut();
+    }
+    on FirebaseAuthException {
+      //Deal with error
+    }
   }
 
 }
