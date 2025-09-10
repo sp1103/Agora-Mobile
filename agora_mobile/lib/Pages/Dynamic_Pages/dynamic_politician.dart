@@ -13,9 +13,23 @@ class DynamicPolitician extends StatelessWidget{
   Widget build(BuildContext context) {
     //var appState = context.watch<AgoraAppState>();
 
-    return Material(
-      color: Colors.white,
-      child: Text(politician.name)
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: Text(politician.name)),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Leadership: ${politician.current_title} "),
+            Text("Chamber: ${politician.chamber}"),
+            Text("Party: ${politician.party}"),
+            Text("Start Date: ${politician.start_date.split("00:00:00").first.trim()}"),
+            Text("State: ${politician.state}"),
+            Text("District: ${politician.district}"),
+          ],
+        ),
+      ),
     );
   }
 }
