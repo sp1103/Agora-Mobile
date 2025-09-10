@@ -56,6 +56,7 @@ class _LogInState extends State<LogIn> {
                 padding: const EdgeInsets.all(12.0),
                 child: TextFormField(
                   controller: _passwordController,
+                  obscureText: true,
                   validator: RequiredValidator(errorText: "Please enter password").call,
                   decoration: InputDecoration(
                     labelText: "Password",
