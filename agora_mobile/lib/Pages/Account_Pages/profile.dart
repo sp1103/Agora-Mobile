@@ -2,6 +2,7 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// This is the actual user profile page
 class UserProfile extends StatelessWidget {
   const UserProfile({super.key});
   

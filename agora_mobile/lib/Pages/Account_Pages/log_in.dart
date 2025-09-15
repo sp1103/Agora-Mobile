@@ -4,6 +4,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:agora_mobile/app_state.dart';
 
+/// User can log in with email and password
 class LogIn extends StatefulWidget{
   const LogIn({super.key});
   

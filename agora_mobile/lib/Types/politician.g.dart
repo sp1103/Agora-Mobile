@@ -17,6 +17,9 @@ Politician _$PoliticianFromJson(Map<String, dynamic> json) => Politician(
       party: json['party'] as String,
       start_date: json['start_date'] as String,
       state: json['state'] as String,
+      terms_served: (json['terms_served'] as List<dynamic>)
+          .map((e) => Term.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$PoliticianToJson(Politician instance) =>
@@ -31,4 +34,5 @@ Map<String, dynamic> _$PoliticianToJson(Politician instance) =>
       'party': instance.party,
       'start_date': instance.start_date,
       'state': instance.state,
+      'terms_served': instance.terms_served,
     };

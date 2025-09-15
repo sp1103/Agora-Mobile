@@ -1,6 +1,8 @@
 // The names are from the Database
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:agora_mobile/Types/politician.dart';
+import 'package:agora_mobile/Types/topic.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'legislation.g.dart';
 
@@ -24,22 +26,22 @@ class Legislation {
   final int congress;
   final String intro_date;
   final int number; 
-  // Sponsor ids 
+  final List<Politician> sponsors_ids; 
   final String status; 
   final String status_update_date;
   final String summary; 
   final String title; 
-  // Topics
+  final List<Topic> topics;
   final String type;
   final String hashType = "legislation"; //Used only for hashing
 
 
   //All of this is things required for the JSON
   Legislation({required this.bill_id, required this.congress, required this.intro_date, 
-  required this.number, required this.status, required this.status_update_date, required this.summary, 
-  required this.title, required this.type});
+  required this.number, required this.sponsors_ids, required this.status, required this.status_update_date, 
+  required this.summary, required this.title, required this.topics, required this.type});
 
-  factory Legislation.fromJSON(Map<String, dynamic> json) => _$LegislationFromJson(json);
+  factory Legislation.fromJson(Map<String, dynamic> json) => _$LegislationFromJson(json);
 
   Map<String, dynamic> toJson() => _$LegislationToJson(this);
 

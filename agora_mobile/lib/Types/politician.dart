@@ -1,6 +1,7 @@
 // The names are from the Database
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:agora_mobile/Types/term.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'politician.g.dart';
 
@@ -32,16 +33,16 @@ class Politician {
   final String party;
   final String start_date;
   final String state;
-  // terms_served
+  final List<Term> terms_served; 
   final String type = "politician";
 
 
   //All of this is things required for the JSON Converter
   Politician({required this.bio_id, required this.chamber, required this.congress, required this.current_title, 
   required this.district, this.image_url, required this.name, required this.party, required this.start_date,
-  required this.state});
+  required this.state, required this.terms_served});
 
-  factory Politician.fromJSON(Map<String, dynamic> json) => _$PoliticianFromJson(json);
+  factory Politician.fromJson(Map<String, dynamic> json) => _$PoliticianFromJson(json);
 
   Map<String, dynamic> toJson() => _$PoliticianToJson(this);
 

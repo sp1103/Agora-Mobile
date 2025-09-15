@@ -50,10 +50,10 @@ class LegislationItem implements ListItem {
                     style: TextStyle(fontWeight: FontWeight.bold)
                   ),
                   Spacer(flex: 2),
-                  // Text(
-                  //   legislation.last_action_date,
-                  //   style: TextStyle(color:Colors.black)
-                  // ),
+                  Text(
+                    legislation.intro_date.split("00:00:00").first.trim(),
+                    style: TextStyle(color:Colors.black)
+                  ),
                 ],
               ),
               SizedBox(height: 8),
@@ -67,14 +67,15 @@ class LegislationItem implements ListItem {
               SizedBox(height: 8),
               SizedBox(height: 100, child: Html(data: legislation.summary)),
               SizedBox(height: 8),
-              // Wrap(
-              //     spacing: 8,
-              //     children: legislation.interests_arr
-              //         .map((issueCategory) => Chip(
-              //               label: Text(issueCategory),
-              //               backgroundColor: Colors.grey.shade300,
-              //             ))
-              //         .toList()),
+              Wrap(
+                  spacing: 8,
+                  children: legislation.topics
+                      .take(3)
+                      .map((topic) => Chip(
+                            label: Text(topic.topic_name),
+                            backgroundColor: Colors.grey.shade300,
+                          ))
+                      .toList()),
               SizedBox(height: 10),
               Row(
                 children: [

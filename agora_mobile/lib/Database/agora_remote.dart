@@ -3,6 +3,7 @@ import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
+import 'package:agora_mobile/Types/topic.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
@@ -11,8 +12,7 @@ class AgoraRemote {
 
   /// Returns a list of politicians from the database
   static Future<List<PoliticianItem>> fetchLegisltors() async {
-    var year = DateTime.now().year.toString();
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?start_year=$year&num_to_return=100');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?name_search=" "&num_to_return=100');
 
     final response = await http.get(url);
 
@@ -21,7 +21,7 @@ class AgoraRemote {
     final items = data
       .where((json) => json is Map && json.containsKey("bio_id"))
       .map((json) {
-        final politician = Politician.fromJSON(json);
+        final politician = Politician.fromJson(json);
         return PoliticianItem(politician);
       }).toList();
 
@@ -41,7 +41,7 @@ class AgoraRemote {
     final items = data
       .where((json) => json is Map && json.containsKey("bill_id"))
       .map((json) {
-        final legislation = Legislation.fromJSON(json);
+        final legislation = Legislation.fromJson(json);
         return LegislationItem(legislation);
       }).toList();
 
@@ -59,7 +59,7 @@ class AgoraRemote {
     final items = data
       .where((json) => json is Map && json.containsKey("bill_id"))
       .map((json) {
-        final legislation = Legislation.fromJSON(json);
+        final legislation = Legislation.fromJson(json);
         return LegislationItem(legislation);
       }).toList();
 
@@ -77,9 +77,26 @@ class AgoraRemote {
     final items = data
       .where((json) => json is Map && json.containsKey("bio_id"))
       .map((json) {
-        final politician = Politician.fromJSON(json);
+        final politician = Politician.fromJson(json);
         return PoliticianItem(politician);
       }).toList();
+
+    return items;
+  }
+
+  /// Returns set of all bill topics
+  static Future<Set<Topic>> fetchAllTopics() async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_all_bill_topics');
+
+    final response = await http.get(url);
+
+    final List<dynamic> data = jsonDecode(response.body);
+    final items = data
+      .where((json) => json is Map && json.containsKey("topic_id"))
+      .map((json) {
+        final topic = Topic.fromJson(json);
+        return topic;
+      }).toSet();
 
     return items;
   }
