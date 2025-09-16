@@ -60,29 +60,33 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
                   setState(() => _search = val), //AI GENERATED CODE END
             ),
           ),
-          if (_search.isEmpty) Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-            child: Wrap(
-              spacing: 10,
-              runSpacing: 15,
-              children: popularTopics.map((topic) {
-                bool isSelected = selected.contains(topic);
-                return ChoiceChip(
-                  label: Text(topic),
-                  selected: isSelected,
-                  onSelected: (val) {
-                    setState(() {
-                      if (isSelected) {
-                        selected.remove(topic);
-                        appState.selectedTopics.remove(topic);
-                      } else {
-                        selected.add(topic);
-                        appState.selectedTopics.add(topic);
-                      }
-                    });
-                  },
-                );
-              }).toList(), //AI GENERATED CODE END
+          if (_search.isEmpty) Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
+                child: Wrap(
+                  spacing: 10,
+                  runSpacing: 15,
+                  children: popularTopics.map((topic) {
+                    bool isSelected = selected.contains(topic);
+                    return ChoiceChip(
+                      label: Text(topic),
+                      selected: isSelected,
+                      onSelected: (val) {
+                        setState(() {
+                          if (isSelected) {
+                            selected.remove(topic);
+                            appState.selectedTopics.remove(topic);
+                          } else {
+                            selected.add(topic);
+                            appState.selectedTopics.add(topic);
+                          }
+                        });
+                      },
+                    );
+                  }).toList(), //AI GENERATED CODE END
+                ),
+              ),
             ),
           ),
           if (filtered.isNotEmpty) Expanded(
@@ -112,6 +116,11 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
               ),
             ),
           ),
+        ],
+      ),
+      bottomNavigationBar: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 50, vertical: 0),
             child: Center(
