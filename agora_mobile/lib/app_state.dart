@@ -28,6 +28,14 @@ class AgoraAppState extends ChangeNotifier{
   Widget? detailPage;
   /// The login page or the sign up page depending on which is shown
   Widget loginOrSignUp = LogIn();
+  /// Whether we need to show the sign up process or not
+  bool signUpProcess = false;
+  /// Whether it is time to move on from topic selection
+  bool topicSelectionDone = false;
+  /// Onboarding process selected topics
+  var selectedTopics = <String>[];
+  /// Onboarding process selected politicians 
+  var selectedPolticians = <String>[];
   /// User of the app
   User? _user;
   /// Fetch user of the app
@@ -125,6 +133,7 @@ class AgoraAppState extends ChangeNotifier{
   Future<void> signUp(String email, String password) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+      signUpProcess = true;
     }
     on FirebaseAuthException {
       //Deal with error
@@ -149,6 +158,15 @@ class AgoraAppState extends ChangeNotifier{
     on FirebaseAuthException {
       //Deal with error
     }
+  }
+
+  /// Clean up variables from signup process since we won't need them again
+  void finishSignUpProcess() {
+    signUpProcess = false;
+    topicSelectionDone = false;
+
+    selectedTopics.clear();
+    selectedPolticians.clear();
   }
 
 }

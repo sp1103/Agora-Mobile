@@ -1,4 +1,5 @@
 import 'package:agora_mobile/Pages/Account_Pages/profile.dart';
+import 'package:agora_mobile/Pages/Sign_Up_Process_Pages/topic_selection_page.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +14,9 @@ class ProfilePage extends StatelessWidget {
 
     if (appState.user == null) {
       return appState.loginOrSignUp;
+    }
+    else if (appState.signUpProcess) {
+      return TopicSelectionPage();
     }
     return UserProfile();
   }
