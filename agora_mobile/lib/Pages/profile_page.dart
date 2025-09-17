@@ -1,4 +1,7 @@
+import 'package:agora_mobile/Pages/Account_Pages/log_in.dart';
 import 'package:agora_mobile/Pages/Account_Pages/profile.dart';
+import 'package:agora_mobile/Pages/Account_Pages/sign_up.dart';
+import 'package:agora_mobile/Pages/Sign_Up_Process_Pages/politician_selection_page.dart';
 import 'package:agora_mobile/Pages/Sign_Up_Process_Pages/topic_selection_page.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +15,14 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<AgoraAppState>();
 
-    if (appState.user == null) {
-      return appState.loginOrSignUp;
+    if (appState.user == null && appState.isLogIn) {
+      return LogIn();
+    }
+    else if (appState.user == null && !appState.isLogIn) {
+      return SignUp();
+    }
+    else if (appState.signUpProcess && appState.topicSelectionDone) {
+      return PoliticianSelectionPage();
     }
     else if (appState.signUpProcess) {
       return TopicSelectionPage();

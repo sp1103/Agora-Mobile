@@ -28,6 +28,24 @@ class AgoraRemote {
     return items;
   }
 
+  /// Returns a list of politicians from the database
+  static Future<List<Politician>> fetchPoliticianSelection() async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?name_search=" "&num_to_return=5000');
+
+    final response = await http.get(url);
+
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["members"] ?? [];
+    final items = data
+      .where((json) => json is Map && json.containsKey("bio_id"))
+      .map((json) {
+        final politician = Politician.fromJson(json);
+        return politician;
+      }).toList();
+
+    return items;
+  }
+
   /// Returns a list of bills from the database
   static Future<List<LegislationItem>> fetchBills() async {
     const startDate = "2000-01-01";
@@ -99,6 +117,23 @@ class AgoraRemote {
       }).toSet();
 
     return items;
+  }
+
+  static Future<void> addUser({required String token, required List<String> topics, required List<String> politicians, required int district, required String state}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/add_users');
+
+    final payload = 
+    [
+      {
+        "token": token,
+        "topics": topics,
+        "us_members": politicians,
+        "district": district,
+        "state": state
+      }
+    ];
+
+    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
   }
 
 }

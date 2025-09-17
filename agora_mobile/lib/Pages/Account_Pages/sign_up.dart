@@ -1,4 +1,3 @@
-import 'package:agora_mobile/Pages/Account_Pages/log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
@@ -70,7 +69,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
               ),
-              Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () {appState.openSignUpOrLogin(LogIn());}, child: Text("Log In"))),
+              Align(alignment: Alignment.centerLeft, child: TextButton(onPressed: () {appState.signUpOrLogin();}, child: Text("Log In"))),
               Padding(
                 padding: const EdgeInsets.all(28.0),
                 child: ElevatedButton(

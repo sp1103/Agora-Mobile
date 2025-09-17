@@ -1,8 +1,8 @@
 import 'package:agora_mobile/Database/agora_remote.dart';
-import 'package:agora_mobile/Pages/Account_Pages/log_in.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
+import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +20,8 @@ class AgoraAppState extends ChangeNotifier{
   Set<Object> favorites = {}; 
   /// All topics for legislation
   Set<Topic> topics = {};
+  /// As many polticians as possible
+  List<Politician> polticianSelecttionList = [];
   /// Items for the favorties page optimized for fast display
   var favoritesList = <ListItem>[]; 
   /// Index of what page in navigation we are on
@@ -27,7 +29,7 @@ class AgoraAppState extends ChangeNotifier{
   /// The detail page if applicable
   Widget? detailPage;
   /// The login page or the sign up page depending on which is shown
-  Widget loginOrSignUp = LogIn();
+  bool isLogIn = true;
   /// Whether we need to show the sign up process or not
   bool signUpProcess = false;
   /// Whether it is time to move on from topic selection
@@ -54,7 +56,11 @@ class AgoraAppState extends ChangeNotifier{
     getHome();
     getLegislation();
     getPolitcian();
+  }
+
+  Future<void> initSignUpProcess() async {
     getTopics();
+    getPolitcianSelection();
   }
 
   /// Gets a list depending on menu setting of trending
@@ -67,15 +73,23 @@ class AgoraAppState extends ChangeNotifier{
   /// Gets all legislation in databse for startup
   void getLegislation() async {
     legislation = await AgoraRemote.fetchBills();
+    notifyListeners();
   }
 
   /// Gets all politicians in database for startup
   void getPolitcian() async {
     politician = await AgoraRemote.fetchLegisltors();
+    notifyListeners();
   }
 
   void getTopics() async {
     topics = await AgoraRemote.fetchAllTopics();
+    notifyListeners();
+  }
+
+  void getPolitcianSelection() async {
+    polticianSelecttionList = await AgoraRemote.fetchPoliticianSelection();
+    notifyListeners();
   }
 
   // FAVORITES OPERATIONS ------------------------------------------------------------------------------------------
@@ -103,6 +117,11 @@ class AgoraAppState extends ChangeNotifier{
     //Add stuff that happens when the menu button is pressed
   }
 
+  void changeSignUpProcessPage() {
+    topicSelectionDone = true;
+    notifyListeners();
+  }
+
   /// When an icon is tapped update which view we are on
   void navigationItemTapped(int index) {
     navigationIndex = index;
@@ -122,8 +141,8 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
   }
 
-  void openSignUpOrLogin(Widget page) {
-    loginOrSignUp = page;
+  void signUpOrLogin() {
+    isLogIn = !isLogIn;
     notifyListeners();
   }
 
@@ -132,8 +151,9 @@ class AgoraAppState extends ChangeNotifier{
   /// Creates a new user using email and password
   Future<void> signUp(String email, String password) async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
       signUpProcess = true;
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+      await initSignUpProcess();
     }
     on FirebaseAuthException {
       //Deal with error
@@ -161,12 +181,18 @@ class AgoraAppState extends ChangeNotifier{
   }
 
   /// Clean up variables from signup process since we won't need them again
-  void finishSignUpProcess() {
+  void finishSignUpProcess() async {
     signUpProcess = false;
     topicSelectionDone = false;
 
-    selectedTopics.clear();
-    selectedPolticians.clear();
+    topics.clear();
+    polticianSelecttionList.clear();
+
+    notifyListeners();
+
+    final token = await _user!.getIdToken();
+    print("User ID Token: $token");
+    await AgoraRemote.addUser(token: token!, topics: selectedTopics, politicians: selectedPolticians, district: 1, state: "Utah");
   }
 
 }

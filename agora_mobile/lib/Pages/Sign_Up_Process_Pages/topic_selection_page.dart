@@ -126,7 +126,7 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
             child: Center(
               child: ElevatedButton(
                 onPressed: appState.selectedTopics.length >= 3
-                ? () { }
+                ? () { appState.changeSignUpProcessPage(); }
                 : null,
                 child: Center(child: Text("Next")),
               ),
