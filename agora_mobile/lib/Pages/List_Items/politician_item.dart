@@ -63,7 +63,7 @@ class PoliticianItem implements ListItem {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          politician.name,
+                          appState.formatPolticianName(politician.name),
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,

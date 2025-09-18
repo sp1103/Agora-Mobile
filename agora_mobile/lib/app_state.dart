@@ -47,6 +47,7 @@ class AgoraAppState extends ChangeNotifier{
     //Setting up Authentication listener
     FirebaseAuth.instance.authStateChanges().listen((user) {
       _user = user;
+      if (_user != null) getFavorites();
       notifyListeners();
     });
   }
@@ -82,14 +83,52 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
   }
 
+  /// Gets all the bill topics
   void getTopics() async {
     topics = await AgoraRemote.fetchAllTopics();
     notifyListeners();
   }
 
+  /// Gets all polticians 
   void getPolitcianSelection() async {
     polticianSelecttionList = await AgoraRemote.fetchPoliticianSelection();
     notifyListeners();
+  }
+
+  /// Gets the favorites for a signed in user
+  void getFavorites() async {
+    final token = await _user!.getIdToken();
+    final List<PoliticianItem> favoritePolticians = await AgoraRemote.fetchFollowingPoliticians(token: token!);
+    final List<LegislationItem> favoriteLegislations = await AgoraRemote.fetchFollowingBills(token: token);
+    favorites.addAll(favoritePolticians);
+    favoritesList.addAll(favoritePolticians);
+    favorites.addAll(favoriteLegislations);
+    favoritesList.addAll(favoriteLegislations);
+    notifyListeners();
+  }
+
+  /// Removes a favorite from the database
+  void removeFavoriteFromDatabase(ListItem selected) async {
+    final token = await _user!.getIdToken();
+
+    if (selected is LegislationItem) {
+      await AgoraRemote.unfollowBill(token: token!, billId: selected.legislation.bill_id);
+    }
+    else if (selected is PoliticianItem) {
+      await AgoraRemote.unfollowPolitician(token: token!, bioId: selected.politician.bio_id);
+    }
+  }
+
+  /// Adds a favorite from the database
+  void addFavoriteFromDatabase(ListItem selected) async {
+    final token = await _user!.getIdToken();
+
+    if (selected is LegislationItem) {
+      await AgoraRemote.followBill(token: token!, billId: selected.legislation.bill_id);
+    }
+    else if (selected is PoliticianItem) {
+      await AgoraRemote.followPolitician(token: token!, bioId: selected.politician.bio_id);
+    }
   }
 
   // FAVORITES OPERATIONS ------------------------------------------------------------------------------------------
@@ -99,9 +138,11 @@ class AgoraAppState extends ChangeNotifier{
     if (favorites.contains(selected)) {
       favorites.remove(selected);
       favoritesList.remove(selected);
+      removeFavoriteFromDatabase(selected);
     } else {
       favorites.add(selected);
       favoritesList.add(selected);
+      addFavoriteFromDatabase(selected);
     }
     notifyListeners();
   }
@@ -191,8 +232,27 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
 
     final token = await _user!.getIdToken();
-    print("User ID Token: $token");
     await AgoraRemote.addUser(token: token!, topics: selectedTopics, politicians: selectedPolticians, district: 1, state: "Utah");
+    clearSignUpSelection();
+    getFavorites();
+  }
+
+  /// Clean up the signup selection info
+  void clearSignUpSelection() {
+    selectedTopics.clear();
+    selectedPolticians.clear();
+  }
+
+  // TOOLS --------------------------------------------------------------------------------------------------------
+
+  /// Turn name from "Last, First M."" to "First M. Last"
+  String formatPolticianName(String name) {
+    final parts = name.split(",");
+
+    final last = parts[0].trim();
+    final firstAndMiddle = parts[1].trim();
+
+    return "$firstAndMiddle $last";
   }
 
 }

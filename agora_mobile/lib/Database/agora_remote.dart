@@ -28,7 +28,7 @@ class AgoraRemote {
     return items;
   }
 
-  /// Returns a list of politicians from the database
+  /// Returns a list of most politicians from the database
   static Future<List<Politician>> fetchPoliticianSelection() async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?name_search=" "&num_to_return=5000');
 
@@ -102,6 +102,42 @@ class AgoraRemote {
     return items;
   }
 
+  /// Returns a list of followed politicians 
+  static Future<List<PoliticianItem>> fetchFollowingPoliticians({required String token}) async {
+    final url = Uri.parse('http://piece-o-pi.com/agora_api/get_user_info?token="$token"&us_members_followed=""');
+
+    final response = await http.get(url);
+
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["bio_ids"] ?? [];
+    final items = data
+      .where((json) => json is Map && json.containsKey("bio_id"))
+      .map((json) {
+        final politician = Politician.fromJson(json);
+        return PoliticianItem(politician);
+      }).toList();
+
+    return items;
+  }
+
+  /// Returns a list of followed bills
+  static Future<List<LegislationItem>> fetchFollowingBills({required String token}) async {
+    final url = Uri.parse('http://piece-o-pi.com/agora_api/get_user_info?token="$token"&us_bills_followed=""');
+
+    final response = await http.get(url);
+
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["bill_ids"] ?? [];
+    final items = data
+      .where((json) => json is Map && json.containsKey("bill_id"))
+      .map((json) {
+        final legislation = Legislation.fromJson(json);
+        return LegislationItem(legislation);
+      }).toList();
+
+    return items;
+  }
+
   /// Returns set of all bill topics
   static Future<Set<Topic>> fetchAllTopics() async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_all_bill_topics');
@@ -119,6 +155,87 @@ class AgoraRemote {
     return items;
   }
 
+  /// Post request that unfollows a bill based on user
+  static Future<void> unfollowBill({required String token, required int billId}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/add_user_interactions');
+
+    final payload = 
+    [
+      {
+        "token": token,
+        "type": "unfollow_us_bill",
+        "bill_id": billId, 
+        "bio_id": null,
+        "district": null,
+        "state": null,
+        "current_topics": []
+      }
+    ];
+
+    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+  }
+
+  // Post request that follows a bill based on user
+  static Future<void> followBill({required String token, required int billId}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/add_user_interactions');
+
+    final payload = 
+    [
+      {
+        "token": token,
+        "type": "follow_us_bill",
+        "bill_id": billId, 
+        "bio_id": null,
+        "district": null,
+        "state": null,
+        "current_topics": []
+      }
+    ];
+
+    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+  }
+
+  /// Post request that unfollows a politcian based on user
+  static Future<void> unfollowPolitician({required String token, required String bioId}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/add_user_interactions');
+
+    final payload = 
+    [
+      {
+        "token": token,
+        "type": "unfollow_us_member",
+        "bill_id": null, 
+        "bio_id": bioId,
+        "district": null,
+        "state": null,
+        "current_topics": []
+      }
+    ];
+
+    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+  }
+
+  /// Post request that unfollows a politcian based on user
+  static Future<void> followPolitician({required String token, required String bioId}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/add_user_interactions');
+
+    final payload = 
+    [
+      {
+        "token": token,
+        "type": "follow_us_member",
+        "bill_id": null, 
+        "bio_id": bioId,
+        "district": null,
+        "state": null,
+        "current_topics": []
+      }
+    ];
+
+    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+  }
+
+  /// POST request to databse that adds a user
   static Future<void> addUser({required String token, required List<String> topics, required List<String> politicians, required int district, required String state}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/add_users');
 

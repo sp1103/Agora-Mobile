@@ -1,6 +1,8 @@
 import 'package:agora_mobile/Types/politician.dart';
+import 'package:agora_mobile/app_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 /// Simplfied poltician view item designed for selection and sponsors
 class PoliticianCard extends StatelessWidget{
@@ -13,6 +15,7 @@ class PoliticianCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<AgoraAppState>();
     
     return InkWell(
       onTap: onTap,
@@ -41,7 +44,7 @@ class PoliticianCard extends StatelessWidget{
                 : const AssetImage('assets/No_Photo.png'),
               ),
               const SizedBox(height: 8),
-              Text(politician.name, style: TextStyle(fontSize: 20, color: Colors.indigo, fontWeight: FontWeight.bold),),
+              Text(appState.formatPolticianName(politician.name), style: TextStyle(fontSize: 20, color: Colors.indigo, fontWeight: FontWeight.bold),),
               const SizedBox(height: 8),
               if (isSelected) Padding(
                 padding: const EdgeInsets.only(top: 6),

@@ -2,6 +2,7 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+///Page allows user to select initial topics to follow during sign up process
 class TopicSelectionPage extends StatefulWidget {
   const TopicSelectionPage({super.key});
 

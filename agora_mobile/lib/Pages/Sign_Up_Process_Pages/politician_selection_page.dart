@@ -3,6 +3,7 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+///Page allows user to select initial polticians to follow during sign up process
 class PoliticianSelectionPage extends StatefulWidget{
   const PoliticianSelectionPage({super.key});
 
