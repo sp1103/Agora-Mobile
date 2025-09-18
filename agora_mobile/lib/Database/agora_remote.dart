@@ -10,6 +10,8 @@ import 'dart:async';
 /// Contains functions that perform queries to the database
 class AgoraRemote {
 
+  // GET METHOODS --------------------------------------------------------------------------------------------------------------
+
   /// Returns a list of politicians from the database
   static Future<List<PoliticianItem>> fetchLegisltors() async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?name_search=" "&num_to_return=100');
@@ -154,6 +156,8 @@ class AgoraRemote {
 
     return items;
   }
+
+  // POST METHOODS -------------------------------------------------------------------------------------------------------------
 
   /// Post request that unfollows a bill based on user
   static Future<void> unfollowBill({required String token, required int billId}) async {

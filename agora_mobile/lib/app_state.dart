@@ -59,6 +59,7 @@ class AgoraAppState extends ChangeNotifier{
     getPolitcian();
   }
 
+  /// Intializes resources needed for sign up process
   Future<void> initSignUpProcess() async {
     getTopics();
     getPolitcianSelection();
@@ -154,10 +155,12 @@ class AgoraAppState extends ChangeNotifier{
 
   // NAVIGATION ---------------------------------------------------------------------------------------------------
 
+  /// When a navigtion menu is pressed
   void navigationMenuPressed() {
     //Add stuff that happens when the menu button is pressed
   }
 
+  /// Movee from topic selection to poltician selection
   void changeSignUpProcessPage() {
     topicSelectionDone = true;
     notifyListeners();
@@ -182,6 +185,7 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
   }
 
+  /// Should the sign up or log in page be displayed
   void signUpOrLogin() {
     isLogIn = !isLogIn;
     notifyListeners();
