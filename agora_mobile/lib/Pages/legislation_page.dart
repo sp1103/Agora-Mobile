@@ -18,7 +18,7 @@ class _LegislationPageState extends State<LegislationPage> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AgoraAppState>();
-    var legislation = appState.legislation;
+    var legislation = appState.itemsToDisplayLegislation;
 
     return ListView.builder(
       controller: _scrollController,

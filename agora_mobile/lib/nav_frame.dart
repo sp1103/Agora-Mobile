@@ -1,3 +1,4 @@
+import 'package:agora_mobile/AgoraWidgets/search_app_bar.dart';
 import 'package:agora_mobile/Pages/favorites_page.dart';
 import 'package:agora_mobile/Pages/home_page.dart';
 import 'package:agora_mobile/Pages/legislation_page.dart';
@@ -15,9 +16,9 @@ class NavFrame extends StatelessWidget {
   static const List<Widget> _widgetOptions = 
     <Widget>[
       PoliticianPage(),
-      FavoritesPage(),
-      HomePage(),
       LegislationPage(),
+      HomePage(),
+      FavoritesPage(),
       ProfilePage()
     ];
 
@@ -26,13 +27,31 @@ class NavFrame extends StatelessWidget {
 
     var appState = context.watch<AgoraAppState>();
 
+    PreferredSizeWidget? buildAppBar() {
+      switch (appState.navigationIndex) {
+        case 0: 
+          return SearchAppBar(
+            controller: appState.polticianSearchController,
+            onQueryChanged: (query) {appState.searchPoliticians(query);}, 
+            onClear: appState.clearSearchPolitician,
+          ); 
+        case 1: 
+          return SearchAppBar(
+            controller: appState.legislationSearchController,
+            onQueryChanged: (query) {appState.searchLegislation(query);}, 
+            onClear: appState.clearSearchLegislation,
+          );
+        default: 
+          return null;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: appState.detailPage == null 
-        ? IconButton(onPressed: appState.navigationMenuPressed, icon: Icon(Icons.menu, color: Colors.black)) //If there is no details page show a menu button
+        ? IconButton(onPressed: appState.navigationMenuPressed, icon: Image.asset('assets/Agora_Logo.png', width: 55, height: 55)) //If there is no details page show a menu button
         : IconButton(onPressed: appState.closeDetails, icon: Icon(Icons.arrow_back, color: Colors.black)), //If details page show back button
-        title: Image.asset('assets/Agora_Logo.png', width: 55, height: 55), //Adds the Agora logo
-        
+        title: buildAppBar() != null ? buildAppBar()! : const SizedBox.shrink(),
       ),
       // AI GENERATED CODE
       body: Stack(
@@ -51,9 +70,9 @@ class NavFrame extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar( //Creates the bottom bar with the icons for the pages or the details page
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.people), label: "Politicians"),
-          BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Favorites"),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: "Legislation"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Favorites"),
           BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Profile"),
         ],
         currentIndex: appState.navigationIndex,

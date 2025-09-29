@@ -6,6 +6,7 @@ import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:math';
 
 class AgoraAppState extends ChangeNotifier{
 
@@ -14,8 +15,12 @@ class AgoraAppState extends ChangeNotifier{
   var home = <ListItem>[]; 
   /// Items for the legislation page
   var legislation = <LegislationItem>[];
+  /// Items displayed by the legislation page
+  var itemsToDisplayLegislation = <LegislationItem>[];
   /// Items for the politician page
   var politician = <PoliticianItem>[]; 
+  /// Items displayed by the politician page
+  var itemsToDisplayPolitician = <PoliticianItem>[];
   /// Items for the favorites page optimized for fast lookup
   Set<Object> favorites = {}; 
   /// All topics for legislation
@@ -42,6 +47,18 @@ class AgoraAppState extends ChangeNotifier{
   User? _user;
   /// Fetch user of the app
   User? get user => _user;
+  /// The filter being used for searching politicians 
+  String politcianFilter = "Name";
+  /// The filter being used for searching legislation
+  String legislationFilter = "Title";
+  /// The list of politicians being searched 
+  List<PoliticianItem> searchedPoliticians = [];
+  /// The list of legislation being searched
+  List<LegislationItem> searchedLegislation = [];
+  /// The controller for the legislation search bar
+  TextEditingController legislationSearchController = TextEditingController();
+  /// The controller for the poltician search bar
+  TextEditingController polticianSearchController = TextEditingController();
 
   AgoraAppState() {
     //Setting up Authentication listener
@@ -67,20 +84,25 @@ class AgoraAppState extends ChangeNotifier{
 
   /// Gets a list depending on menu setting of trending
   void getHome() async{
-    home.addAll(await AgoraRemote.fetchTrendingBills());
-    home.addAll(await AgoraRemote.fetchTrendingPoliticians());
+    final trendingBills = await AgoraRemote.fetchTrendingBills();
+    final trendingPolticians = await AgoraRemote.fetchTrendingPoliticians();
+
+    home = interleaveRandomly([trendingBills, trendingPolticians]);
+
     notifyListeners();
   }
 
   /// Gets all legislation in databse for startup
   void getLegislation() async {
     legislation = await AgoraRemote.fetchBills();
+    itemsToDisplayLegislation = legislation;
     notifyListeners();
   }
 
   /// Gets all politicians in database for startup
   void getPolitcian() async {
     politician = await AgoraRemote.fetchLegisltors();
+    itemsToDisplayPolitician = politician;
     notifyListeners();
   }
 
@@ -247,6 +269,38 @@ class AgoraAppState extends ChangeNotifier{
     selectedPolticians.clear();
   }
 
+  // SEARCHING ----------------------------------------------------------------------------------------------------
+
+  /// Queries Databse and searches poltician by name
+  Future<void> searchPoliticians(String query) async {
+    searchedPoliticians = await AgoraRemote.queryPoliticians(query: 'name_search="$query"');
+    itemsToDisplayPolitician = searchedPoliticians;
+    notifyListeners();
+  }
+
+  /// Queries Databse and searches legislation by title
+  Future<void> searchLegislation(String query) async {
+    searchedLegislation = await AgoraRemote.queryLegislation(query: 'title="$query"');
+    itemsToDisplayLegislation = searchedLegislation;
+    notifyListeners();
+  }
+
+  /// Clears the legislation search bar and resets view
+  void clearSearchLegislation() {
+    itemsToDisplayLegislation = legislation;
+    legislationSearchController.clear();
+    searchedLegislation.clear();
+    notifyListeners();
+  }
+
+  /// Clears the poltician search bar and resets view
+  void clearSearchPolitician() {
+    itemsToDisplayPolitician = politician;
+    polticianSearchController.clear();
+    searchedPoliticians.clear();
+    notifyListeners();
+  }
+
   // TOOLS --------------------------------------------------------------------------------------------------------
 
   /// Turn name from "Last, First M."" to "First M. Last"
@@ -259,4 +313,26 @@ class AgoraAppState extends ChangeNotifier{
     return "$firstAndMiddle $last";
   }
 
+  //AI GENERATED CODE START
+  /// Interleaves multiple lists while preserving the relative order of items in each list.
+  /// The resulting list is somewhat randomized between the lists.
+  List<T> interleaveRandomly<T>(List<List<T>> lists) {
+    final random = Random();
+    final result = <T>[];
+
+    // Make a copy of each list so we can safely remove items
+    final buffers = lists.map((l) => List<T>.from(l)).toList();
+
+    while (buffers.any((b) => b.isNotEmpty)) {
+      // Pick a non-empty buffer at random
+      final nonEmptyBuffers = buffers.where((b) => b.isNotEmpty).toList();
+      final chosenBuffer = nonEmptyBuffers[random.nextInt(nonEmptyBuffers.length)];
+
+      // Take the first item to preserve order, remove it from its buffer
+      result.add(chosenBuffer.removeAt(0));
+    }
+
+    return result;
+  }
+  //AI GENERATED CODE END
 }

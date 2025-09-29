@@ -157,6 +157,43 @@ class AgoraRemote {
     return items;
   }
 
+  // SEARCH METHOODS ------------------------------------------------------------------------------------------------------------
+
+  /// Query the database for politicians using various search options
+  static Future<List<PoliticianItem>> queryPoliticians({required String query}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?$query&num_to_return=100');
+
+    final response = await http.get(url);
+
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["members"] ?? [];
+    final items = data
+      .where((json) => json is Map && json.containsKey("bio_id"))
+      .map((json) {
+        final politician = Politician.fromJson(json);
+        return PoliticianItem(politician);
+      }).toList();
+
+    return items;
+  }
+
+  /// Query the database for legislation using various search options
+  static Future<List<LegislationItem>> queryLegislation({required String query}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_bills?$query&num_to_return=100');
+
+    final response = await http.get(url);
+
+    final List<dynamic> data = jsonDecode(response.body);
+    final items = data
+      .where((json) => json is Map && json.containsKey("bill_id"))
+      .map((json) {
+        final legislation = Legislation.fromJson(json);
+        return LegislationItem(legislation);
+      }).toList();
+
+    return items;
+  }
+
   // POST METHOODS -------------------------------------------------------------------------------------------------------------
 
   /// Post request that unfollows a bill based on user

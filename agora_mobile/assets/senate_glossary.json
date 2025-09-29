@@ -1,0 +1,466 @@
+[
+  {
+    "term": "act",
+    "definition": "A measure passed by one or both Chambers. Usually refers to a measure passed by both Chambers in identical format and signed into law by the president or passed over aveto."
+  },
+  {
+    "term": "adjourn",
+    "definition": "To end a day’s session."
+  },
+  {
+    "term": "adjournment sine die",
+    "definition": "Latin for without day. The final adjournment of a session of a Congress."
+  },
+  {
+    "term": "advice and consent",
+    "definition": "The role of the Senate to confirm presidential nominations for executive and judicial posts and international treaties."
+  },
+  {
+    "term": "amendment",
+    "definition": "A proposal to alter the text of a pending bill or other measure by striking out part of it, inserting new language, or both."
+  },
+  {
+    "term": "amendment in the nature of a substitute",
+    "definition": "An amendment that would strike out the entire text of a bill or other measure and insert a different text. Also called a \"substitute amendment.\""
+  },
+  {
+    "term": "amendment tree",
+    "definition": "A way of diagramming the Senate amendment process. “Filling the amendment tree” refers to a process by which a certain number and type of amendments are offered under Senate precedents. Once these amendments are offered and the “tree is filled” no other amendments are allowed."
+  },
+  {
+    "term": "appropriation",
+    "definition": "A provision of funds for federal agencies to make payments out of the Treasury for specified purposes.For additional information on appropriations  go toLegislation & Records."
+  },
+  {
+    "term": "authorization",
+    "definition": "A statutory provision that obligates funding for a federal program or agency. An authorization establishes the terms and conditions under which the program or agency operates, authorizes the enactment of appropriations, and specifies how appropriated funds are to be used."
+  },
+  {
+    "term": "bill",
+    "definition": "A proposal to enact or repeal laws."
+  },
+  {
+    "term": "budget authority",
+    "definition": "Authority provided by law to enter into obligations that will result in outlays of federal funds.For additional information on the budget process go toLegislation & Records."
+  },
+  {
+    "term": "budget resolution",
+    "definition": "A concurrent resolution setting forth the congressional budget by establishing various budget totals and dividing spending totals into functional categories (e.g., transportation). It sometimes includesreconciliationinstructions to designated Senate or House committees.For additional information on the budget process go toLegislation & Records."
+  },
+  {
+    "term": "Calendar of Business",
+    "definition": "A publication that contains information on bills and resolutions eligible for floor action, published each day the Senate is in session. Also referred to popularly as the Senate Calendar or the Legislative Calendar.Calendar of Business"
+  },
+  {
+    "term": "caucus",
+    "definition": "An informal organization of members of the Senate or House, or both, that exists to discuss issues of mutual concern and possibly to perform legislative research and policy planning for its members. There are regional, political, ideological, and ethnic caucuses."
+  },
+  {
+    "term": "class",
+    "definition": "A grouping of senators who are up for election in the same year.Article I, section 3of the Constitution divides senators into three classes,Class I,Class II, andClass III. Each class is elected two years apart."
+  },
+  {
+    "term": "cloakroom",
+    "definition": "A room adjacent to the House or Senate Chamber that serves as a gathering place for members of the same party to discuss Chamber business privately. There is a cloakroom for each party."
+  },
+  {
+    "term": "closed session",
+    "definition": "A meeting of the House or Senate from which the public and press are excluded. Used for deliberations duringimpeachmenttrials or to discuss issues of national security, confidential information, or sensitive communications from the president. Also referred to as a secret session."
+  },
+  {
+    "term": "cloture",
+    "definition": "A procedure used in the Senateto place a time limit on consideration of a billor other matter. Used to overcome or deter a filibuster. SeeSenate Rule XXII."
+  },
+  {
+    "term": "committee",
+    "definition": "A subgroup of the House or Senate established for the purpose of considering legislation, conducting hearings and investigations, or carrying out other assignments as instructed by its respective Chamber.Current Senate Committees"
+  },
+  {
+    "term": "committee amendment",
+    "definition": "An amendment recommended by a committee when reporting a bill or other measure."
+  },
+  {
+    "term": "committee print",
+    "definition": "A publication used by committees for various purposes. Examples include the rules of each standing committee, drafts of bills or committee reports, and memorial tributes."
+  },
+  {
+    "term": "committee report",
+    "definition": "A publication written by a House, Senate, or conference committee that discusses and explains the purpose of legislation the committee has considered.How to Find Committee and Conference Reports"
+  },
+  {
+    "term": "companion bill or measure",
+    "definition": "Similar or identical legislation introduced in the Senate and House."
+  },
+  {
+    "term": "concurrent resolution",
+    "definition": "A legislative measure dealing with matters affecting both Chambers, such as a congratulatory message to another country, a concurrent budget resolution, or the creation of a temporary joint committee. Concurrent resolutions are not submitted to the president and thus do not have the force of law."
+  },
+  {
+    "term": "conferees",
+    "definition": "Members appointed to serve on conference committees. Charged with upholding their Chamber’s position on measures when negotiating with conferees from the other Chamber. Also called \"managers.\""
+  },
+  {
+    "term": "conference committee",
+    "definition": "An ad hoc panel composed of Senate and House conferees formed for the purpose of reconciling different versions of a measure after passage in each Chamber.  See \"What is a Conference Committee?\""
+  },
+  {
+    "term": "Congressional Record",
+    "definition": "The substantiallyverbatim accounts of daily proceedingson the House and Senate floors. Printed each day either Chamber is in session."
+  },
+  {
+    "term": "continuing resolution",
+    "definition": "Ajoint resolutionenacted by Congress to provide budget authority for federal agencies and programs to continue operating in the absence of regular appropriations. Also referred to as continuing appropriations."
+  },
+  {
+    "term": "controlled time",
+    "definition": "Aunanimous consent agreementthat limits the time for debate on a bill or other measure and places it under the control of the floor managers. Each manager then allows any senator to participate in debate by yielding a specified amount of time to the senator."
+  },
+  {
+    "term": "enacted legislation",
+    "definition": "Legislation that has passed both Chambers of Congress in identical form and has become law by signature of the president, apocket veto, or aveto override."
+  },
+  {
+    "term": "engrossed bill",
+    "definition": "The official copy of a bill or joint resolution passed and certified by one Chamber."
+  },
+  {
+    "term": "enrolled bill",
+    "definition": "The final copy of a bill or joint resolution that has passed both Chambers in identical form and has been signed by the appropriate Senate and House officials and submitted to the president for signature."
+  },
+  {
+    "term": "ex officio membership",
+    "definition": "The practice under Senate or House rules that allows the chairman and ranking member of a committee to participate as members of any subcommittees of that committee, with the exception that they are not generally permitted to vote."
+  },
+  {
+    "term": "executive business",
+    "definition": "The consideration of nominations and treaties, so called because they are received from the president rather than introduced by senators."
+  },
+  {
+    "term": "Executive Calendar",
+    "definition": "A list of executive business (i.e., treaties and nominations) available for consideration on the Senate floor.Executive CalendarArchive (1997 to Present)"
+  },
+  {
+    "term": "executive communication",
+    "definition": "A message sent to the Senate by the president or other executive branch official, such as a presidential veto message."
+  },
+  {
+    "term": "executive session",
+    "definition": "Any time during the Senate's daily session when it considersexecutive business."
+  },
+  {
+    "term": "filibuster",
+    "definition": "An attempt to block or delay Senate action on a bill or other matter by debating it at length, by offering numerous procedural motions, or by any other delaying or obstructive actions. SeeAbout Filibusters and Cloturefor additional information."
+  },
+  {
+    "term": "fiscal year",
+    "definition": "The accounting period for the federal government that begins on October 1 and ends on September 30. The fiscal year is designated by the calendar year in which it ends; for example, fiscal year 2013 began on October 1, 2012, and ended on September 30, 2013. Congress passesappropriationslegislation to fund the government for every fiscal year."
+  },
+  {
+    "term": "floor",
+    "definition": "The physical space where the Senate as a whole conducts its business; also used to refer informally to that space during a Senate session. Action \"on the floor\" is that which occurs as part of the Senate proceedings. A senator who has been recognized to speak by the chair is said to \"have the floor\" and when he or she is done speaking, “yields the floor.”"
+  },
+  {
+    "term": "floor amendment",
+    "definition": "An amendment offered by an individual senator or representative from the floor during consideration of a bill or other measure, in contrast to a committee amendment."
+  },
+  {
+    "term": "floor leader",
+    "definition": "The chief spokesperson for each party in the Senate and House who is responsible for managing and scheduling business. Elected by the party conferences. Also called themajority leader and minority leader."
+  },
+  {
+    "term": "floor manager",
+    "definition": "Senators or representatives designated to lead consideration of a bill or other measure on the floor. Usually the chair and ranking minority member of the reporting committee or their designee."
+  },
+  {
+    "term": "germane",
+    "definition": "Pertaining to the subject of the pending bill or other business. Senate rules permit nongermane amendments in all but a few specific circumstances. See the CRS report,Germaneness of Debate in the Senate(PDF)."
+  },
+  {
+    "term": "hearing",
+    "definition": "A meeting of a committee or subcommitteeheld to take testimony on proposed legislation, conduct an investigation, review a federal agency or program, or consider a nomination or treaty."
+  },
+  {
+    "term": "hold",
+    "definition": "An informal practice by which a senator informs Senate leadership that he or she does not wish a particular measure or nomination to reach the floor for consideration. See the CRS report,“Holds” in the Senate(PDF)."
+  },
+  {
+    "term": "joint committee",
+    "definition": "A committee that includes membership from both Chambers of Congress, usually established with a narrow jurisdiction and lacking authority to report legislation. Chairmanship usually alternates between the Senate and House members from Congress to Congress."
+  },
+  {
+    "term": "joint explanatory statement",
+    "definition": "A document produced by aconference committeethat addresses the differences between versions passed by the Senate and House and explains the conferees’ agreement. Also referred to as a “managers’ statement.\""
+  },
+  {
+    "term": "joint meeting",
+    "definition": "An occasion, often ceremonial, when the Senate and House recess and meet together to hear an address by a visiting dignitary, such as a foreign leader.Joint Sessions and Meetings of Congress (1993 to Present)"
+  },
+  {
+    "term": "joint resolution",
+    "definition": "A legislative measure frequently employed for such matters as constitutional amendments, continuing appropriations, establishing permanent joint committees, and corrections of errors in existing law, and the vehicle most often used for congressional approval and disapproval, though it can be used for any legislative matter. Becomes law when approved by both Chambers and signed by the president, except for aproposed constitutional amendment, which requires a two-thirds affirmative vote in each Chamber and ratification by three-quarters of the states."
+  },
+  {
+    "term": "joint session",
+    "definition": "A session in which the Senate and House meet together to conduct formal business or to hear an address by the president of the United States."
+  },
+  {
+    "term": "Journal of the Senate",
+    "definition": "The written record of the official proceedings of the Senate, required by Article I, section 5 of the U.S. Constitution. Includes motions and votes but not debates. Separate journals are kept for each Chamber, as well as for legislative, executive, closed, and impeachment proceedings."
+  },
+  {
+    "term": "\"lame duck\" session",
+    "definition": "The time following the November general elections in an even-numbered year. So called because some of the lawmakers who take part will not be returning for the next Congress."
+  },
+  {
+    "term": "layover",
+    "definition": "Informal term for the requirement in various Senate rules that a measure or matter lie over one or two days before Senate action is in order. For example, when a bill or other measure is reported from committee, it may be considered on the floor only after it “lies over” for one legislative day, and if the measure is reported with a written report, after the written report has been available for two calendar days. Nominations and treaties must lie over one day.  Layover periods may be waived by unanimous consent. Some fast-track statutes waive the layover requirement so that it is in order to proceed immediately to a measure."
+  },
+  {
+    "term": "legislative day",
+    "definition": "The time between when the Senate convenes and adjourns. Usually one day, though may extend over several days or even weeks or months."
+  },
+  {
+    "term": "legislative session",
+    "definition": "Any time during the Senate's daily session in which it considers legislative business (bills, resolutions, and related actions)."
+  },
+  {
+    "term": "lie on the table",
+    "definition": "Seemotion to table."
+  },
+  {
+    "term": "line-item veto",
+    "definition": "A veto of part rather than all of an appropriations act. As the law currently stands, the president must sign or veto the entire act and may not issue a line-item veto."
+  },
+  {
+    "term": "majority leader",
+    "definition": "Thefloor leaderfor the majority party."
+  },
+  {
+    "term": "markup",
+    "definition": "The process by which congressional committees and subcommittees debate, amend, and rewrite proposed legislation."
+  },
+  {
+    "term": "measure",
+    "definition": "Proposed legislation on which the Senate or House takes action, such as a bill or resolution."
+  },
+  {
+    "term": "minority leader",
+    "definition": "Thefloor leaderfor the minority party."
+  },
+  {
+    "term": "morning business",
+    "definition": "Routine business that occurs during the first two hours of a legislative day or at other times by unanimous consent. Includes receiving messages from the president and the House, executive branch reports, committee reports, and the introduction of bills and submission of resolutions."
+  },
+  {
+    "term": "motion to instruct conferees",
+    "definition": "A proposal to instruct conferees appointed to a conference committee to take a certain position in the conference. Such instructions are not binding."
+  },
+  {
+    "term": "motion to proceed to consider",
+    "definition": "A proposal, usually offered by the majority leader, to bring a measure, nomination, or treaty up for floor consideration, including debate and votes. Usually used when unanimous consent to do so cannot be obtained."
+  },
+  {
+    "term": "motion to reconsider",
+    "definition": "A proposal to revisit any question previously decided by vote. May only be offered once after each vote and may only be offered by a member of the winning side. Usually followed by a “motion to table” that secures the outcome of the vote."
+  },
+  {
+    "term": "motion to table",
+    "definition": "A proposal to set aside any pending question. Used to dispose of a question the Chamber does not want to consider further. Agreement to the motion is equivalent to defeating the question tabled."
+  },
+  {
+    "term": "nomination",
+    "definition": "An appointment by the president to executive or judicial office. Subject to Senate confirmation.Nominations"
+  },
+  {
+    "term": "original bill",
+    "definition": "A bill drafted by a committee instead of one drafted by a member and referred to committee."
+  },
+  {
+    "term": "oversight",
+    "definition": "Review of the activities of a federal agency or program by a committee."
+  },
+  {
+    "term": "parliamentarian",
+    "definition": "The Senate or House adviser on the interpretation of its rules and procedures. Duties also include referring bills to the appropriate committees."
+  },
+  {
+    "term": "parliamentary inquiry",
+    "definition": "A question from the floor to the presiding officer by a senator or representative requesting a clarification of the procedural situation on the floor."
+  },
+  {
+    "term": "party conference",
+    "definition": "An organization of all party members in a Chamber. Elects the party and committee leaders and assigns members to committees. Meets periodically to discuss political strategy and to review party positions on pending legislative business."
+  },
+  {
+    "term": "pocket veto",
+    "definition": "A veto that occurs when the president does not sign a bill within 10 days of receiving it—the time period granted by the Constitution for presidential review—and Congress adjourns during that time."
+  },
+  {
+    "term": "point of order",
+    "definition": "A claim made by a senator or representative from the floor that a rule of the Chamber is being violated."
+  },
+  {
+    "term": "policy committees",
+    "definition": "Democratic and Republican groups that provide research and other services to members of each party and also serve as a forum for discussion of party legislative strategy."
+  },
+  {
+    "term": "president of the Senate",
+    "definition": "The vice president. As presiding officer of the Senate, the vice president oversees sessions of the Senate and may vote in the case of a tie. In the absence of the vice president, the president pro tempore or a designee performs these duties, with the exception of voting."
+  },
+  {
+    "term": "president pro tempore",
+    "definition": "Aconstitutionally recognized officerof the Senate who presides over the Chamber in the absence of the vice president. Elected by the Senate and, by custom, the senator of the majority party with the longest record of continuous service."
+  },
+  {
+    "term": "presiding officer",
+    "definition": "A senator of the majority party who presides over the Senate in the absence of the president pro tempore. Charged with maintaining order and decorum, recognizing members to speak, and interpreting the Senate's rules, practices, and precedents."
+  },
+  {
+    "term": "private law",
+    "definition": "A bill applicable only to specific organizations or individuals that has passed both Chambers and is signed by the president."
+  },
+  {
+    "term": "pro forma session",
+    "definition": "A brief meeting of the Senate or House, often only a few minutes in duration, during which business is not usually conducted."
+  },
+  {
+    "term": "proxy voting",
+    "definition": "The practice of allowing a senator to cast a vote in committee on behalf of an absent senator."
+  },
+  {
+    "term": "public law",
+    "definition": "A bill or joint resolution with general applicability nationwide that has passed both Chambers and is signed by the president."
+  },
+  {
+    "term": "question",
+    "definition": "Any matter on which the Senate is to vote, such as passage of a bill, adoption of an amendment, agreement to a motion, or an appeal."
+  },
+  {
+    "term": "quorum",
+    "definition": "The number of senators that must be present for the Senate or House to do business. The Constitution requires a majority of senators (51) and representatives (218) for a quorum."
+  },
+  {
+    "term": "ranking member",
+    "definition": "The highest-ranking (and usually longest-serving) minority member of a committee or subcommittee."
+  },
+  {
+    "term": "recess",
+    "definition": "A temporary interruption of Senate or House proceedings. A recess may extend for a few hours or overnight, or may constitute a long break, such as over a holiday period."
+  },
+  {
+    "term": "reconciliation",
+    "definition": "An optional process established by the Congressional Budget Act of 1974 by which Congress changes existing laws to conform tax and spending levels to levels set in abudget resolution. Reconciliation instructions found in budget resolutions direct committees to report or submit to the Budget Committee legislation that would enact such changes, indicating appropriate dollar changes to be achieved and usually providing a deadline for committee action. The resulting legislation is a reconciliation bill."
+  },
+  {
+    "term": "referral",
+    "definition": "The process by which a bill is assigned to a committee for consideration. In the Senate, referrals are generally made to the committee with jurisdiction over the predominant subject matter in the bill or resolution, but measures may be referred to more than one committee by unanimous consent."
+  },
+  {
+    "term": "rider",
+    "definition": "A nongermane amendment to a bill or an amendment to an appropriation bill that changes the permanent law governing a program funded by the bill."
+  },
+  {
+    "term": "roll call vote",
+    "definition": "A vote in which each senator or representative votes \"yea\" or \"nay\" as his or her name is called by the clerk. Sometimes referred to as the “yeas and nays.”"
+  },
+  {
+    "term": "secretary, party",
+    "definition": "The party official responsible for working with the party floor leader to schedule legislation on the floor and inform senators of all pending business. Elected by the party conference. Also called the secretary for the majority and the secretary for the minority."
+  },
+  {
+    "term": "secretary of the Senate",
+    "definition": "The chief legislative, financial, and administrative officer of the Senate. Nominated by the majority party conference and elected by the Senate. Learn more about thesecretary of the Senate."
+  },
+  {
+    "term": "select or special committee",
+    "definition": "A committee established by resolution to conduct a particular study or investigation. Usually established for a limited time period and often does not have the authority to report legislation."
+  },
+  {
+    "term": "Senate Manual",
+    "definition": "A document that contains the Senate's standing rules and orders and other laws and regulations that apply to the Senate, usually published once each new Congress."
+  },
+  {
+    "term": "senator",
+    "definition": "A person elected or appointed to the Senate andduly sworn. TheConstitutionrequires that a senator be at least 30 years old, a citizen of the United States for at least nine years, and an inhabitant of the state from which he or she is elected. There are two senators from every state and each is elected to a six-year term."
+  },
+  {
+    "term": "seniority",
+    "definition": "The status given senators according to their length of service. Entitles a senator with greater seniority to preferential treatment in matters such as committee assignments. Seniority lists are established by the party conferences."
+  },
+  {
+    "term": "sergeant at arms",
+    "definition": "The protocol officer and chief law enforcement officer of the Senate. Nominated by the majority party conference and elected by the Senate. Learn more about thesergeant at arms."
+  },
+  {
+    "term": "session",
+    "definition": "The period during which Congress assembles and conducts business. Each Congress generally has a first and second session roughly lasting a calendar year; historically, there have also been third and special sessions."
+  },
+  {
+    "term": "simple resolution",
+    "definition": "A measure used to express nonbinding positions of the Senate or House or to deal with either Chamber’s internal affairs, such as the creation of a special committee. Does not require action by the other Chamber and does not have the force of law."
+  },
+  {
+    "term": "slip law",
+    "definition": "The first official publication of a law, usually published a few days after a law has been enacted."
+  },
+  {
+    "term": "standing committee",
+    "definition": "A permanentcommitteeestablished under the rules of the Senate or House, specializing in the consideration of particular subject areas."
+  },
+  {
+    "term": "star print",
+    "definition": "Corrected editions of congressional publications identifiable by stars printed in the lower left-hand corner of their title pages or covers. Takes precedence over the original print of a report or document."
+  },
+  {
+    "term": "Statutes at Large",
+    "definition": "A publication of the laws and concurrent resolutions enacted during each Congress, arranged in chronological order. Also includes presidential proclamations."
+  },
+  {
+    "term": "subcommittee",
+    "definition": "A sub-unit of a committee established for the purpose of dividing the committee's workload."
+  },
+  {
+    "term": "supplemental appropriation",
+    "definition": "Money provided in an appropriations act outside the regular appropriations cycle. Used to cover emergencies, such as disaster relief, or other needs deemed too urgent to be postponed until the enactment of the next year's regular appropriations acts."
+  },
+  {
+    "term": "unanimous consent",
+    "definition": "Agreement on any question or matter before the Senate that sets aside a rule of procedure to expedite proceedings. Many requests for unanimous consent (u.c.) are routine but if any senator objects, the request is rejected. A more complex unanimous consent agreement sets terms for the consideration of a specified bill or other measure, reflecting negotiations among senators interested in the measure. Examples include limiting time available for debate and only permitting a list of specified amendments to a measure."
+  },
+  {
+    "term": "United States Code",
+    "definition": "A compilation of general and permanent U.S. laws currently in force, organized by subject matter.United States Code"
+  },
+  {
+    "term": "veto",
+    "definition": "The procedure by which the president prevents the enactment of a bill or joint resolution into law. Occurs when the president returns the legislation to the Chamber in which it originated. Can be overridden by a two-thirds vote in both the Senate and the House."
+  },
+  {
+    "term": "veto override",
+    "definition": "The passage into law of a bill vetoed by the president. Requires a two-thirds vote in both Chambers."
+  },
+  {
+    "term": "vice president",
+    "definition": "Seepresident of the Senate"
+  },
+  {
+    "term": "voice vote",
+    "definition": "A vote in which the presiding officer states the question, asks those in favor and against to vote \"yea\" or \"nay\" respectively, and announces the result according to his or her judgment. The names and numbers of senators voting on each side are not recorded."
+  },
+  {
+    "term": "vote-arama",
+    "definition": "The process known as \"vote-arama\" (or \"vote-a-rama\" or \"vote-a-thon\") developed out of unique procedures under the Congressional Budget Act of 1974. After debate time has expired on a budget resolution or reconciliation bill, senators can introduce an unlimited number of amendments, and each is voted on in succession."
+  },
+  {
+    "term": "whip",
+    "definition": "An assistant to the majority or minority leader who is also elected by his or her party conference. Responsible for mobilizing votes within the party on major issues and often serves as acting floor leader."
+  },
+  {
+    "term": "yeas and nays",
+    "definition": "A vote in which each senator or representative votes \"yea\" or \"nay\" as his or her name is called by the clerk."
+  },
+  {
+    "term": "yield",
+    "definition": "A member “yields the floor” when he or she is done speaking. “Yielding time” refers to a floor manager allowing a member a specified amount of time to speak under a time-limited debate. “Yielding for a question” means the senator who has the floor will entertain a question from another member who does not have the floor. Senators have the right to yield for questions while maintaining the floor—consent is not required for this to occur. If, however, a senator who holds the floor wants to engage in a colloquy or permit another senator to make a request of the Senate, propound an inquiry, or the like, that senator must ask consent to permit the other senator to act without surrendering the floor (e.g., “I ask to yield to the senator for such purpose without losing my right to the floor.”)."
+  }
+]
