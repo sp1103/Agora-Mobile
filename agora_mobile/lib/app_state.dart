@@ -64,7 +64,10 @@ class AgoraAppState extends ChangeNotifier{
     //Setting up Authentication listener
     FirebaseAuth.instance.authStateChanges().listen((user) {
       _user = user;
-      if (_user != null) getFavorites();
+      if (_user != null) {
+        getFavorites();
+        getHomeUser();
+      }
       notifyListeners();
     });
   }
@@ -82,10 +85,21 @@ class AgoraAppState extends ChangeNotifier{
     getPolitcianSelection();
   }
 
-  /// Gets a list depending on menu setting of trending
+  /// Gets a list of trending polticians and legislation
   void getHome() async{
     final trendingBills = await AgoraRemote.fetchTrendingBills();
     final trendingPolticians = await AgoraRemote.fetchTrendingPoliticians();
+
+    home = interleaveRandomly([trendingBills, trendingPolticians]);
+
+    notifyListeners();
+  }
+
+  /// Gets a list of trending polticians and legislation for a specific user
+  void getHomeUser() async{
+    final token = await _user!.getIdToken();
+    final trendingBills = await AgoraRemote.fetchTrendingBillsUser(token: token!);
+    final trendingPolticians = await AgoraRemote.fetchTrendingPoliticiansUser(token: token);
 
     home = interleaveRandomly([trendingBills, trendingPolticians]);
 
@@ -176,11 +190,6 @@ class AgoraAppState extends ChangeNotifier{
   }
 
   // NAVIGATION ---------------------------------------------------------------------------------------------------
-
-  /// When a navigtion menu is pressed
-  void navigationMenuPressed() {
-    //Add stuff that happens when the menu button is pressed
-  }
 
   /// Movee from topic selection to poltician selection
   void changeSignUpProcessPage() {

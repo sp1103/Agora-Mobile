@@ -49,7 +49,25 @@ class NavFrame extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: appState.detailPage == null 
-        ? IconButton(onPressed: appState.navigationMenuPressed, icon: Image.asset('assets/Agora_Logo.png', width: 55, height: 55)) //If there is no details page show a menu button
+        ? PopupMenuButton<String>( //If there is no details page show a menu button
+          icon: Image.asset('assets/Agora_Logo.png', width: 55, height: 55),
+          offset: Offset(0, 56),
+          onSelected: (value) { /* What to do when menu item slected */}, 
+          itemBuilder: (context) => [
+            const PopupMenuItem(
+              value: 'home',
+              child: Row(children: [Icon(Icons.home), SizedBox(width: 5), Text("Home", style: TextStyle(fontSize: 15))]),
+            ),
+            const PopupMenuItem(
+              value: 'glossary',
+              child: Row(children: [Icon(Icons.book), SizedBox(width: 5), Text("Glossary", style: TextStyle(fontSize: 15))]),
+            ),
+            const PopupMenuItem(
+              value: 'map',
+              child: Row(children: [Icon(Icons.map), SizedBox(width: 5), Text("Map", style: TextStyle(fontSize: 15))]),
+            ),
+          ],
+        )   
         : IconButton(onPressed: appState.closeDetails, icon: Icon(Icons.arrow_back, color: Colors.black)), //If details page show back button
         title: buildAppBar() != null ? buildAppBar()! : const SizedBox.shrink(),
       ),
