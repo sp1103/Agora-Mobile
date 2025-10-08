@@ -2,61 +2,92 @@ import 'package:agora_mobile/Database/agora_remote.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
+import 'package:agora_mobile/Types/glossary_entry.dart';
+import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
+import 'package:azlistview/azlistview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math';
+import 'dart:convert';
 
-class AgoraAppState extends ChangeNotifier{
+import 'package:flutter/services.dart';
 
+class AgoraAppState extends ChangeNotifier {
   //These will be what the pages are based on
   /// Items for the homepage
-  var home = <ListItem>[]; 
+  var home = <ListItem>[];
+
   /// Items for the legislation page
   var legislation = <LegislationItem>[];
+
   /// Items displayed by the legislation page
   var itemsToDisplayLegislation = <LegislationItem>[];
+
   /// Items for the politician page
-  var politician = <PoliticianItem>[]; 
+  var politician = <PoliticianItem>[];
+
   /// Items displayed by the politician page
   var itemsToDisplayPolitician = <PoliticianItem>[];
+
   /// Items for the favorites page optimized for fast lookup
-  Set<Object> favorites = {}; 
+  Set<Object> favorites = {};
+
   /// All topics for legislation
   Set<Topic> topics = {};
+
+  /// List of all glossary entries for the glossary page
+  var glossaryList = <GlossaryEntry>[];
+
   /// As many polticians as possible
   List<Politician> polticianSelecttionList = [];
+
   /// Items for the favorties page optimized for fast display
-  var favoritesList = <ListItem>[]; 
+  var favoritesList = <ListItem>[];
+
   /// Index of what page in navigation we are on
   int navigationIndex = 2; // Start on home page
   /// The detail page if applicable
   Widget? detailPage;
+
   /// The login page or the sign up page depending on which is shown
   bool isLogIn = true;
+
   /// Whether we need to show the sign up process or not
   bool signUpProcess = false;
+
   /// Whether it is time to move on from topic selection
   bool topicSelectionDone = false;
+
   /// Onboarding process selected topics
   var selectedTopics = <String>[];
-  /// Onboarding process selected politicians 
+
+  /// Onboarding process selected politicians
   var selectedPolticians = <String>[];
+
   /// User of the app
   User? _user;
+
   /// Fetch user of the app
   User? get user => _user;
-  /// The filter being used for searching politicians 
+
+  /// The filter being used for searching politicians
   String politcianFilter = "Name";
+
   /// The filter being used for searching legislation
   String legislationFilter = "Title";
-  /// The list of politicians being searched 
+
+  /// The list of politicians being searched
   List<PoliticianItem> searchedPoliticians = [];
+
   /// The list of legislation being searched
   List<LegislationItem> searchedLegislation = [];
+
   /// The controller for the legislation search bar
   TextEditingController legislationSearchController = TextEditingController();
+
   /// The controller for the poltician search bar
   TextEditingController polticianSearchController = TextEditingController();
 
@@ -73,10 +104,11 @@ class AgoraAppState extends ChangeNotifier{
   }
 
   ///Initializes the app by loading data from the database
-  Future<void> init() async{
+  Future<void> init() async {
     getHome();
     getLegislation();
     getPolitcian();
+    getGlossary();
   }
 
   /// Intializes resources needed for sign up process
@@ -86,9 +118,17 @@ class AgoraAppState extends ChangeNotifier{
   }
 
   /// Gets a list of trending polticians and legislation
-  void getHome() async{
-    final trendingBills = await AgoraRemote.fetchTrendingBills();
-    final trendingPolticians = await AgoraRemote.fetchTrendingPoliticians();
+  void getHome() async {
+    final rawBills = AgoraRemote.fetchTrendingBills();
+    final rawPolticians = AgoraRemote.fetchTrendingPoliticians();
+
+    final res = await Future.wait([
+      compute(_decodeBillsFiltered, await rawBills),
+      compute(_decodePolticians, await rawPolticians)
+    ]);
+
+    final trendingBills = res[0];
+    final trendingPolticians = res[1];
 
     home = interleaveRandomly([trendingBills, trendingPolticians]);
 
@@ -96,10 +136,18 @@ class AgoraAppState extends ChangeNotifier{
   }
 
   /// Gets a list of trending polticians and legislation for a specific user
-  void getHomeUser() async{
+  void getHomeUser() async {
     final token = await _user!.getIdToken();
-    final trendingBills = await AgoraRemote.fetchTrendingBillsUser(token: token!);
-    final trendingPolticians = await AgoraRemote.fetchTrendingPoliticiansUser(token: token);
+    final rawBills = AgoraRemote.fetchTrendingBillsUser(token: token!);
+    final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(token: token);
+
+    final res = await Future.wait([
+      compute(_decodeBillsFiltered, await rawBills),
+      compute(_decodePolticians, await rawPolticians)
+    ]);
+
+    final trendingBills = res[0];
+    final trendingPolticians = res[1];
 
     home = interleaveRandomly([trendingBills, trendingPolticians]);
 
@@ -108,14 +156,28 @@ class AgoraAppState extends ChangeNotifier{
 
   /// Gets all legislation in databse for startup
   void getLegislation() async {
-    legislation = await AgoraRemote.fetchBills();
+    final rawBills = await AgoraRemote.fetchBills();
+    legislation = await compute(_decodeBills, rawBills);
     itemsToDisplayLegislation = legislation;
+    notifyListeners();
+  }
+
+  /// Loads and sorts the glossary from the json in assets folder
+  void getGlossary() async {
+    final raw = await rootBundle.loadString("assets/senate_glossary.json");
+    final List<dynamic> data = jsonDecode(raw);
+    glossaryList = data.map((e) => GlossaryEntry.fromJson(e)).toList();
+
+    SuspensionUtil.sortListBySuspensionTag(glossaryList);
+    SuspensionUtil.setShowSuspensionStatus(glossaryList);
+
     notifyListeners();
   }
 
   /// Gets all politicians in database for startup
   void getPolitcian() async {
-    politician = await AgoraRemote.fetchLegisltors();
+    final rawMembers = await AgoraRemote.fetchLegisltors();
+    politician = await compute(_decodePolticians, rawMembers);
     itemsToDisplayPolitician = politician;
     notifyListeners();
   }
@@ -126,7 +188,7 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
   }
 
-  /// Gets all polticians 
+  /// Gets all polticians
   void getPolitcianSelection() async {
     polticianSelecttionList = await AgoraRemote.fetchPoliticianSelection();
     notifyListeners();
@@ -150,8 +212,7 @@ class AgoraAppState extends ChangeNotifier{
 
     if (selected is LegislationItem) {
       await AgoraRemote.unfollowBill(token: token!, billId: selected.legislation.bill_id);
-    }
-    else if (selected is PoliticianItem) {
+    } else if (selected is PoliticianItem) {
       await AgoraRemote.unfollowPolitician(token: token!, bioId: selected.politician.bio_id);
     }
   }
@@ -162,8 +223,7 @@ class AgoraAppState extends ChangeNotifier{
 
     if (selected is LegislationItem) {
       await AgoraRemote.followBill(token: token!, billId: selected.legislation.bill_id);
-    }
-    else if (selected is PoliticianItem) {
+    } else if (selected is PoliticianItem) {
       await AgoraRemote.followPolitician(token: token!, bioId: selected.politician.bio_id);
     }
   }
@@ -212,7 +272,7 @@ class AgoraAppState extends ChangeNotifier{
 
   /// Closes the details page of an item
   void closeDetails() {
-    detailPage = null; 
+    detailPage = null;
     notifyListeners();
   }
 
@@ -230,8 +290,7 @@ class AgoraAppState extends ChangeNotifier{
       signUpProcess = true;
       await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
       await initSignUpProcess();
-    }
-    on FirebaseAuthException {
+    } on FirebaseAuthException {
       //Deal with error
     }
   }
@@ -240,8 +299,7 @@ class AgoraAppState extends ChangeNotifier{
   Future<void> signIn(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-    }
-    on FirebaseAuthException {
+    } on FirebaseAuthException {
       //Deal with error
     }
   }
@@ -250,8 +308,15 @@ class AgoraAppState extends ChangeNotifier{
   Future<void> signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
-    }
-    on FirebaseAuthException {
+
+      _user = null;
+      favorites.clear();
+      favoritesList.clear();
+      home.clear();
+
+      getHome();
+
+    } on FirebaseAuthException {
       //Deal with error
     }
   }
@@ -267,7 +332,12 @@ class AgoraAppState extends ChangeNotifier{
     notifyListeners();
 
     final token = await _user!.getIdToken();
-    await AgoraRemote.addUser(token: token!, topics: selectedTopics, politicians: selectedPolticians, district: 1, state: "Utah");
+    await AgoraRemote.addUser(
+        token: token!,
+        topics: selectedTopics,
+        politicians: selectedPolticians,
+        district: 1,
+        state: "Utah");
     clearSignUpSelection();
     getFavorites();
   }
@@ -323,6 +393,34 @@ class AgoraAppState extends ChangeNotifier{
   }
 
   //AI GENERATED CODE START
+  ///Capitilizes the first letter of each word in a string
+  String titleCasePreservePunctuation(String text) {
+    return text.split(RegExp(r'\s+')).map((word) {
+      if (word.isEmpty) return word;
+      if (word.toUpperCase() == word) return word;
+
+      // Leading non-alnum (quotes, parentheses, punctuation)
+      final leadingMatch = RegExp(r'^[^A-Za-z0-9]+').firstMatch(word);
+      final leading = leadingMatch?.group(0) ?? '';
+
+      // Trailing non-alnum
+      final trailingMatch = RegExp(r'[^A-Za-z0-9]+$').firstMatch(word);
+      final trailing = trailingMatch?.group(0) ?? '';
+
+      final start = leading.length;
+      final end = word.length - trailing.length;
+      if (start >= end) return leading + trailing; // nothing to capitalize
+
+      final core = word.substring(start, end);
+      final capitalized =
+          '${core[0].toUpperCase()}${core.length > 1 ? core.substring(1).toLowerCase() : ''}';
+
+      return '$leading$capitalized$trailing';
+    }).join(' ');
+  }
+  //AI GENERATED CODE END
+
+  //AI GENERATED CODE START
   /// Interleaves multiple lists while preserving the relative order of items in each list.
   /// The resulting list is somewhat randomized between the lists.
   List<T> interleaveRandomly<T>(List<List<T>> lists) {
@@ -335,7 +433,8 @@ class AgoraAppState extends ChangeNotifier{
     while (buffers.any((b) => b.isNotEmpty)) {
       // Pick a non-empty buffer at random
       final nonEmptyBuffers = buffers.where((b) => b.isNotEmpty).toList();
-      final chosenBuffer = nonEmptyBuffers[random.nextInt(nonEmptyBuffers.length)];
+      final chosenBuffer =
+          nonEmptyBuffers[random.nextInt(nonEmptyBuffers.length)];
 
       // Take the first item to preserve order, remove it from its buffer
       result.add(chosenBuffer.removeAt(0));
@@ -344,4 +443,47 @@ class AgoraAppState extends ChangeNotifier{
     return result;
   }
   //AI GENERATED CODE END
+}
+
+// JSON DECODE ----------------------------------------------------------------------------------------------------
+
+///Decodes the json response for bills for the home page
+List<LegislationItem> _decodeBillsFiltered(String response) {
+  final Map<String, dynamic> json = jsonDecode(response);
+  final List<dynamic> data = json["bills"] ?? [];
+  final items = data
+      .where((json) => json is Map && json.containsKey("bill_id"))
+      .map((json) {
+    final legislation = Legislation.fromJson(json);
+    return LegislationItem(legislation);
+  }).toList();
+
+  return items;
+}
+
+///Decodes the json response for bills
+List<LegislationItem> _decodeBills(String response) {
+  final List<dynamic> data = jsonDecode(response);
+  final items = data
+      .where((json) => json is Map && json.containsKey("bill_id"))
+      .map((json) {
+    final legislation = Legislation.fromJson(json);
+    return LegislationItem(legislation);
+  }).toList();
+
+  return items;
+}
+
+///Decodes the json response for polticians
+List<PoliticianItem> _decodePolticians(String response) {
+  final Map<String, dynamic> json = jsonDecode(response);
+  final List<dynamic> data = json["members"] ?? [];
+  final items = data
+      .where((json) => json is Map && json.containsKey("bio_id"))
+      .map((json) {
+    final politician = Politician.fromJson(json);
+    return PoliticianItem(politician);
+  }).toList();
+
+  return items;
 }

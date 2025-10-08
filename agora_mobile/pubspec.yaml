@@ -41,6 +41,7 @@ dependencies:
   firebase_auth: ^6.0.2
   firebase_auth_platform_interface: ^8.1.1
   firebase_auth_web: ^6.0.2
+  azlistview: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -75,6 +76,7 @@ flutter:
     - assets/Agora_Logo.png
     - assets/US_Seal.png
     - assets/No_Photo.png
+    - assets/senate_glossary.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

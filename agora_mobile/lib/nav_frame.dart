@@ -1,5 +1,6 @@
 import 'package:agora_mobile/AgoraWidgets/search_app_bar.dart';
 import 'package:agora_mobile/Pages/favorites_page.dart';
+import 'package:agora_mobile/Pages/glossary_page.dart';
 import 'package:agora_mobile/Pages/home_page.dart';
 import 'package:agora_mobile/Pages/legislation_page.dart';
 import 'package:agora_mobile/Pages/politicain_page.dart';
@@ -52,7 +53,18 @@ class NavFrame extends StatelessWidget {
         ? PopupMenuButton<String>( //If there is no details page show a menu button
           icon: Image.asset('assets/Agora_Logo.png', width: 55, height: 55),
           offset: Offset(0, 56),
-          onSelected: (value) { /* What to do when menu item slected */}, 
+          onSelected: (value) {
+            switch (value) {
+              case 'home':
+                appState.navigationItemTapped(2);
+                break;
+              case 'glossary':
+                appState.openDetails(GlossaryPage()); 
+                break;
+              case 'map':
+                break;
+            }
+          }, 
           itemBuilder: (context) => [
             const PopupMenuItem(
               value: 'home',

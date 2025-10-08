@@ -13,21 +13,12 @@ class AgoraRemote {
   // GET METHOODS --------------------------------------------------------------------------------------------------------------
 
   /// Returns a list of politicians from the database
-  static Future<List<PoliticianItem>> fetchLegisltors() async {
+  static Future<String> fetchLegisltors() async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?name_search=" "&num_to_return=100');
 
     final response = await http.get(url);
 
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    final List<dynamic> data = json["members"] ?? [];
-    final items = data
-      .where((json) => json is Map && json.containsKey("bio_id"))
-      .map((json) {
-        final politician = Politician.fromJson(json);
-        return PoliticianItem(politician);
-      }).toList();
-
-    return items;
+    return response.body;
   }
 
   /// Returns a list of most politicians from the database
@@ -49,7 +40,7 @@ class AgoraRemote {
   }
 
   /// Returns a list of bills from the database
-  static Future<List<LegislationItem>> fetchBills() async {
+  static Future<String> fetchBills() async {
     const startDate = "2000-01-01";
     var endDate = DateTime.now().toIso8601String().split("T")[0];
 
@@ -57,87 +48,43 @@ class AgoraRemote {
 
     final response = await http.get(url);
 
-    final List<dynamic> data = jsonDecode(response.body);
-    final items = data
-      .where((json) => json is Map && json.containsKey("bill_id"))
-      .map((json) {
-        final legislation = Legislation.fromJson(json);
-        return LegislationItem(legislation);
-      }).toList();
-
-    return items;
+    return response.body;
   }
 
   /// Returns a list of trending bills
-  static Future<List<LegislationItem>> fetchTrendingBills() async {
+  static Future<String> fetchTrendingBills() async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?num_to_return=100');
 
     final response = await http.get(url);
 
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    final List<dynamic> data = json["bills"] ?? [];
-    final items = data
-      .where((json) => json is Map && json.containsKey("bill_id"))
-      .map((json) {
-        final legislation = Legislation.fromJson(json);
-        return LegislationItem(legislation);
-      }).toList();
-
-    return items;
+    return response.body;
   }
 
   /// Returns a list of trending bills for a specific user
-  static Future<List<LegislationItem>> fetchTrendingBillsUser({required String token}) async {
+  static Future<String> fetchTrendingBillsUser({required String token}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?token="$token"&num_to_return=100');
 
     final response = await http.get(url);
 
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    final List<dynamic> data = json["bills"] ?? [];
-    final items = data
-      .where((json) => json is Map && json.containsKey("bill_id"))
-      .map((json) {
-        final legislation = Legislation.fromJson(json);
-        return LegislationItem(legislation);
-      }).toList();
-
-    return items;
+    return response.body;
   }
 
   /// Returns a list of trending politicians 
-  static Future<List<PoliticianItem>> fetchTrendingPoliticians() async {
+  static Future<String> fetchTrendingPoliticians() async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=100');
 
     final response = await http.get(url);
 
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    final List<dynamic> data = json["members"] ?? [];
-    final items = data
-      .where((json) => json is Map && json.containsKey("bio_id"))
-      .map((json) {
-        final politician = Politician.fromJson(json);
-        return PoliticianItem(politician);
-      }).toList();
-
-    return items;
+    return response.body;
   }
 
   /// Returns a list of trending politicians for specific user
-  static Future<List<PoliticianItem>> fetchTrendingPoliticiansUser({required String token}) async {
+  static Future<String> fetchTrendingPoliticiansUser({required String token}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?token="$token"&num_to_return=100');
 
     final response = await http.get(url);
 
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    final List<dynamic> data = json["members"] ?? [];
-    final items = data
-      .where((json) => json is Map && json.containsKey("bio_id"))
-      .map((json) {
-        final politician = Politician.fromJson(json);
-        return PoliticianItem(politician);
-      }).toList();
-
-    return items;
+    return response.body;
   }
 
   /// Returns a list of followed politicians 
