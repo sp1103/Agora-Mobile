@@ -53,6 +53,19 @@ class _GlossaryPageState extends State<GlossaryPage> {
             ],
           );
         },
+        susItemBuilder: (context, index) {
+          final tag = list[index].getSuspensionTag();
+          return Container(
+            height: 40,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            color: Colors.grey[200],
+            alignment: Alignment.centerLeft,
+            child: Text(
+              tag,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          );
+        },
         indexBarData: SuspensionUtil.getTagIndexList(list),
         indexBarOptions: const IndexBarOptions(
           needRebuild: true,
