@@ -41,12 +41,14 @@ class LegislationItem implements ListItem {
             children: [
               Row(
                 children: [
-                  Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
-                  Spacer(),
+                  appState.houseOrSenate(legislation.type)
+                  ? Image.asset('assets/us-h.png', width: 24.04, height: 24)
+                  : Image.asset('assets/us-s.png', width: 24.04, height: 24),
+                  SizedBox(width: 10),
                   Text(
-                    legislation.type == "s"
-                    ? "Senate"
-                    : "House of Repersentatives",
+                    appState.houseOrSenate(legislation.type)
+                    ? "House of Repersentatives"
+                    : "Senate",
                     style: TextStyle(fontWeight: FontWeight.bold)
                   ),
                   Spacer(flex: 2),
@@ -79,7 +81,8 @@ class LegislationItem implements ListItem {
               SizedBox(height: 10),
               Row(
                 children: [
-                  IconButton(
+                  if (appState.user != null) ...[
+                    IconButton(
                     onPressed: () {
                       appState.toggleFavorite(this);
                     },
@@ -88,18 +91,19 @@ class LegislationItem implements ListItem {
                             ? Icons.check_circle
                             : Icons.add_circle,
                         color: Colors.black),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_upward, color: Colors.blue),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_downward, color: Colors.red),
-                  ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_upward, color: Colors.red),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_downward, color: Colors.blue),
+                    ),
+                  ],
                   Spacer(flex: 20),
                   Text(
-                    legislation.number.toString(),
+                    "${appState.formatBillPrefix(legislation.type)}${legislation.number.toString()}",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],

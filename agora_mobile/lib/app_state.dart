@@ -130,7 +130,7 @@ class AgoraAppState extends ChangeNotifier {
     final trendingBills = res[0];
     final trendingPolticians = res[1];
 
-    home = interleaveRandomly([trendingBills, trendingPolticians]);
+    interleaveRandomly([trendingBills, trendingPolticians]);
 
     notifyListeners();
   }
@@ -149,7 +149,7 @@ class AgoraAppState extends ChangeNotifier {
     final trendingBills = res[0];
     final trendingPolticians = res[1];
 
-    home = interleaveRandomly([trendingBills, trendingPolticians]);
+    interleaveRandomly([trendingBills, trendingPolticians]);
 
     notifyListeners();
   }
@@ -393,6 +393,42 @@ class AgoraAppState extends ChangeNotifier {
   }
 
   //AI GENERATED CODE START
+  /// Returns a properly formatted bill prefix based on the raw code.
+  ///
+  /// Example:
+  /// - "hr" -> "H.R."
+  /// - "hjres" -> "H.J.Res."
+  /// - "s" -> "S."
+  /// - "sjres" -> "S.J.Res."
+  /// - "hconres" -> "H.Con.Res."
+  /// - "sconres" -> "S.Con.Res."
+  /// - "hres" -> "H.Res."
+  /// - "sres" -> "S.Res."
+  String formatBillPrefix(String raw) {
+    final normalized = raw.toLowerCase().trim();
+
+    const mappings = {
+      'hr': 'H.R.',
+      'hjres': 'H.J.Res.',
+      'hconres': 'H.Con.Res.',
+      'hres': 'H.Res.',
+      's': 'S.',
+      'sjres': 'S.J.Res.',
+      'sconres': 'S.Con.Res.',
+      'sres': 'S.Res.',
+    };
+
+    // Return mapped value or just capitalize the raw string as fallback
+    return mappings[normalized] ?? raw.toUpperCase();
+  }
+  //AI GENERATED CODE END
+
+  /// Returns false if it is a senate or true if it is house
+  bool houseOrSenate(String type) {
+    return type == "hr" || type == "hrjres" ||  type == "hconres" ||  type == "hres"; 
+  }
+
+  //AI GENERATED CODE START
   ///Capitilizes the first letter of each word in a string
   String titleCasePreservePunctuation(String text) {
     return text.split(RegExp(r'\s+')).map((word) {
@@ -423,12 +459,12 @@ class AgoraAppState extends ChangeNotifier {
   //AI GENERATED CODE START
   /// Interleaves multiple lists while preserving the relative order of items in each list.
   /// The resulting list is somewhat randomized between the lists.
-  List<T> interleaveRandomly<T>(List<List<T>> lists) {
+  void interleaveRandomly(List<List<ListItem>> lists) {
     final random = Random();
-    final result = <T>[];
 
     // Make a copy of each list so we can safely remove items
-    final buffers = lists.map((l) => List<T>.from(l)).toList();
+    final buffers = lists.map((l) => List<ListItem>.from(l)).toList();
+    int added = 0;
 
     while (buffers.any((b) => b.isNotEmpty)) {
       // Pick a non-empty buffer at random
@@ -437,10 +473,12 @@ class AgoraAppState extends ChangeNotifier {
           nonEmptyBuffers[random.nextInt(nonEmptyBuffers.length)];
 
       // Take the first item to preserve order, remove it from its buffer
-      result.add(chosenBuffer.removeAt(0));
-    }
+      home.add(chosenBuffer.removeAt(0));
 
-    return result;
+      if (added % 25 == 0) {
+        notifyListeners(); //Nice speed imporvment
+      }
+    }
   }
   //AI GENERATED CODE END
 }

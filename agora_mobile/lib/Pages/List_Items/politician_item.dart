@@ -41,9 +41,11 @@ class PoliticianItem implements ListItem {
             children: [
               Row(
                 children: [
-                  Image.asset('assets/US_Seal.png', width: 24.04, height: 24),
-                  SizedBox(width: 2),
-                  Text(politician.current_title,
+                  politician.chamber == "Senate"
+                  ? Image.asset('assets/us-s.png', width: 24.04, height: 24)
+                  : Image.asset('assets/us-h.png', width: 24.04, height: 24),
+                  SizedBox(width: 10),
+                  Text(politician.chamber,
                       style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
@@ -76,28 +78,30 @@ class PoliticianItem implements ListItem {
                 ],
               ),
               SizedBox(height: 10),
-              Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      appState.toggleFavorite(this);
-                    },
-                    icon: Icon(
-                        appState.isFavorite(this)
-                            ? Icons.check_circle
-                            : Icons.add_circle,
-                        color: Colors.black),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_upward, color: Colors.blue),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_downward, color: Colors.red),
-                  ),
-                ],
-              ),
+              if (appState.user != null) ...[
+                 Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        appState.toggleFavorite(this);
+                      },
+                      icon: Icon(
+                          appState.isFavorite(this)
+                              ? Icons.check_circle
+                              : Icons.add_circle,
+                          color: Colors.black),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_upward, color: Colors.red),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.arrow_downward, color: Colors.blue),
+                    ),
+                  ],
+                ),
+              ]
             ],
           ),
         ),

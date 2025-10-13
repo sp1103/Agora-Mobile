@@ -20,6 +20,31 @@ class _FavoritesPageState extends State<FavoritesPage> {
     var appState = context.watch<AgoraAppState>();
     var favorites = appState.favoritesList;
 
+    if (appState.user == null) { // If user is not signed in ask them to sign in to use favorites
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              SizedBox(height: 50),
+              Image.asset('assets/Agora_Logo.png',  width: 100, height: 100),
+              SizedBox(height: 16),
+              Text(
+                "Please Sign In To Follow Polticians And Bills.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {appState.navigationItemTapped(4);}, 
+                child: Text("Sign In")
+              )
+            ],
+          ),
+        ),
+      );
+    }
+
     return ListView.builder(
       controller: _scrollController,
       itemCount: favorites.length,

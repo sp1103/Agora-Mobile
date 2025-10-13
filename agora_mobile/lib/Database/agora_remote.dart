@@ -14,7 +14,7 @@ class AgoraRemote {
 
   /// Returns a list of politicians from the database
   static Future<String> fetchLegisltors() async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?name_search=" "&num_to_return=100');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=100');
 
     final response = await http.get(url);
 
@@ -53,7 +53,7 @@ class AgoraRemote {
 
   /// Returns a list of trending bills
   static Future<String> fetchTrendingBills() async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?num_to_return=100');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?num_to_return=50');
 
     final response = await http.get(url);
 
@@ -62,7 +62,7 @@ class AgoraRemote {
 
   /// Returns a list of trending bills for a specific user
   static Future<String> fetchTrendingBillsUser({required String token}) async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?token="$token"&num_to_return=100');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?token="$token"&num_to_return=50');
 
     final response = await http.get(url);
 
@@ -71,7 +71,7 @@ class AgoraRemote {
 
   /// Returns a list of trending politicians 
   static Future<String> fetchTrendingPoliticians() async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=100');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=50');
 
     final response = await http.get(url);
 
@@ -80,7 +80,7 @@ class AgoraRemote {
 
   /// Returns a list of trending politicians for specific user
   static Future<String> fetchTrendingPoliticiansUser({required String token}) async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?token="$token"&num_to_return=100');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?token="$token"&num_to_return=50');
 
     final response = await http.get(url);
 

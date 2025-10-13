@@ -74,7 +74,8 @@ flutter:
 
   assets:
     - assets/Agora_Logo.png
-    - assets/US_Seal.png
+    - assets/us-h.png
+    - assets/us-s.png
     - assets/No_Photo.png
     - assets/senate_glossary.json
 
