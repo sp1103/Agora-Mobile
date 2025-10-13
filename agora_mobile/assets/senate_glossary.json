@@ -168,32 +168,20 @@
         "definition": "Pertaining to the subject of the pending bill or other business. Senate rules permit nongermane amendments in all but a few specific circumstances. See the CRS report,Germaneness of Debate in the Senate(PDF)."
     },
     {
-        "term": "HB",
-        "definition": "House Bill"
+        "term": "H.CON.RES.",
+        "definition": "House Concurrent Resolution - Matters that affect the operations of both the House and Senate originated from the House."
     },
     {
-        "term": "HCM",
-        "definition": "House Concurrent Memorial"
+        "term": "H.J.RES.",
+        "definition": " House Joint Resolution - similar to HR but does not require a presidential signature but does require two-thirds of both the House and Senate."
     },
     {
-        "term": "HCR",
-        "definition": "House Concurrent Resolution"
+        "term": "H.R.",
+        "definition": "House Bill - legislation introduced in the House of Representatives"
     },
     {
-        "term": "HJM",
-        "definition": "House Joint Memorial"
-    },
-    {
-        "term": "HJR",
-        "definition": "House Joint Resolution"
-    },
-    {
-        "term": "HM",
-        "definition": "House Memorial"
-    },
-    {
-        "term": "HR",
-        "definition": "House Resolution"
+        "term": "H.RES.",
+        "definition": "House Simple Resolution - Matters that affect the operations of only the House."
     },
     {
         "term": "hearing",
@@ -384,16 +372,20 @@
         "definition": "Strike-Everything Amendment"
     },
     {
-        "term": "SB",
-        "definition": "Senate Bill"
+        "term": "S.",
+        "definition": "Senate Bill - legislation introduced in the Senate"
     },
     {
-        "term": "SCM",
-        "definition": "Senate Concurrent Memorial"
+        "term": "S.CON.RES.",
+        "definition": "Senate Concurrent Resolution - Matters that affect the operations of both the House and Senate originated from the Senate."
     },
     {
-        "term": "SCR",
-        "definition": "Senate Concurrent Resolution"
+        "term": "S.J.RES.",
+        "definition": "Senate Joint Resolution - similar to S but does not require a presidential signature but does require two-thirds of both the House and Senate."
+    },
+    {
+        "term": "S.RES.",
+        "definition": "Senate Simple Resolution - Matters that affect the operations of only the Senate."
     },
     {
         "term": "secretary, party",
@@ -421,7 +413,7 @@
     },
     {
         "term": "sergeant at arms",
-        "definition": "The protocol officer and chief law enforcement officer of the Senate. Nominated by the majority party conference and elected by the Senate. Learn more about thesergeant at arms."
+        "definition": "The protocol officer and chief law enforcement officer of the Senate. Nominated by the majority party conference and elected by the Senate."
     },
     {
         "term": "session",
@@ -589,7 +581,7 @@
     },
     {
         "term": "Democratic Congressional Campaign Committee Chairman",
-        "definition": "The Chairman of the Democratic Congressional Campaign Committee (DCCC) appointed by Leader, oversees the political committee of House Democrats which is not funded by tax dollars nor located in the Congressional complex."
+        "definition": "The Chairman of the Democratic Congressional Campaign Committee (DCCC) oversees the political committee of House Democrats which is not funded by tax dollars nor located in the Congressional complex."
     },
     {
         "term": "Senate Minority Leader",
