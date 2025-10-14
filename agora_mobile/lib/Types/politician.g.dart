@@ -8,6 +8,7 @@ part of 'politician.dart';
 
 Politician _$PoliticianFromJson(Map<String, dynamic> json) => Politician(
       bio_id: json['bio_id'] as String,
+      bio_text: json['bio_text'] as String?,
       chamber: json['chamber'] as String,
       congress: (json['congress'] as num).toInt(),
       current_title: json['current_title'] as String,
@@ -25,6 +26,7 @@ Politician _$PoliticianFromJson(Map<String, dynamic> json) => Politician(
 Map<String, dynamic> _$PoliticianToJson(Politician instance) =>
     <String, dynamic>{
       'bio_id': instance.bio_id,
+      'bio_text': instance.bio_text,
       'chamber': instance.chamber,
       'congress': instance.congress,
       'current_title': instance.current_title,

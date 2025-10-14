@@ -23,6 +23,7 @@ part 'politician.g.dart';
 class Politician {
 
   final String bio_id;
+  final String? bio_text;
   final String chamber;
   // Comitties
   final int congress;
@@ -38,7 +39,7 @@ class Politician {
 
 
   //All of this is things required for the JSON Converter
-  Politician({required this.bio_id, required this.chamber, required this.congress, required this.current_title, 
+  Politician({required this.bio_id, this.bio_text, required this.chamber, required this.congress, required this.current_title, 
   required this.district, this.image_url, required this.name, required this.party, required this.start_date,
   required this.state, required this.terms_served});
 

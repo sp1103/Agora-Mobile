@@ -55,6 +55,12 @@ class AgoraAppState extends ChangeNotifier {
   /// The login page or the sign up page depending on which is shown
   bool isLogIn = true;
 
+  /// If the app bar of the nav frame should be displayed
+  bool hideAppBar = false;
+
+  /// If the bottom bar of the nav frame should be displayed 
+  bool hideBottomBar = false;
+
   /// Whether we need to show the sign up process or not
   bool signUpProcess = false;
 
@@ -265,13 +271,17 @@ class AgoraAppState extends ChangeNotifier {
   }
 
   /// Opens the details page of a selected item
-  void openDetails(Widget page) {
+  void openDetails(Widget page, bool hideTop, bool hideBottom) {
+    hideBottomBar = hideBottom;
+    hideAppBar = hideTop;
     detailPage = page;
     notifyListeners();
   }
 
   /// Closes the details page of an item
   void closeDetails() {
+    hideBottomBar = false;
+    hideAppBar = false;
     detailPage = null;
     notifyListeners();
   }
@@ -390,6 +400,18 @@ class AgoraAppState extends ChangeNotifier {
     final firstAndMiddle = parts[1].trim();
 
     return "$firstAndMiddle $last";
+  }
+
+  /// Gets the color for the border of the image in the poltician details page
+  Color getBorderColor(String party) {
+    switch (party.toLowerCase()) {
+      case 'republican':
+        return Colors.red;
+      case 'democratic':
+        return Colors.blue;
+      default:
+        return Colors.green;
+    }
   }
 
   //AI GENERATED CODE START

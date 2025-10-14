@@ -32,7 +32,7 @@ class LegislationItem implements ListItem {
       elevation: 3,
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () {appState.openDetails(DynamicLegislation(legislation: legislation));},
+        onTap: () {appState.openDetails(DynamicLegislation(legislation: legislation), true, false);},
         splashColor: Colors.blue.withAlpha(30),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -65,6 +65,9 @@ class LegislationItem implements ListItem {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.indigo),
+                maxLines: 3,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
               ),
               SizedBox(height: 8),
               SizedBox(height: 100, child: Html(data: legislation.summary)),

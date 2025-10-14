@@ -32,7 +32,7 @@ class PoliticianItem implements ListItem {
       elevation: 3,
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () {appState.openDetails(DynamicPolitician(politician: politician));},
+        onTap: () {appState.openDetails(DynamicPolitician(politician: politician), true, false);},
         splashColor: Colors.blue.withAlpha(30),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
