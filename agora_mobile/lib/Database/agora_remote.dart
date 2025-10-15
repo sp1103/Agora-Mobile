@@ -4,6 +4,7 @@ import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
+import 'package:agora_mobile/Types/votes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
@@ -23,7 +24,7 @@ class AgoraRemote {
 
   /// Returns a list of most politicians from the database
   static Future<List<Politician>> fetchPoliticianSelection() async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?name_search=" "&num_to_return=5000');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=5000');
 
     final response = await http.get(url);
 
@@ -34,6 +35,24 @@ class AgoraRemote {
       .map((json) {
         final politician = Politician.fromJson(json);
         return politician;
+      }).toList();
+
+    return items;
+  }
+
+  /// Returns a list of most politician's votes
+  static Future<List<Vote>> fetchVotes(String bioId) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_member_most_recent_votes?bio_id="$bioId"&num_to_return=100');
+
+    final response = await http.get(url);
+
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["votes"] ?? [];
+    final items = data
+      .where((json) => json is Map && json.containsKey("vote_id"))
+      .map((json) {
+        final vote = Vote.fromJson(json);
+        return vote;
       }).toList();
 
     return items;

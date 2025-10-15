@@ -57,11 +57,15 @@ class _SignUpState extends State<SignUp> {
                 child: TextFormField(
                   controller: _passwordController,
                   obscureText: true,
-                  validator: RequiredValidator(errorText: "Please enter password").call,
+                  validator: MultiValidator([
+                    RequiredValidator(errorText: "Please enter Email"),
+                    PatternValidator(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$',
+                      errorText: "Password must be at least 6 chars, include letters (at least one must be one capital) and numbers"),
+                  ]).call,
                   decoration: InputDecoration(
                     labelText: "Password",
                     hintText: "Please Enter Your Password",
-                    errorStyle: TextStyle(fontSize: 18),
+                    errorStyle: TextStyle(fontSize: 18, overflow: TextOverflow.visible, height: 1.2),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
                       borderRadius: BorderRadius.all(Radius.circular(9.0)),
@@ -73,9 +77,9 @@ class _SignUpState extends State<SignUp> {
               Padding(
                 padding: const EdgeInsets.all(28.0),
                 child: ElevatedButton(
-                  onPressed: () async {
+                  onPressed: () {
                     if (_formkey.currentState!.validate()) {
-                      await appState.signUp(_emailController.text.trim(), _passwordController.text.trim());
+                      appState.beginSignUpProcess(_emailController.text.trim(), _passwordController.text.trim());
                     }
                   }, 
                   child: Text("Sign Up"))

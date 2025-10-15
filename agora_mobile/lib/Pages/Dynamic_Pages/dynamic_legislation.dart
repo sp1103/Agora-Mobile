@@ -1,4 +1,5 @@
 import 'package:agora_mobile/Pages/Tab_Views/legislation_info_tab.dart';
+import 'package:agora_mobile/Pages/Tab_Views/legislation_sponsor_tab.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,7 @@ class DynamicLegislation extends StatelessWidget{
                 children: [
                   SingleChildScrollView(child: Html(data: legislation.summary)),
                   LegislationInfoTab(legislation: legislation),
-                  Center(child: Text("Sponsors")),
+                  LegislationSponsorTab(legislation: legislation),
                 ],
               ),
             ),

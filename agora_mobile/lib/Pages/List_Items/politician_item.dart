@@ -55,7 +55,7 @@ class PoliticianItem implements ListItem {
                   CircleAvatar(
                     radius: 40,
                     backgroundImage: 
-                    Uri.parse(politician.image_url ?? '').isAbsolute
+                    Uri.parse(politician.image_url ?? '').isAbsolute || politician.image_url!.contains("nomemberphoto")
                     ? CachedNetworkImageProvider(politician.image_url!)
                     : const AssetImage('assets/No_Photo.png'),
                   ),

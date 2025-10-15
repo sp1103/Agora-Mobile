@@ -20,13 +20,6 @@ class _PoliticianSelectionPageState extends State<PoliticianSelectionPage> {
   Widget build(BuildContext context) {
     var appState = context.watch<AgoraAppState>();
 
-    var filtered = _search.isEmpty
-        ? []
-        : appState.polticianSelecttionList
-            .where((p) => p.name.toLowerCase().contains(_search.toLowerCase()))
-            .toList();
-
-
     return Scaffold(
       appBar: AppBar(
           title: Center(
@@ -51,75 +44,43 @@ class _PoliticianSelectionPageState extends State<PoliticianSelectionPage> {
             ),
           ),
           if (appState.polticianSelecttionList.length <= 6) Padding(padding: EdgeInsets.symmetric(horizontal: 50, vertical:0), child: Center(child: CircularProgressIndicator())),
-          if (_search.isEmpty && appState.polticianSelecttionList.length >= 6) Expanded(
+          Expanded(
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-                child: GridView.builder( //AI GENERATED CODE START
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 2,
-                    childAspectRatio: 0.68,
-                  ),
-                  itemCount: 6,
-                  itemBuilder: (context, index) {
-                    final politician = appState.polticianSelecttionList[index];
+                child: Wrap(
+                  spacing: 0,
+                  runSpacing: 10,
+                  children: (_search.isEmpty
+                          ? appState.polticianSelecttionList.take(6).toList()
+                          : appState.polticianSelecttionList
+                              .where((p) =>
+                                  p.name.toLowerCase().contains(_search.toLowerCase()))
+                              .toList())
+                      .map((politician) {
                     bool isSelected = selected.contains(politician.bio_id);
-                    return PoliticianCard(
-                      politician: politician,
-                      isSelected: isSelected,
-                      onTap: () {
-                        setState(() {
-                          if (isSelected) {
-                            selected.remove(politician.bio_id);
-                            appState.selectedPolticians.remove(politician.bio_id);
-                          } else {
-                            selected.add(politician.bio_id);
-                            appState.selectedPolticians.add(politician.bio_id); //AI GENERATED CODE END
-                          }
-                        });
-                      },
+                    return SizedBox(
+                      width: 155,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (isSelected) {
+                              selected.remove(politician.bio_id);
+                              appState.selectedPolticians.remove(politician.bio_id);
+                            } else {
+                              selected.add(politician.bio_id);
+                              appState.selectedPolticians.add(politician.bio_id);
+                            }
+                          });
+                        },
+                        child: PoliticianCard(
+                          politician: politician,
+                          isSelected: isSelected,
+                        ),
+                      ),
                     );
-                  }
+                  }).toList(),
                 ),
-              ),
-            ),
-          ),
-          if (filtered.isNotEmpty) Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-              child: GridView.builder( //AI GENERATED CODE START
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 2,
-                  childAspectRatio: 0.68,
-                ),
-                itemCount: filtered.length,
-                itemBuilder: (context, index) {
-                  final politician = filtered[index];
-                  bool isSelected = selected.contains(politician.bio_id);
-                  return PoliticianCard(
-                    politician: politician,
-                    isSelected: isSelected,
-                    onTap: () {
-                      setState(() {
-                        if (isSelected) {
-                          selected.remove(politician.bio_id);
-                          appState.selectedPolticians.remove(politician.bio_id);
-                        } else {
-                          selected.add(politician.bio_id);
-                          appState.selectedPolticians.add(politician.bio_id); //AI GENERATED CODE END
-                        }
-                      });
-                    },
-                  );
-                }
               ),
             ),
           ),

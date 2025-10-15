@@ -15,10 +15,10 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<AgoraAppState>();
 
-    if (appState.user == null && appState.isLogIn) {
+    if (appState.user == null && appState.isLogIn && !appState.signUpProcess) {
       return LogIn();
     }
-    else if (appState.user == null && !appState.isLogIn) {
+    else if (appState.user == null && !appState.isLogIn && !appState.signUpProcess) {
       return SignUp();
     }
     else if (appState.signUpProcess && appState.topicSelectionDone) {

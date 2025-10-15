@@ -51,7 +51,7 @@ class NavFrame extends StatelessWidget {
       appBar: appState.hideAppBar
         ? null
         : AppBar(
-          leading: appState.detailPage == null 
+          leading: appState.detailPage.isEmpty 
           ? PopupMenuButton<String>( //If there is no details page show a menu button
             icon: Image.asset('assets/Agora_Logo.png', width: 55, height: 55),
             offset: Offset(0, 56),
@@ -89,11 +89,11 @@ class NavFrame extends StatelessWidget {
       body: Stack(
         children: [
           IndexedStack(index: appState.navigationIndex, children: _widgetOptions),
-          if (appState.detailPage != null)
+          if (appState.detailPage.isNotEmpty)
             Positioned.fill(
               child: Material(
                 color: Colors.transparent,
-                child: appState.detailPage!,
+                child: appState.detailPage.last,
               ),
             ),
         ]

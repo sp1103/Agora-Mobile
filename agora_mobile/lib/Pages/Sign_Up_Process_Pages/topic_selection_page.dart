@@ -14,15 +14,6 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
   String _search = "";
   Set<String> selected = {};
 
-  final List<String> popularTopics = [
-    "Climate change and greenhouse gases",
-    "Abortion",
-    "Education",
-    "Firearms and explosives",
-    "Immigration",
-    "Human rights"
-  ];
-
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AgoraAppState>();
@@ -68,7 +59,7 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
                 child: Wrap(
                   spacing: 10,
                   runSpacing: 15,
-                  children: popularTopics.map((topic) {
+                  children: allTopics.take(6).map((topic) {
                     bool isSelected = selected.contains(topic);
                     return ChoiceChip(
                       label: Text(topic),

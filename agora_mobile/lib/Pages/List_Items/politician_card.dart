@@ -34,17 +34,18 @@ class PoliticianCard extends StatelessWidget{
           padding: const EdgeInsets.all(12),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(height: 8),
               CircleAvatar(
                 radius: 40,
                 backgroundImage: 
-                Uri.parse(politician.image_url ?? '').isAbsolute
+                Uri.parse(politician.image_url ?? '').isAbsolute && !politician.image_url!.contains("nomemberphoto")
                 ? CachedNetworkImageProvider(politician.image_url!)
                 : const AssetImage('assets/No_Photo.png'),
               ),
               const SizedBox(height: 8),
-              Text(appState.formatPolticianName(politician.name), style: TextStyle(fontSize: 20, color: Colors.indigo, fontWeight: FontWeight.bold),),
+              Text(appState.formatPolticianName(politician.name), style: TextStyle(fontSize: 20, color: Colors.indigo, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
               const SizedBox(height: 8),
               if (isSelected) Padding(
                 padding: const EdgeInsets.only(top: 6),

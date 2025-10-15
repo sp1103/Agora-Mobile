@@ -11,18 +11,21 @@ class UserProfile extends StatelessWidget {
     var appState = context.watch<AgoraAppState>();
 
     return Scaffold(
-      body: Column(
-        children: [
-          Text("Hello ${appState.user?.email ?? '?'}"),
-          Padding(
-                padding: const EdgeInsets.all(28.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    appState.signOut();
-                  }, 
-                  child: Text("Sign Out"))
-              ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Hello ${appState.user?.email ?? '?'}", textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+            Padding(
+                  padding: const EdgeInsets.all(28.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      appState.signOut();
+                    }, 
+                    child: Text("Sign Out"))
+                ),
+          ],
+        ),
       ),
     );
   }

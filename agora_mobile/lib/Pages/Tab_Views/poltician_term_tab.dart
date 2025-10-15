@@ -2,7 +2,7 @@ import 'package:agora_mobile/Pages/List_Items/term_item.dart';
 import 'package:agora_mobile/Types/term.dart';
 import 'package:flutter/material.dart';
 
-/// Creates a page that contains polticians 
+/// Creates a page that contains polticians terms
 class PoliticianTermTab extends StatefulWidget {
   final List<Term> terms;
 
@@ -22,7 +22,6 @@ class _PoliticianTermTabState extends State<PoliticianTermTab> {
 
     return ListView.builder(
       controller: _scrollController,
-      reverse: true,
       itemCount: widget.terms.length,
 
       itemBuilder: (context, index) {

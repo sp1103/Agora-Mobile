@@ -18,13 +18,25 @@ class PoliticianInfoTab extends StatelessWidget {
         children: [
           Text(
             "Biography",
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.indigo),
           ),
           const SizedBox(height: 8),
           Text(
             politician.bio_text ?? "No Biography Available",
             style: const TextStyle(fontSize: 16),
           ),
+          const SizedBox(height: 16),
+          if (politician.current_title != "No current leadership role") ...[
+            Text(
+              "Current Leadership Role",
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.indigo),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              politician.current_title,
+              style: const TextStyle(fontSize: 16),
+            ),
+          ],
         ],
       ),
     );

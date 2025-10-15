@@ -6,6 +6,7 @@ import 'package:agora_mobile/Types/glossary_entry.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
+import 'package:agora_mobile/Types/votes.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +50,12 @@ class AgoraAppState extends ChangeNotifier {
 
   /// Index of what page in navigation we are on
   int navigationIndex = 2; // Start on home page
+
   /// The detail page if applicable
-  Widget? detailPage;
+  List<Widget> detailPage = [];
+
+  /// List of a polticians votes
+  List<Vote> votes = [];
 
   /// The login page or the sign up page depending on which is shown
   bool isLogIn = true;
@@ -90,6 +95,12 @@ class AgoraAppState extends ChangeNotifier {
 
   /// The list of legislation being searched
   List<LegislationItem> searchedLegislation = [];
+
+  /// Temporarily stores password during onboarding
+  String? _password;
+
+  /// Temporarily stores email during onboarding
+  String?_email;
 
   /// The controller for the legislation search bar
   TextEditingController legislationSearchController = TextEditingController();
@@ -138,6 +149,12 @@ class AgoraAppState extends ChangeNotifier {
 
     interleaveRandomly([trendingBills, trendingPolticians]);
 
+    notifyListeners();
+  }
+
+  ///Get polticians votes
+  void getVotes(String bioId)  async {
+    votes.addAll(await AgoraRemote.fetchVotes(bioId));
     notifyListeners();
   }
 
@@ -266,7 +283,9 @@ class AgoraAppState extends ChangeNotifier {
   /// When an icon is tapped update which view we are on
   void navigationItemTapped(int index) {
     navigationIndex = index;
-    detailPage = null;
+    hideBottomBar = false;
+    hideAppBar = false;
+    detailPage.clear();
     notifyListeners();
   }
 
@@ -274,15 +293,17 @@ class AgoraAppState extends ChangeNotifier {
   void openDetails(Widget page, bool hideTop, bool hideBottom) {
     hideBottomBar = hideBottom;
     hideAppBar = hideTop;
-    detailPage = page;
+    detailPage.add(page);
     notifyListeners();
   }
 
   /// Closes the details page of an item
   void closeDetails() {
-    hideBottomBar = false;
-    hideAppBar = false;
-    detailPage = null;
+    if (detailPage.length == 1) {
+      hideBottomBar = false;
+      hideAppBar = false;
+    }
+    detailPage.removeLast();
     notifyListeners();
   }
 
@@ -294,12 +315,19 @@ class AgoraAppState extends ChangeNotifier {
 
   // AUTHENTICATION -----------------------------------------------------------------------------------------------
 
+  /// Begins the sign up process
+  void beginSignUpProcess(String email, String password) {
+    signUpProcess = true;
+    _password = password;
+    _email = email;
+    initSignUpProcess();
+    notifyListeners();
+  }
+
   /// Creates a new user using email and password
-  Future<void> signUp(String email, String password) async {
+  Future<void> _signUp() async {
     try {
-      signUpProcess = true;
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-      await initSignUpProcess();
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email!, password: _password!);
     } on FirebaseAuthException {
       //Deal with error
     }
@@ -335,6 +363,10 @@ class AgoraAppState extends ChangeNotifier {
   void finishSignUpProcess() async {
     signUpProcess = false;
     topicSelectionDone = false;
+
+    await _signUp();
+    _password = null;
+    _email = null;
 
     topics.clear();
     polticianSelecttionList.clear();
@@ -411,6 +443,18 @@ class AgoraAppState extends ChangeNotifier {
         return Colors.blue;
       default:
         return Colors.green;
+    }
+  }
+
+  /// Gets the color for the vote
+  Color voteColor(String party) {
+    switch (party.toLowerCase()) {
+      case 'yea':
+        return Colors.green;
+      case 'nay':
+        return Colors.red;
+      default:
+        return Colors.blueGrey;
     }
   }
 
@@ -496,6 +540,7 @@ class AgoraAppState extends ChangeNotifier {
 
       // Take the first item to preserve order, remove it from its buffer
       home.add(chosenBuffer.removeAt(0));
+      added++;
 
       if (added % 25 == 0) {
         notifyListeners(); //Nice speed imporvment

@@ -63,7 +63,7 @@ class TermItem implements ListItem {
             Expanded(
               flex: 2,
               child: Text(
-                term.start_date.split("00:00:00").first.trim().split(' ').last, 
+                term.start_date.split("00:00:00").first.trim().split(' ').last.split('-').first, 
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 16),
               ),

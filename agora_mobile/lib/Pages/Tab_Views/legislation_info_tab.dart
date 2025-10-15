@@ -18,7 +18,7 @@ class LegislationInfoTab extends StatelessWidget {
         children: [
           Text(
             "Introduction Date",
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.indigo),
           ),
           const SizedBox(height: 8),
           Text(
@@ -28,7 +28,7 @@ class LegislationInfoTab extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             "Date Of Most Recent Action",
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.indigo),
           ),
           const SizedBox(height: 8),
           Text(
@@ -38,7 +38,7 @@ class LegislationInfoTab extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             "Status",
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.indigo),
           ),
           const SizedBox(height: 8),
           Text(
