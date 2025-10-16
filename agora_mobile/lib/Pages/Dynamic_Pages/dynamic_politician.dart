@@ -8,23 +8,10 @@ import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 /// Dynamic page for polticians
-class DynamicPolitician extends StatefulWidget {
+class DynamicPolitician extends StatelessWidget {
   final Politician politician;
 
   const DynamicPolitician({super.key, required this.politician});
-
-   @override
-  State<DynamicPolitician> createState() => _DynamicPoliticianState();
-}
-
-class _DynamicPoliticianState extends State<DynamicPolitician> {
-  @override
-  void initState() {
-    super.initState();
-    // Fetch votes only once
-    final appState = context.read<AgoraAppState>();
-    appState.getVotes(widget.politician.bio_id);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +34,14 @@ class _DynamicPoliticianState extends State<DynamicPolitician> {
                   child: Container(
                     padding: const EdgeInsets.all(3),
                     decoration: BoxDecoration(
-                      color: appState.getBorderColor(widget.politician.party),
+                      color: appState.getBorderColor(politician.party),
                       shape: BoxShape.circle,
                     ),
                     child: CircleAvatar(
                       radius: 55,
-                      backgroundImage: Uri.parse(widget.politician.image_url ?? '')
+                      backgroundImage: Uri.parse(politician.image_url ?? '')
                               .isAbsolute
-                          ? CachedNetworkImageProvider(widget.politician.image_url!)
+                          ? CachedNetworkImageProvider(politician.image_url!)
                           : const AssetImage('assets/No_Photo.png'),
                     ),
                   ),
@@ -80,9 +67,9 @@ class _DynamicPoliticianState extends State<DynamicPolitician> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.politician.chamber == "Senate"
-                              ? "Senator ${appState.formatPolticianName(widget.politician.name)}"
-                              : "Rep. ${appState.formatPolticianName(widget.politician.name)}",
+                          politician.chamber == "Senate"
+                              ? "Senator ${appState.formatPolticianName(politician.name)}"
+                              : "Rep. ${appState.formatPolticianName(politician.name)}",
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -91,9 +78,9 @@ class _DynamicPoliticianState extends State<DynamicPolitician> {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          widget.politician.chamber == "Senate"
-                              ? "U.S. Senator from ${widget.politician.state}\nParty - ${widget.politician.party}"
-                              : "U.S. Rep. from ${widget.politician.state}, District ${widget.politician.district}\nParty - ${widget.politician.party}",
+                          politician.chamber == "Senate"
+                              ? "U.S. Senator from ${politician.state}\nParty - ${politician.party}"
+                              : "U.S. Rep. from ${politician.state}, District ${politician.district}\nParty - ${politician.party}",
                           style: const TextStyle(color: Colors.grey),
                         ),
                       ],
@@ -115,9 +102,9 @@ class _DynamicPoliticianState extends State<DynamicPolitician> {
             Expanded(
               child: TabBarView(
                 children: [
-                  PoliticianInfoTab(politician: widget.politician),
-                  PoliticianTermTab(terms: widget.politician.terms_served),
-                  PoliticianVoteTab(votes: appState.votes),
+                  PoliticianInfoTab(politician: politician),
+                  PoliticianTermTab(terms: politician.terms_served),
+                  PoliticianVoteTab(poltician: politician),
                 ],
               ),
             ),

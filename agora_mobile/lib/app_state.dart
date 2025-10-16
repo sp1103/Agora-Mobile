@@ -154,7 +154,7 @@ class AgoraAppState extends ChangeNotifier {
 
   ///Get polticians votes
   void getVotes(String bioId)  async {
-    votes.addAll(await AgoraRemote.fetchVotes(bioId));
+    votes = await AgoraRemote.fetchVotes(bioId);
     notifyListeners();
   }
 
@@ -303,6 +303,7 @@ class AgoraAppState extends ChangeNotifier {
       hideBottomBar = false;
       hideAppBar = false;
     }
+    if (votes.isNotEmpty) votes.clear();
     detailPage.removeLast();
     notifyListeners();
   }
