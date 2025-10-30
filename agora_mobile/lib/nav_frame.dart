@@ -1,4 +1,5 @@
 import 'package:agora_mobile/AgoraWidgets/search_app_bar.dart';
+import 'package:agora_mobile/Pages/district_map.dart';
 import 'package:agora_mobile/Pages/favorites_page.dart';
 import 'package:agora_mobile/Pages/glossary_page.dart';
 import 'package:agora_mobile/Pages/home_page.dart';
@@ -64,6 +65,7 @@ class NavFrame extends StatelessWidget {
                   appState.openDetails(GlossaryPage(), false, false); 
                   break;
                 case 'map':
+                  appState.openDetails(DistrictMap(), true, true);
                   break;
               }
             }, 
