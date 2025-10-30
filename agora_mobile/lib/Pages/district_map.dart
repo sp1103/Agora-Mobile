@@ -105,12 +105,10 @@ class _DistrictMapState extends State<DistrictMap> {
           polygons.add(
             Polygon(
               points: points,
-              color: (_selectedDistrict == district)
-                  ? Colors.orange.withValues(alpha: 0.4)
-                  : Colors.blue.withValues(alpha: 0.3),
-              borderStrokeWidth: 1.0,
+              color: Colors.blue.withValues(alpha: 0.3),
+              borderStrokeWidth: 2.0,
               borderColor: Colors.blueAccent,
-              label: '$state District $district',
+              label: district,
             ),
           );
         }
@@ -125,12 +123,10 @@ class _DistrictMapState extends State<DistrictMap> {
             polygons.add(
               Polygon(
                 points: points,
-                color: (_selectedDistrict == district)
-                    ? Colors.orange.withValues(alpha: 0.4)
-                    : Colors.blue.withValues(alpha: 0.3),
-                borderStrokeWidth: 1.0,
+                color: Colors.blue.withValues(alpha: 0.3),
+                borderStrokeWidth: 2.0,
                 borderColor: Colors.blueAccent,
-                label: '$state District $district',
+                label: district,
               ),
             );
           }
@@ -145,6 +141,61 @@ class _DistrictMapState extends State<DistrictMap> {
     debugPrint("Error loading $path: $e");
   }
 }
+
+void _onMapTap(TapPosition tapPosition, LatLng latlng) {
+  for (final poly in _districtPolygons) {
+    if (_isPointInPolygon(latlng, poly.points)) {
+      String district = poly.label ?? 'Unknown';
+      setState(() {
+        _selectedDistrict = district;
+        // Rebuild polygons to refresh colors
+        _districtPolygons = _districtPolygons.map((p) {
+          return Polygon(
+            points: p.points,
+            color: (p.label == _selectedDistrict)
+                ? Colors.orange.withValues(alpha: 0.4)
+                : Colors.blue.withValues(alpha: 0.3),
+            borderStrokeWidth: 2.0,
+            borderColor: (p.label == _selectedDistrict) 
+                          ? Colors.orangeAccent
+                          : Colors.blueAccent,
+            label: p.label,
+          );
+        }).toList();
+      });
+
+      showModalBottomSheet(
+        context: context,
+        builder: (_) => Container(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            "State: $selectedState\nDistrict: $district",
+            style: const TextStyle(fontSize: 18),
+          ),
+        ),
+      );
+      break;
+    }
+  }
+}
+
+
+ bool _isPointInPolygon(LatLng point, List<LatLng> polygon) {
+    int i, j = polygon.length - 1;
+    bool inside = false;
+    for (i = 0; i < polygon.length; j = i++) {
+      if (((polygon[i].latitude > point.latitude) !=
+              (polygon[j].latitude > point.latitude)) &&
+          (point.longitude <
+              (polygon[j].longitude - polygon[i].longitude) *
+                      (point.latitude - polygon[i].latitude) /
+                      (polygon[j].latitude - polygon[i].latitude) +
+                  polygon[i].longitude)) {
+        inside = !inside;
+      }
+    }
+    return inside;
+  }
 
   void _onStateSelected(String? state) {
     if (state == null) return;
@@ -184,10 +235,11 @@ class _DistrictMapState extends State<DistrictMap> {
           Expanded(
             child: FlutterMap(
               mapController: _mapController,
-              options: const MapOptions(
+              options: MapOptions(
                 initialCenter: LatLng(37.8, -96.9),
                 initialZoom: 4.0,
                 minZoom: 3,
+                onTap: (tapPosition, latlng) => _onMapTap(tapPosition, latlng),
               ),
               children: [
                 TileLayer(
