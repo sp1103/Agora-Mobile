@@ -1,4 +1,5 @@
 import 'package:agora_mobile/AgoraWidgets/search_app_bar.dart';
+import 'package:agora_mobile/Pages/Search_Pages/search_page.dart';
 import 'package:agora_mobile/Pages/district_map.dart';
 import 'package:agora_mobile/Pages/favorites_page.dart';
 import 'package:agora_mobile/Pages/glossary_page.dart';
@@ -65,7 +66,10 @@ class NavFrame extends StatelessWidget {
                   appState.openDetails(GlossaryPage(), false, false); 
                   break;
                 case 'map':
-                  appState.openDetails(DistrictMap(), true, true);
+                  appState.openDetails(DistrictMap(signIn: false), true, true);
+                  break;
+                case 'search':
+                  appState.openDetails(SearchPage(), true, false);
                   break;
               }
             }, 
@@ -81,6 +85,10 @@ class NavFrame extends StatelessWidget {
               const PopupMenuItem(
                 value: 'map',
                 child: Row(children: [Icon(Icons.map), SizedBox(width: 5), Text("Map", style: TextStyle(fontSize: 15))]),
+              ),
+              const PopupMenuItem(
+                value: 'search',
+                child: Row(children: [Icon(Icons.search), SizedBox(width: 5), Text("Search", style: TextStyle(fontSize: 15))],)
               ),
             ],
           )   

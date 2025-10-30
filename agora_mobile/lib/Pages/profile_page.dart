@@ -3,6 +3,7 @@ import 'package:agora_mobile/Pages/Account_Pages/profile.dart';
 import 'package:agora_mobile/Pages/Account_Pages/sign_up.dart';
 import 'package:agora_mobile/Pages/Sign_Up_Process_Pages/politician_selection_page.dart';
 import 'package:agora_mobile/Pages/Sign_Up_Process_Pages/topic_selection_page.dart';
+import 'package:agora_mobile/Pages/district_map.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,9 @@ class ProfilePage extends StatelessWidget {
     }
     else if (appState.user == null && !appState.isLogIn && !appState.signUpProcess) {
       return SignUp();
+    }
+    else if (appState.signUpProcess && appState.topicSelectionDone && appState.mapStep) {
+      return DistrictMap(signIn: true);
     }
     else if (appState.signUpProcess && appState.topicSelectionDone) {
       return PoliticianSelectionPage();

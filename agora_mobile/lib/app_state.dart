@@ -2,6 +2,7 @@ import 'package:agora_mobile/Database/agora_remote.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
+import 'package:agora_mobile/Pages/Search_Pages/search_results.dart';
 import 'package:agora_mobile/Types/glossary_entry.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
@@ -19,6 +20,9 @@ class AgoraAppState extends ChangeNotifier {
   //These will be what the pages are based on
   /// Items for the homepage
   var home = <ListItem>[];
+
+  /// Items for display from advanced search
+  var searchResults = <ListItem>[];
 
   /// Items for the legislation page
   var legislation = <LegislationItem>[];
@@ -71,11 +75,20 @@ class AgoraAppState extends ChangeNotifier {
   /// Whether it is time to move on from topic selection
   bool topicSelectionDone = false;
 
+  /// Whether it is time to move to map step
+  bool mapStep = false;
+
   /// Onboarding process selected topics
   var selectedTopics = <String>[];
 
   /// Onboarding process selected politicians
   var selectedPolticians = <String>[];
+
+  /// Onboarding process selected state
+  String selectedState = "";
+
+  /// Onboarding process selected district
+  String selectedDistrict = "";
 
   /// User of the app
   User? _user;
@@ -125,11 +138,11 @@ class AgoraAppState extends ChangeNotifier {
     getLegislation();
     getPolitcian();
     getGlossary();
+    getTopics();
   }
 
   /// Intializes resources needed for sign up process
   Future<void> initSignUpProcess() async {
-    getTopics();
     getPolitcianSelection();
   }
 
@@ -279,6 +292,12 @@ class AgoraAppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Move from poltician selection to map step
+  void changeSignUpProcessMap() {
+    mapStep = true;
+    notifyListeners();
+  }
+
   /// When an icon is tapped update which view we are on
   void navigationItemTapped(int index) {
     navigationIndex = index;
@@ -378,8 +397,8 @@ class AgoraAppState extends ChangeNotifier {
         token: token!,
         topics: selectedTopics,
         politicians: selectedPolticians,
-        district: 1,
-        state: "Utah");
+        district: int.parse(selectedDistrict),
+        state: selectedState);
     clearSignUpSelection();
     getFavorites();
   }
@@ -388,13 +407,84 @@ class AgoraAppState extends ChangeNotifier {
   void clearSignUpSelection() {
     selectedTopics.clear();
     selectedPolticians.clear();
+    selectedState = "";
+    selectedDistrict = "";
   }
 
   // SEARCHING ----------------------------------------------------------------------------------------------------
 
+  /// Performs and advanced search for a poltician or legislation
+  Future<void> advancedSearch(String searchMode, String name, Topic? topic, String? status, String? billType, String? congressSessionLegislation, DateTime? dateIntroduced, DateTime? lastUpdateDate, String? chamber, String? state, DateTime? startYear, String? congressSessionPolitician) async {
+    String query = "";
+    if (searchMode == 'Politicians') {
+      query += 'name_search="$name"';
+      if (chamber != null && chamber.isNotEmpty) {
+        query += '&chamber_name="$chamber"';
+      }
+      if (state != null && state.isNotEmpty) {
+        query += '&state="$state"';
+      }
+      if (startYear != null) {
+        query += '&start_year=${startYear.year}';
+      }
+      if (congressSessionPolitician != null && congressSessionPolitician.isNotEmpty) {
+        query += '&congress=$congressSessionPolitician';
+      }
+
+      searchResults = await AgoraRemote.queryPoliticians(query: query);
+      openDetails(SearchResults(query: "Search Polticians"), true, false);
+    }
+
+    if (searchMode == 'Legislation') {
+      query += 'title="$name"';
+      if (topic != null) {
+        query += '&topic_id=${topic.topic_id}';
+      }
+      if (status != null && status.isNotEmpty) {
+        query += '&status="$status"';
+      }
+      if (billType != null && billType.isNotEmpty) {
+        query += '&type="$billType"';
+      }
+      if (congressSessionLegislation != null && congressSessionLegislation.isNotEmpty) {
+        query += '&congress=$congressSessionLegislation';
+      }
+      if (dateIntroduced != null) {
+        query += '&intro_date=["${dateIntroduced.toIso8601String().split("T")[0]}", "${DateTime.now().toIso8601String().split("T")[0]}"]';
+      }
+      if (lastUpdateDate != null) {
+        query += '&status_update_date=["${lastUpdateDate.toIso8601String().split("T")[0]}", "${DateTime.now().toIso8601String().split("T")[0]}"]';
+      }
+
+      searchResults = await AgoraRemote.queryLegislation(query: query);
+      openDetails(SearchResults(query: "Search Legislation"), true, false);
+    }
+    notifyListeners();
+  }
+
+  /// Get info for district
+  Future<void> searchByDistrict(String state, String district, bool moreThanOne) async {
+  searchResults.clear();
+  final reps = AgoraRemote.queryPoliticians(query: 'state="$state"&district=$district&congress=119');
+  List<PoliticianItem> results = [];
+
+  if (moreThanOne) {
+    final sen = AgoraRemote.queryPoliticians(query: 'state="$state"&district=0&congress=119');
+    final res = await Future.wait([reps, sen]);
+    results.addAll(res[0]);
+    results.addAll(res[1]);
+  } else {
+    results.addAll(await reps);
+  }
+
+  searchResults.addAll(results);
+  openDetails(SearchResults(query: "$state, District $district"), true, false);
+}
+
+
   /// Queries Databse and searches poltician by name
   Future<void> searchPoliticians(String query) async {
-    searchedPoliticians = await AgoraRemote.queryPoliticians(query: 'name_search="$query"');
+    searchedPoliticians = await AgoraRemote.queryPoliticians(query: 'name_search="$query"&');
     itemsToDisplayPolitician = searchedPoliticians;
     notifyListeners();
   }

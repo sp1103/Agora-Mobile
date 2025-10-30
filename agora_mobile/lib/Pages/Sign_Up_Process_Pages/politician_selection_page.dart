@@ -94,7 +94,7 @@ class _PoliticianSelectionPageState extends State<PoliticianSelectionPage> {
             child: Center(
               child: ElevatedButton(
                 onPressed: appState.selectedPolticians.length >= 3
-                ? () { appState.finishSignUpProcess(); }
+                ? () { appState.changeSignUpProcessMap(); }
                 : null,
                 child: Center(child: Text("Next")),
               ),

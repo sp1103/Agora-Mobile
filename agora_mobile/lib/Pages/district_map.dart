@@ -8,7 +8,9 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 class DistrictMap extends StatefulWidget {
-  const DistrictMap({super.key});
+  final bool signIn;
+
+  const DistrictMap({super.key, required this.signIn});
 
   @override
   State<DistrictMap> createState() => _DistrictMapState();
@@ -142,13 +144,78 @@ class _DistrictMapState extends State<DistrictMap> {
   }
 }
 
+void _showConfirmationSheet(String state, String district) {
+  var appState = context.read<AgoraAppState>();
+
+  showModalBottomSheet(
+    context: context,
+    isDismissible: false,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    builder: (BuildContext context) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Confirm Your District",
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              "State: $state\nDistrict: $district",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () async {
+                appState.selectedState = state;
+                appState.selectedDistrict = district;
+                Navigator.pop(context); // close modal
+                appState.finishSignUpProcess();
+              },
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(double.infinity, 48),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text("Confirm"),
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
 void _onMapTap(TapPosition tapPosition, LatLng latlng) {
+  var appState = context.read<AgoraAppState>();
+
   for (final poly in _districtPolygons) {
     if (_isPointInPolygon(latlng, poly.points)) {
-      String district = poly.label ?? 'Unknown';
+      String rawDistrict = poly.label ?? 'Unknown';
+      String district = '0';
+      bool moreThanOne = false;
+
+      final lower = rawDistrict.toLowerCase();
+      if (lower.contains('at large')) {
+        district = '0';
+      } else {
+        // Extract first number from string (e.g. "Congressional District 3" → "3")
+        final match = RegExp(r'\d+').firstMatch(rawDistrict);
+        if (match != null) {
+          district = match.group(0)!;
+          moreThanOne = true; // meaning: district number found
+        }
+      }
+
       setState(() {
-        _selectedDistrict = district;
-        // Rebuild polygons to refresh colors
+        _selectedDistrict = rawDistrict;
         _districtPolygons = _districtPolygons.map((p) {
           return Polygon(
             points: p.points,
@@ -156,28 +223,27 @@ void _onMapTap(TapPosition tapPosition, LatLng latlng) {
                 ? Colors.orange.withValues(alpha: 0.4)
                 : Colors.blue.withValues(alpha: 0.3),
             borderStrokeWidth: 2.0,
-            borderColor: (p.label == _selectedDistrict) 
-                          ? Colors.orangeAccent
-                          : Colors.blueAccent,
+            borderColor: (p.label == _selectedDistrict)
+                ? Colors.orangeAccent
+                : Colors.blueAccent,
             label: p.label,
           );
         }).toList();
       });
 
-      showModalBottomSheet(
-        context: context,
-        builder: (_) => Container(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            "State: $selectedState\nDistrict: $district",
-            style: const TextStyle(fontSize: 18),
-          ),
-        ),
-      );
+      if (widget.signIn) {
+        _showConfirmationSheet(selectedState!, district);
+      }
+
+      if (selectedState != null && !widget.signIn) {
+        appState.searchByDistrict(selectedState!, district, moreThanOne);
+      }
+
       break;
     }
   }
 }
+
 
 
  bool _isPointInPolygon(LatLng point, List<LatLng> polygon) {
