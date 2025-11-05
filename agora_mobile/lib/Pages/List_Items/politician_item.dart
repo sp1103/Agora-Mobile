@@ -75,9 +75,10 @@ class PoliticianItem implements ListItem {
                       ],
                     ),
                   ),
+
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(width: 10),
               if (appState.user != null) ...[
                  Row(
                   children: [
@@ -90,14 +91,6 @@ class PoliticianItem implements ListItem {
                               ? Icons.check_circle
                               : Icons.add_circle,
                           color: Colors.black),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.arrow_upward, color: Colors.red),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.arrow_downward, color: Colors.blue),
                     ),
                   ],
                 ),

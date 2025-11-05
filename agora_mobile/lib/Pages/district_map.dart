@@ -306,6 +306,7 @@ void _onMapTap(TapPosition tapPosition, LatLng latlng) {
                 initialZoom: 4.0,
                 minZoom: 3,
                 onTap: (tapPosition, latlng) => _onMapTap(tapPosition, latlng),
+                interactionOptions: InteractionOptions(flags: InteractiveFlag.all & ~InteractiveFlag.rotate)
               ),
               children: [
                 TileLayer(

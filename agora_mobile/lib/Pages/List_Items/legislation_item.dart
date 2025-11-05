@@ -95,14 +95,6 @@ class LegislationItem implements ListItem {
                             : Icons.add_circle,
                         color: Colors.black),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.arrow_upward, color: Colors.red),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.arrow_downward, color: Colors.blue),
-                    ),
                   ],
                   Spacer(flex: 20),
                   Text(

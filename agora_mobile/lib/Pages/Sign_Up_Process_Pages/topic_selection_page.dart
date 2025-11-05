@@ -59,7 +59,7 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
                 child: Wrap(
                   spacing: 10,
                   runSpacing: 15,
-                  children: allTopics.take(6).map((topic) {
+                  children: allTopics.map((topic) {
                     bool isSelected = selected.contains(topic);
                     return ChoiceChip(
                       label: Text(topic),

@@ -2,6 +2,7 @@ import 'package:agora_mobile/Database/agora_remote.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/list_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
+import 'package:agora_mobile/Pages/List_Items/topic_item.dart';
 import 'package:agora_mobile/Pages/Search_Pages/search_results.dart';
 import 'package:agora_mobile/Types/glossary_entry.dart';
 import 'package:agora_mobile/Types/legislation.dart';
@@ -41,6 +42,9 @@ class AgoraAppState extends ChangeNotifier {
 
   /// All topics for legislation
   Set<Topic> topics = {};
+
+  /// Set of the ids that the user is following
+  Set<int> userTopicIds = {};
 
   /// List of all glossary entries for the glossary page
   var glossaryList = <GlossaryEntry>[];
@@ -127,6 +131,7 @@ class AgoraAppState extends ChangeNotifier {
       if (_user != null) {
         getFavorites();
         getHomeUser();
+        getUserTopics();
       }
       notifyListeners();
     });
@@ -223,6 +228,17 @@ class AgoraAppState extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  /// Gets the list of topics user is following
+  void getUserTopics() async {
+    final token = await _user!.getIdToken();
+
+    Map<int, TopicItem> topicMap = await AgoraRemote.fetchFollowingTopics(token: token!);
+    favoritesList.addAll(topicMap.values);
+    userTopicIds.addAll(topicMap.keys);
+    notifyListeners();
+  }
+
   /// Gets all polticians
   void getPolitcianSelection() async {
     polticianSelecttionList = await AgoraRemote.fetchPoliticianSelection();
@@ -239,6 +255,13 @@ class AgoraAppState extends ChangeNotifier {
     favorites.addAll(favoriteLegislations);
     favoritesList.addAll(favoriteLegislations);
     notifyListeners();
+  }
+
+  /// Updates to topics in the database
+  void updateTopicsInDatabase() async {
+    final token = await _user!.getIdToken();
+
+    await AgoraRemote.updateTopics(token: token!, topics: userTopicIds.toList());
   }
 
   /// Removes a favorite from the database
@@ -260,7 +283,7 @@ class AgoraAppState extends ChangeNotifier {
       await AgoraRemote.followBill(token: token!, billId: selected.legislation.bill_id);
     } else if (selected is PoliticianItem) {
       await AgoraRemote.followPolitician(token: token!, bioId: selected.politician.bio_id);
-    }
+    } 
   }
 
   // FAVORITES OPERATIONS ------------------------------------------------------------------------------------------
@@ -282,6 +305,27 @@ class AgoraAppState extends ChangeNotifier {
   /// Returns whether or not a ListItem is in the favorites set
   bool isFavorite(ListItem item) {
     return favorites.contains(item);
+  }
+
+  //TOPIC OPERATIONS ----------------------------------------------------------------------------------------------
+
+  /// Adds an item to topic list if it isn't already or removes item from topic list otherwise
+  void toggleTopics(TopicItem selected) {
+    if (userTopicIds.contains(selected.topic.topic_id)) {
+      userTopicIds.remove(selected.topic.topic_id);
+      favoritesList.remove(selected);
+      updateTopicsInDatabase();
+    } else {
+      userTopicIds.add(selected.topic.topic_id);
+      favoritesList.add(selected);
+      updateTopicsInDatabase();
+    }
+    notifyListeners();
+  }
+
+  /// Returns whether or not a TopicItem is in the topics set
+  bool isFollowingTopic(TopicItem item) {
+    return userTopicIds.contains(item.topic.topic_id);
   }
 
   // NAVIGATION ---------------------------------------------------------------------------------------------------
@@ -401,6 +445,7 @@ class AgoraAppState extends ChangeNotifier {
         state: selectedState);
     clearSignUpSelection();
     getFavorites();
+    getUserTopics();
   }
 
   /// Clean up the signup selection info

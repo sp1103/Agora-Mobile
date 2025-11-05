@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
+import 'package:agora_mobile/Pages/List_Items/topic_item.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
@@ -159,6 +160,25 @@ class AgoraRemote {
     return items;
   }
 
+  /// Fetch all the topics that a user is currently following
+  static Future<Map<int, TopicItem>> fetchFollowingTopics({required String token}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_user_info?token="$token"&topics_following=""');
+
+    final response = await http.get(url);
+
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["topic_ids"] ?? [];
+    final Map<int, TopicItem> topicMap = {};
+    for (final item in data) {
+    if (item is Map && item.containsKey("topic_id")) {
+      final topic = Topic.fromJson(Map<String, dynamic>.from(item));
+      topicMap[topic.topic_id] = TopicItem(topic);
+    }
+  }
+
+    return topicMap;
+  }
+
   // SEARCH METHOODS ------------------------------------------------------------------------------------------------------------
 
   /// Query the database for politicians using various search options
@@ -272,6 +292,26 @@ class AgoraRemote {
         "district": null,
         "state": null,
         "current_topics": []
+      }
+    ];
+
+    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+  }
+
+  /// POST request that updates a users topic list
+  static Future<void> updateTopics({required String token, required List<int> topics}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/add_user_interactions');
+
+    final payload = 
+    [
+      {
+        "token": token,
+        "type": "update_topics",
+        "bill_id": null,
+        "bio_id": null,
+        "district": null,
+        "state": null,
+        "current_topics": topics,
       }
     ];
 
