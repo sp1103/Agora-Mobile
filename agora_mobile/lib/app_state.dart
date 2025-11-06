@@ -82,6 +82,15 @@ class AgoraAppState extends ChangeNotifier {
   /// Whether it is time to move to map step
   bool mapStep = false;
 
+  ///Whether or not legislation is trying to get more data
+  bool loadingBills = false; 
+
+  ///Whether or not home is trying to get more data
+  bool loadingHome = false; 
+
+  ///Whether or not politicians is trying to get more data
+  bool loadingPoliticians = false; 
+
   /// Onboarding process selected topics
   var selectedTopics = <String>[];
 
@@ -152,9 +161,9 @@ class AgoraAppState extends ChangeNotifier {
   }
 
   /// Gets a list of trending polticians and legislation
-  void getHome() async {
-    final rawBills = AgoraRemote.fetchTrendingBills();
-    final rawPolticians = AgoraRemote.fetchTrendingPoliticians();
+  Future<void> getHome() async {
+    final rawBills = AgoraRemote.fetchTrendingBills(numToReturn: 50);
+    final rawPolticians = AgoraRemote.fetchTrendingPoliticians(numToReturn: 50);
 
     final res = await Future.wait([
       compute(_decodeBillsFiltered, await rawBills),
@@ -171,15 +180,16 @@ class AgoraAppState extends ChangeNotifier {
 
   ///Get polticians votes
   void getVotes(String bioId)  async {
-    votes = await AgoraRemote.fetchVotes(bioId);
+    votes.clear();
+    votes = await AgoraRemote.fetchVotes(bioId, 100);
     notifyListeners();
   }
 
   /// Gets a list of trending polticians and legislation for a specific user
-  void getHomeUser() async {
+  Future<void> getHomeUser() async {
     final token = await _user!.getIdToken();
-    final rawBills = AgoraRemote.fetchTrendingBillsUser(token: token!);
-    final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(token: token);
+    final rawBills = AgoraRemote.fetchTrendingBillsUser(token: token!, numToReturn: 50);
+    final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(token: token, numToReturn: 50);
 
     final res = await Future.wait([
       compute(_decodeBillsFiltered, await rawBills),
@@ -195,8 +205,8 @@ class AgoraAppState extends ChangeNotifier {
   }
 
   /// Gets all legislation in databse for startup
-  void getLegislation() async {
-    final rawBills = await AgoraRemote.fetchBills();
+  Future<void> getLegislation() async {
+    final rawBills = await AgoraRemote.fetchBills(numToReturn: 100);
     legislation = await compute(_decodeBills, rawBills);
     itemsToDisplayLegislation = legislation;
     notifyListeners();
@@ -215,8 +225,8 @@ class AgoraAppState extends ChangeNotifier {
   }
 
   /// Gets all politicians in database for startup
-  void getPolitcian() async {
-    final rawMembers = await AgoraRemote.fetchLegisltors();
+  Future<void> getPolitcian() async {
+    final rawMembers = await AgoraRemote.fetchLegisltors(numToReturn: 100);
     politician = await compute(_decodePolticians, rawMembers);
     itemsToDisplayPolitician = politician;
     notifyListeners();
@@ -284,6 +294,113 @@ class AgoraAppState extends ChangeNotifier {
     } else if (selected is PoliticianItem) {
       await AgoraRemote.followPolitician(token: token!, bioId: selected.politician.bio_id);
     } 
+  }
+
+  // REFRESH AND PAGANATION OPERATIONS -----------------------------------------------------------------------------
+
+  /// Clears home list and then refreshes home
+  Future<void> refreshHome() async {
+    home.clear();
+    if (user != null ) {
+      await getHomeUser();
+    } else {
+      await getHome();
+    }
+  }
+
+  /// Loads more bills from the database
+  Future<void> loadMoreBills() async {
+    if (loadingBills) return;
+
+    loadingBills = true;
+    
+    try {
+      int ntr = legislation.length + 100;
+
+      final rawBills = await AgoraRemote.fetchBills(numToReturn: ntr);
+      var decodedBills = await compute(_decodeBills, rawBills);
+      legislation.addAll(decodedBills.skip(legislation.length));
+      notifyListeners();
+    }
+    finally {
+      loadingBills = false;
+    }
+  }
+
+  /// Loads more politicians from the database
+  Future<void> loadMorePoliticians() async {
+    if (loadingPoliticians) return;
+
+    loadingPoliticians = true;
+
+    try {
+      int ntr = politician.length + 100;
+
+      final rawMembers = await AgoraRemote.fetchLegisltors(numToReturn: ntr);
+      var decodedMembers= await compute(_decodePolticians, rawMembers);
+      politician.addAll(decodedMembers.skip(politician.length));
+      notifyListeners();
+    }
+    finally {
+     loadingPoliticians = false;
+    }
+  }
+
+  /// Loads more home data from the database
+  Future<void> loadMoreUserHome() async {
+    if (loadingHome) return;
+
+    loadingHome = true;
+
+    try {
+      int ntr = (home.length ~/ 2) + 50;
+
+      final token = await _user!.getIdToken();
+      final rawBills = AgoraRemote.fetchTrendingBillsUser(token: token!, numToReturn: ntr);
+      final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(token: token, numToReturn: ntr);
+
+      final res = await Future.wait([
+        compute(_decodeBillsFiltered, await rawBills),
+        compute(_decodePolticians, await rawPolticians)
+      ]);
+
+      final trendingBills = res[0].skip(ntr - 50).toList();
+      final trendingPolticians = res[1].skip(ntr - 50).toList();
+
+      interleaveRandomly([trendingBills, trendingPolticians]);
+      notifyListeners();
+    }
+    finally {
+      loadingHome = false;
+    }
+  }
+
+   /// Loads more home data from the database
+  Future<void> loadMoreHome() async {
+    if (loadingHome) return;
+
+    loadingHome = true;
+
+    try {
+      int ntr = (home.length ~/ 2) + 50;
+
+      final rawBills = AgoraRemote.fetchTrendingBills(numToReturn: ntr);
+      final rawPolticians = AgoraRemote.fetchTrendingPoliticians(numToReturn: ntr);
+
+      final res = await Future.wait([
+        compute(_decodeBillsFiltered, await rawBills),
+        compute(_decodePolticians, await rawPolticians)
+      ]);
+
+      final trendingBills = res[0].skip(ntr - 50).toList();
+      final trendingPolticians = res[1].skip(ntr - 50).toList();
+
+      interleaveRandomly([trendingBills, trendingPolticians]);
+      notifyListeners();
+    }
+    finally {
+      loadingHome = false;
+    }
   }
 
   // FAVORITES OPERATIONS ------------------------------------------------------------------------------------------
@@ -508,7 +625,7 @@ class AgoraAppState extends ChangeNotifier {
   }
 
   /// Get info for district
-  Future<void> searchByDistrict(String state, String district, bool moreThanOne) async {
+  Future<void> searchByDistrict(String state, String district, bool moreThanOne, bool isFed) async {
   searchResults.clear();
   final reps = AgoraRemote.queryPoliticians(query: 'state="$state"&district=$district&congress=119');
   List<PoliticianItem> results = [];
@@ -520,6 +637,11 @@ class AgoraAppState extends ChangeNotifier {
     results.addAll(res[1]);
   } else {
     results.addAll(await reps);
+  }
+
+  if (isFed) {
+    results.removeWhere((p) =>
+        p.politician.chamber.toLowerCase().contains(state.toLowerCase()));
   }
 
   searchResults.addAll(results);

@@ -15,8 +15,8 @@ class AgoraRemote {
   // GET METHOODS --------------------------------------------------------------------------------------------------------------
 
   /// Returns a list of politicians from the database
-  static Future<String> fetchLegisltors() async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=100');
+  static Future<String> fetchLegisltors({required int numToReturn}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=$numToReturn');
 
     final response = await http.get(url);
 
@@ -42,8 +42,8 @@ class AgoraRemote {
   }
 
   /// Returns a list of most politician's votes
-  static Future<List<Vote>> fetchVotes(String bioId) async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_member_most_recent_votes?bio_id="$bioId"&num_to_return=100');
+  static Future<List<Vote>> fetchVotes(String bioId, int numToReturn) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_member_most_recent_votes?bio_id="$bioId"&num_to_return=$numToReturn');
 
     final response = await http.get(url);
 
@@ -60,11 +60,11 @@ class AgoraRemote {
   }
 
   /// Returns a list of bills from the database
-  static Future<String> fetchBills() async {
+  static Future<String> fetchBills({required int numToReturn}) async {
     const startDate = "2000-01-01";
     var endDate = DateTime.now().toIso8601String().split("T")[0];
 
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_bills?intro_date=["$startDate","$endDate"]&num_to_return=100');
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_bills?intro_date=["$startDate","$endDate"]&num_to_return=$numToReturn');
 
     final response = await http.get(url);
 
@@ -72,8 +72,8 @@ class AgoraRemote {
   }
 
   /// Returns a list of trending bills
-  static Future<String> fetchTrendingBills() async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?num_to_return=50');
+  static Future<String> fetchTrendingBills({required int numToReturn}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?num_to_return=$numToReturn');
 
     final response = await http.get(url);
 
@@ -81,8 +81,8 @@ class AgoraRemote {
   }
 
   /// Returns a list of trending bills for a specific user
-  static Future<String> fetchTrendingBillsUser({required String token}) async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?token="$token"&num_to_return=50');
+  static Future<String> fetchTrendingBillsUser({required String token, required int numToReturn}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?token="$token"&num_to_return=$numToReturn');
 
     final response = await http.get(url);
 
@@ -90,8 +90,8 @@ class AgoraRemote {
   }
 
   /// Returns a list of trending politicians 
-  static Future<String> fetchTrendingPoliticians() async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=50');
+  static Future<String> fetchTrendingPoliticians({required int numToReturn}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=$numToReturn');
 
     final response = await http.get(url);
 
@@ -99,8 +99,8 @@ class AgoraRemote {
   }
 
   /// Returns a list of trending politicians for specific user
-  static Future<String> fetchTrendingPoliticiansUser({required String token}) async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?token="$token"&num_to_return=50');
+  static Future<String> fetchTrendingPoliticiansUser({required String token, required int numToReturn}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?token="$token"&num_to_return=$numToReturn');
 
     final response = await http.get(url);
 

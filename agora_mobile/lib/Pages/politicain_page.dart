@@ -2,36 +2,68 @@ import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-/// Creates a page that contains polticians 
 class PoliticianPage extends StatefulWidget {
   const PoliticianPage({super.key});
 
   @override
   State<PoliticianPage> createState() => _PoliticianPageState();
-
 }
 
-class _PoliticianPageState extends State<PoliticianPage> { 
-
+class _PoliticianPageState extends State<PoliticianPage> {
   final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent - 200) {
+        final appState = context.read<AgoraAppState>();
+        appState.loadMorePoliticians();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _refreshPolitician() async {
+    var appState = context.read<AgoraAppState>();
+    await appState.getPolitcian();
+  }
 
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AgoraAppState>();
     var politician = appState.itemsToDisplayPolitician;
 
-    return ListView.builder(
-      controller: _scrollController,
-      itemCount: politician.length,
+    if (politician.isEmpty) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-      itemBuilder: (context, index) {
-        final item = politician[index];
+    return RefreshIndicator(
+      onRefresh: _refreshPolitician,
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: politician.length + 1,
+        itemBuilder: (context, index) {
+          if (index == politician.length) {
+            return appState.loadingPoliticians
+                ? const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                : const SizedBox.shrink();
+          }
 
-        return ListTile(
-          title: item.build(context),
-        );
-      }
+          final item = politician[index];
+          return ListTile(title: item.build(context));
+        },
+      ),
     );
   }
-
 }

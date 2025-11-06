@@ -71,6 +71,8 @@ class NavFrame extends StatelessWidget {
                 case 'search':
                   appState.openDetails(SearchPage(), true, false);
                   break;
+                case 'congress':
+                  break; 
               }
             }, 
             itemBuilder: (context) => [
@@ -89,6 +91,10 @@ class NavFrame extends StatelessWidget {
               const PopupMenuItem(
                 value: 'search',
                 child: Row(children: [Icon(Icons.search), SizedBox(width: 5), Text("Search", style: TextStyle(fontSize: 15))],)
+              ),
+              const PopupMenuItem(
+                value: 'congress',
+                child: Row(children: [Icon(Icons.gavel_rounded), SizedBox(width: 5), Text("Congress", style: TextStyle(fontSize: 15))],)
               ),
             ],
           )   

@@ -236,7 +236,7 @@ void _onMapTap(TapPosition tapPosition, LatLng latlng) {
       }
 
       if (selectedState != null && !widget.signIn) {
-        appState.searchByDistrict(selectedState!, district, moreThanOne);
+        appState.searchByDistrict(selectedState!, district, moreThanOne, true);
       }
 
       break;
