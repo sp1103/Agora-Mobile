@@ -19,6 +19,7 @@ class DistrictMap extends StatefulWidget {
 class _DistrictMapState extends State<DistrictMap> {
   final MapController _mapController = MapController();
   String? selectedState;
+  String _mapLevel = "Federal";
   List<Polygon> _districtPolygons = [];
   String? _selectedDistrict;
 
@@ -76,47 +77,45 @@ class _DistrictMapState extends State<DistrictMap> {
     "Wyoming": {"center": LatLng(43.0759, -107.2903), "zoom": 6.0},
   };
 
+  String _getGeoJsonPath(String state) {
+    if (state == "Utah") {
+      switch (_mapLevel) {
+        case "Senate":
+          return 'assets/States-Local/$state/SenateDistricts.geojson';
+        case "House":
+          return 'assets/States-Local/$state/HouseDistricts.geojson';
+        default:
+          return 'assets/States/Utah.geojson';
+      }
+    } else {
+      return 'assets/States/$state.geojson';
+    }
+  }
+
   Future<void> _loadStateGeoJson(String state) async {
-  final String path = 'assets/States/$state.geojson';
-  try {
-    final String data = await rootBundle.loadString(path);
-    final Map<String, dynamic> geojson = jsonDecode(data);
+    final String path = _getGeoJsonPath(state);
+    try {
+      final String data = await rootBundle.loadString(path);
+      final Map<String, dynamic> geojson = jsonDecode(data);
 
-    List features = geojson['features'];
-    List<Polygon> polygons = [];
+      List features = geojson['features'];
+      List<Polygon> polygons = [];
 
-    for (var feature in features) {
-      final geometry = feature['geometry'];
-      final type = geometry['type'];
+      for (var feature in features) {
+        final geometry = feature['geometry'];
+        final type = geometry['type'];
 
-      String district = (feature['properties']['NAMELSAD'] ??
-              feature['properties']['CD119FP'] ??
-              feature['properties']['DISTRICT'] ??
-              feature['properties']['district'] ??
-              feature['properties']['CD'] ??
-              'Unknown')
-          .toString();
+        String district = (feature['properties']['NAMELSAD'] ??
+                feature['properties']['CD119FP'] ??
+                feature['properties']['DISTRICT'] ??
+                feature['properties']['DIST'] ??
+                feature['properties']['district'] ??
+                feature['properties']['CD'] ??
+                'Unknown')
+            .toString();
 
-      if (type == 'Polygon') {
-        for (var ring in geometry['coordinates']) {
-          List<LatLng> points = ring
-              .map<LatLng>(
-                  (coord) => LatLng(coord[1].toDouble(), coord[0].toDouble()))
-              .toList();
-
-          polygons.add(
-            Polygon(
-              points: points,
-              color: Colors.blue.withValues(alpha: 0.3),
-              borderStrokeWidth: 2.0,
-              borderColor: Colors.blueAccent,
-              label: district,
-            ),
-          );
-        }
-      } else if (type == 'MultiPolygon') {
-        for (var poly in geometry['coordinates']) {
-          for (var ring in poly) {
+        if (type == 'Polygon') {
+          for (var ring in geometry['coordinates']) {
             List<LatLng> points = ring
                 .map<LatLng>(
                     (coord) => LatLng(coord[1].toDouble(), coord[0].toDouble()))
@@ -132,121 +131,148 @@ class _DistrictMapState extends State<DistrictMap> {
               ),
             );
           }
-        }
-      }
-    }
+        } else if (type == 'MultiPolygon') {
+          for (var poly in geometry['coordinates']) {
+            for (var ring in poly) {
+              List<LatLng> points = ring
+                  .map<LatLng>((coord) =>
+                      LatLng(coord[1].toDouble(), coord[0].toDouble()))
+                  .toList();
 
-    setState(() {
-      _districtPolygons = polygons;
-    });
-  } catch (e) {
-    debugPrint("Error loading $path: $e");
-  }
-}
-
-void _showConfirmationSheet(String state, String district) {
-  var appState = context.read<AgoraAppState>();
-
-  showModalBottomSheet(
-    context: context,
-    isDismissible: false,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
-    builder: (BuildContext context) {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              "Confirm Your District",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "State: $state\nDistrict: $district",
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                appState.selectedState = state;
-                appState.selectedDistrict = district;
-                Navigator.pop(context); // close modal
-                appState.finishSignUpProcess();
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 48),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+              polygons.add(
+                Polygon(
+                  points: points,
+                  color: Colors.blue.withValues(alpha: 0.3),
+                  borderStrokeWidth: 2.0,
+                  borderColor: Colors.blueAccent,
+                  label: district,
                 ),
-              ),
-              child: const Text("Confirm"),
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
-
-void _onMapTap(TapPosition tapPosition, LatLng latlng) {
-  var appState = context.read<AgoraAppState>();
-
-  for (final poly in _districtPolygons) {
-    if (_isPointInPolygon(latlng, poly.points)) {
-      String rawDistrict = poly.label ?? 'Unknown';
-      String district = '0';
-      bool moreThanOne = false;
-
-      final lower = rawDistrict.toLowerCase();
-      if (lower.contains('at large')) {
-        district = '0';
-      } else {
-        // Extract first number from string (e.g. "Congressional District 3" → "3")
-        final match = RegExp(r'\d+').firstMatch(rawDistrict);
-        if (match != null) {
-          district = match.group(0)!;
-          moreThanOne = true; // meaning: district number found
+              );
+            }
+          }
         }
       }
 
       setState(() {
-        _selectedDistrict = rawDistrict;
-        _districtPolygons = _districtPolygons.map((p) {
-          return Polygon(
-            points: p.points,
-            color: (p.label == _selectedDistrict)
-                ? Colors.orange.withValues(alpha: 0.4)
-                : Colors.blue.withValues(alpha: 0.3),
-            borderStrokeWidth: 2.0,
-            borderColor: (p.label == _selectedDistrict)
-                ? Colors.orangeAccent
-                : Colors.blueAccent,
-            label: p.label,
-          );
-        }).toList();
+        _districtPolygons = polygons;
       });
-
-      if (widget.signIn) {
-        _showConfirmationSheet(selectedState!, district);
-      }
-
-      if (selectedState != null && !widget.signIn) {
-        appState.searchByDistrict(selectedState!, district, moreThanOne, true);
-      }
-
-      break;
+    } catch (e) {
+      debugPrint("Error loading $path: $e");
     }
   }
-}
 
+  void _showConfirmationSheet(String state, String district) {
+    var appState = context.read<AgoraAppState>();
 
+    showModalBottomSheet(
+      context: context,
+      isDismissible: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Confirm Your District",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "State: $state\nDistrict: $district",
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async {
+                  appState.selectedState = state;
+                  appState.selectedDistrict = district;
+                  Navigator.pop(context); // close modal
+                  appState.finishSignUpProcess();
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 48),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text("Confirm"),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
- bool _isPointInPolygon(LatLng point, List<LatLng> polygon) {
+  void _onMapTap(TapPosition tapPosition, LatLng latlng) {
+    var appState = context.read<AgoraAppState>();
+
+    for (final poly in _districtPolygons) {
+      if (_isPointInPolygon(latlng, poly.points)) {
+        String rawDistrict = poly.label ?? 'Unknown';
+        String district = '0';
+        bool moreThanOne = false;
+
+        final lower = rawDistrict.toLowerCase();
+        if (lower.contains('at large')) {
+          district = '0';
+        } else {
+          // Extract first number from string (e.g. "Congressional District 3" → "3")
+          final match = RegExp(r'\d+').firstMatch(rawDistrict);
+          if (match != null) {
+            district = match.group(0)!;
+            moreThanOne = true; // district number found
+          }
+        }
+
+        bool isFed = _mapLevel == "Federal";
+        bool localSenate = _mapLevel == "Senate";
+        bool localHouse = _mapLevel == "House";
+
+        setState(() {
+          _selectedDistrict = rawDistrict;
+          _districtPolygons = _districtPolygons.map((p) {
+            return Polygon(
+              points: p.points,
+              color: (p.label == _selectedDistrict)
+                  ? Colors.orange.withValues(alpha: 0.4)
+                  : Colors.blue.withValues(alpha: 0.3),
+              borderStrokeWidth: 2.0,
+              borderColor: (p.label == _selectedDistrict)
+                  ? Colors.orangeAccent
+                  : Colors.blueAccent,
+              label: p.label,
+            );
+          }).toList();
+        });
+
+        if (widget.signIn) {
+          _showConfirmationSheet(selectedState!, district);
+        }
+
+        if (selectedState != null && !widget.signIn) {
+          appState.searchByDistrict(
+            selectedState!,
+            district,
+            moreThanOne,
+            isFed,
+            localSenate,
+            localHouse,
+          );
+        }
+
+        break;
+      }
+    }
+  }
+
+  bool _isPointInPolygon(LatLng point, List<LatLng> polygon) {
     int i, j = polygon.length - 1;
     bool inside = false;
     for (i = 0; i < polygon.length; j = i++) {
@@ -261,6 +287,16 @@ void _onMapTap(TapPosition tapPosition, LatLng latlng) {
       }
     }
     return inside;
+  }
+
+  void _onLevelChanged(String? level) {
+    if (level == null) return;
+    setState(() {
+      _mapLevel = level;
+    });
+    if (selectedState != null) {
+      _loadStateGeoJson(selectedState!);
+    }
   }
 
   void _onStateSelected(String? state) {
@@ -282,19 +318,39 @@ void _onMapTap(TapPosition tapPosition, LatLng latlng) {
     var appState = context.watch<AgoraAppState>();
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: appState.closeDetails, icon: Icon(Icons.arrow_back, color: Colors.black)),
-        title: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: DropdownButton<String>(
-              value: selectedState,
-              hint: const Text('Select a State'),
-              isExpanded: true,
-              items: stateInfo.keys
-                  .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                  .toList(),
-              onChanged: _onStateSelected,
+        leading: IconButton(
+          onPressed: appState.closeDetails,
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+        ),
+        title: Row(
+          children: [
+            Expanded(
+              child: DropdownButton<String>(
+                value: selectedState,
+                hint: const Text('Select a State'),
+                isExpanded: true,
+                items: stateInfo.keys
+                    .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                    .toList(),
+                onChanged: _onStateSelected,
+              ),
             ),
-          ),
+            if (selectedState == "Utah" && !widget.signIn) const SizedBox(width: 8),
+            if (selectedState == "Utah" && !widget.signIn)
+              Expanded(
+                child: DropdownButton<String>(
+                  value: _mapLevel,
+                  isExpanded: true,
+                  items: const [
+                    DropdownMenuItem(value: "Federal", child: Text("Federal")),
+                    DropdownMenuItem(value: "Senate", child: Text("Senate")),
+                    DropdownMenuItem(value: "House", child: Text("House")),
+                  ],
+                  onChanged: _onLevelChanged,
+                ),
+              ),
+          ],
+        ),
       ),
       body: Column(
         children: [
@@ -302,16 +358,16 @@ void _onMapTap(TapPosition tapPosition, LatLng latlng) {
             child: FlutterMap(
               mapController: _mapController,
               options: MapOptions(
-                initialCenter: LatLng(37.8, -96.9),
-                initialZoom: 4.0,
-                minZoom: 3,
-                onTap: (tapPosition, latlng) => _onMapTap(tapPosition, latlng),
-                interactionOptions: InteractionOptions(flags: InteractiveFlag.all & ~InteractiveFlag.rotate)
-              ),
+                  initialCenter: LatLng(37.8, -96.9),
+                  initialZoom: 4.0,
+                  minZoom: 3,
+                  onTap: (tapPosition, latlng) =>
+                      _onMapTap(tapPosition, latlng),
+                  interactionOptions: InteractionOptions(
+                      flags: InteractiveFlag.all & ~InteractiveFlag.rotate)),
               children: [
                 TileLayer(
-                  urlTemplate:
-                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 ),
                 PolygonLayer(polygons: _districtPolygons),
               ],

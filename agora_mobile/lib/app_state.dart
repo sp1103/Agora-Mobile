@@ -624,29 +624,52 @@ class AgoraAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Get info for district
-  Future<void> searchByDistrict(String state, String district, bool moreThanOne, bool isFed) async {
-  searchResults.clear();
-  final reps = AgoraRemote.queryPoliticians(query: 'state="$state"&district=$district&congress=119');
-  List<PoliticianItem> results = [];
+  Future<void> searchByDistrict(String state, String district, bool moreThanOne, bool isFed, bool localSenate, bool localHouse) async {
+    searchResults.clear();
 
-  if (moreThanOne) {
-    final sen = AgoraRemote.queryPoliticians(query: 'state="$state"&district=0&congress=119');
-    final res = await Future.wait([reps, sen]);
-    results.addAll(res[0]);
-    results.addAll(res[1]);
-  } else {
-    results.addAll(await reps);
-  }
+    final reps = AgoraRemote.queryPoliticians(
+      query: 'state="$state"&district=$district&congress=119',
+    );
 
-  if (isFed) {
-    results.removeWhere((p) =>
-        p.politician.chamber.toLowerCase().contains(state.toLowerCase()));
-  }
+    List<PoliticianItem> results = [];
 
-  searchResults.addAll(results);
-  openDetails(SearchResults(query: "$state, District $district"), true, false);
-}
+    if (moreThanOne) {
+      final sen = AgoraRemote.queryPoliticians(
+        query: 'state="$state"&district=0&congress=119',
+      );
+      final res = await Future.wait([reps, sen]);
+      results.addAll(res[0]);
+      results.addAll(res[1]);
+    } else {
+      results.addAll(await reps);
+    }
+
+    if (isFed) {
+      results.removeWhere((p) =>
+          p.politician.chamber.toLowerCase().contains(state.toLowerCase()));
+    }
+
+    if (localSenate) {
+      results = results
+          .where((p) =>
+              p.politician.chamber.toLowerCase().contains('senate') &&
+              p.politician.chamber.toLowerCase().contains(state.toLowerCase()))
+          .toList();
+    }
+
+    if (localHouse) {
+      results = results
+          .where((p) =>
+              p.politician.chamber.toLowerCase().contains('house') &&
+              p.politician.chamber.toLowerCase().contains(state.toLowerCase()))
+          .toList();
+    }
+
+    searchResults.addAll(results);
+
+    openDetails(SearchResults(query: "$state, District $district"), true, false);
+  } 
+
 
 
   /// Queries Databse and searches poltician by name

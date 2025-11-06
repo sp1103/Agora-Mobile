@@ -6,6 +6,34 @@ class PoliticianInfoTab extends StatelessWidget {
   final Politician politician;
   
   const PoliticianInfoTab({super.key, required this.politician});
+
+  String sanitizeBio(String? text) {
+    if (text == null || text.isEmpty) return "No Biography Available";
+
+    String clean = text.replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n');
+
+    clean = clean.replaceAll(RegExp(r'<[^>]*>'), '');
+
+    // Decode common HTML entities
+    clean = clean
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&amp;', '&')
+        .replaceAll('&quot;', '"')
+        .replaceAll('&apos;', "'")
+        .replaceAll('&lt;', '<')
+        .replaceAll('&gt;', '>');
+
+    // Remove unsupported Unicode replacement characters (�)
+    clean = clean.replaceAll('�', '');
+
+    // Trim extra whitespace/newlines
+    clean = clean.trim();
+
+    // Fallback if it becomes empty
+    if (clean.isEmpty) return "No Biography Available";
+
+    return clean;
+  }
   
 
   @override
@@ -22,7 +50,7 @@ class PoliticianInfoTab extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            politician.bio_text ?? "No Biography Available",
+            sanitizeBio(politician.bio_text),
             style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(height: 16),
