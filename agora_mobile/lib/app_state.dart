@@ -9,6 +9,7 @@ import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
 import 'package:agora_mobile/Types/votes.dart';
+import 'package:agora_mobile/error_handler.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:agora_mobile/Database/network_helper.dart';
 
 class AgoraAppState extends ChangeNotifier {
   //These will be what the pages are based on
@@ -162,54 +164,72 @@ class AgoraAppState extends ChangeNotifier {
 
   /// Gets a list of trending polticians and legislation
   Future<void> getHome() async {
-    final rawBills = AgoraRemote.fetchTrendingBills(numToReturn: 50);
-    final rawPolticians = AgoraRemote.fetchTrendingPoliticians(numToReturn: 50);
+    try {
+      final rawBills = AgoraRemote.fetchTrendingBills(numToReturn: 50);
+      final rawPolticians = AgoraRemote.fetchTrendingPoliticians(numToReturn: 50);
 
-    final res = await Future.wait([
-      compute(_decodeBillsFiltered, await rawBills),
-      compute(_decodePolticians, await rawPolticians)
-    ]);
+      final res = await Future.wait([
+        compute(_decodeBillsFiltered, await rawBills),
+        compute(_decodePolticians, await rawPolticians)
+      ]);
 
-    final trendingBills = res[0];
-    final trendingPolticians = res[1];
+      final trendingBills = res[0];
+      final trendingPolticians = res[1];
 
-    interleaveRandomly([trendingBills, trendingPolticians]);
-
-    notifyListeners();
+      interleaveRandomly([trendingBills, trendingPolticians]);
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
   }
 
   ///Get polticians votes
   void getVotes(String bioId)  async {
-    votes.clear();
-    votes = await AgoraRemote.fetchVotes(bioId, 100);
-    notifyListeners();
+    try {
+      votes.clear();
+      votes = await AgoraRemote.fetchVotes(bioId, 100);
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
   }
 
   /// Gets a list of trending polticians and legislation for a specific user
   Future<void> getHomeUser() async {
-    final token = await _user!.getIdToken();
-    final rawBills = AgoraRemote.fetchTrendingBillsUser(token: token!, numToReturn: 50);
-    final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(token: token, numToReturn: 50);
+    try {
+      final token = await _user!.getIdToken();
+      final rawBills = AgoraRemote.fetchTrendingBillsUser(token: token!, numToReturn: 50);
+      final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(token: token, numToReturn: 50);
 
-    final res = await Future.wait([
-      compute(_decodeBillsFiltered, await rawBills),
-      compute(_decodePolticians, await rawPolticians)
-    ]);
+      final res = await Future.wait([
+        compute(_decodeBillsFiltered, await rawBills),
+        compute(_decodePolticians, await rawPolticians)
+      ]);
 
-    final trendingBills = res[0];
-    final trendingPolticians = res[1];
+      final trendingBills = res[0];
+      final trendingPolticians = res[1];
 
-    interleaveRandomly([trendingBills, trendingPolticians]);
-
-    notifyListeners();
+      interleaveRandomly([trendingBills, trendingPolticians]);
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
   }
 
   /// Gets all legislation in databse for startup
   Future<void> getLegislation() async {
-    final rawBills = await AgoraRemote.fetchBills(numToReturn: 100);
-    legislation = await compute(_decodeBills, rawBills);
-    itemsToDisplayLegislation = legislation;
-    notifyListeners();
+    try {
+      final rawBills = await AgoraRemote.fetchBills(numToReturn: 100);
+      legislation = await compute(_decodeBills, rawBills);
+      itemsToDisplayLegislation = legislation;
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
   }
 
   /// Loads and sorts the glossary from the json in assets folder
@@ -226,74 +246,116 @@ class AgoraAppState extends ChangeNotifier {
 
   /// Gets all politicians in database for startup
   Future<void> getPolitcian() async {
-    final rawMembers = await AgoraRemote.fetchLegisltors(numToReturn: 100);
-    politician = await compute(_decodePolticians, rawMembers);
-    itemsToDisplayPolitician = politician;
-    notifyListeners();
+    try {
+      final rawMembers = await AgoraRemote.fetchLegisltors(numToReturn: 100);
+      politician = await compute(_decodePolticians, rawMembers);
+      itemsToDisplayPolitician = politician;
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
   }
 
   /// Gets all the bill topics
   void getTopics() async {
-    topics = await AgoraRemote.fetchAllTopics();
-    notifyListeners();
+    try {
+      topics = await AgoraRemote.fetchAllTopics();
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  Future<Map<Color, Politician>> getCongressChart(int congress, String chamber) async {
+    var p = await AgoraRemote.queryCongress(congress: congress, chamber: chamber);
+    return {};
   }
 
 
   /// Gets the list of topics user is following
   void getUserTopics() async {
-    final token = await _user!.getIdToken();
+    try {
+      final token = await _user!.getIdToken();
 
-    Map<int, TopicItem> topicMap = await AgoraRemote.fetchFollowingTopics(token: token!);
-    favoritesList.addAll(topicMap.values);
-    userTopicIds.addAll(topicMap.keys);
-    notifyListeners();
+      Map<int, TopicItem> topicMap = await AgoraRemote.fetchFollowingTopics(token: token!);
+      favoritesList.addAll(topicMap.values);
+      userTopicIds.addAll(topicMap.keys);
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
   }
 
   /// Gets all polticians
   void getPolitcianSelection() async {
-    polticianSelecttionList = await AgoraRemote.fetchPoliticianSelection();
-    notifyListeners();
+    try {
+      polticianSelecttionList = await AgoraRemote.fetchPoliticianSelection();
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
   }
 
   /// Gets the favorites for a signed in user
   void getFavorites() async {
-    final token = await _user!.getIdToken();
-    final List<PoliticianItem> favoritePolticians = await AgoraRemote.fetchFollowingPoliticians(token: token!);
-    final List<LegislationItem> favoriteLegislations = await AgoraRemote.fetchFollowingBills(token: token);
-    favorites.addAll(favoritePolticians);
-    favoritesList.addAll(favoritePolticians);
-    favorites.addAll(favoriteLegislations);
-    favoritesList.addAll(favoriteLegislations);
-    notifyListeners();
+    try {
+      final token = await _user!.getIdToken();
+      final List<PoliticianItem> favoritePolticians = await AgoraRemote.fetchFollowingPoliticians(token: token!);
+      final List<LegislationItem> favoriteLegislations = await AgoraRemote.fetchFollowingBills(token: token);
+      favorites.addAll(favoritePolticians);
+      favoritesList.addAll(favoritePolticians);
+      favorites.addAll(favoriteLegislations);
+      favoritesList.addAll(favoriteLegislations);
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } finally {
+      notifyListeners();
+    }
   }
 
   /// Updates to topics in the database
   void updateTopicsInDatabase() async {
-    final token = await _user!.getIdToken();
+    try {
+      final token = await _user!.getIdToken();
 
-    await AgoraRemote.updateTopics(token: token!, topics: userTopicIds.toList());
+      await AgoraRemote.updateTopics(token: token!, topics: userTopicIds.toList());
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    }
   }
 
   /// Removes a favorite from the database
   void removeFavoriteFromDatabase(ListItem selected) async {
-    final token = await _user!.getIdToken();
+    try {
+      final token = await _user!.getIdToken();
 
-    if (selected is LegislationItem) {
-      await AgoraRemote.unfollowBill(token: token!, billId: selected.legislation.bill_id);
-    } else if (selected is PoliticianItem) {
-      await AgoraRemote.unfollowPolitician(token: token!, bioId: selected.politician.bio_id);
+      if (selected is LegislationItem) {
+        await AgoraRemote.unfollowBill(token: token!, billId: selected.legislation.bill_id);
+      } else if (selected is PoliticianItem) {
+        await AgoraRemote.unfollowPolitician(token: token!, bioId: selected.politician.bio_id);
+      }
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
     }
   }
 
   /// Adds a favorite from the database
   void addFavoriteFromDatabase(ListItem selected) async {
-    final token = await _user!.getIdToken();
+    try {
+      final token = await _user!.getIdToken();
 
-    if (selected is LegislationItem) {
-      await AgoraRemote.followBill(token: token!, billId: selected.legislation.bill_id);
-    } else if (selected is PoliticianItem) {
-      await AgoraRemote.followPolitician(token: token!, bioId: selected.politician.bio_id);
-    } 
+      if (selected is LegislationItem) {
+        await AgoraRemote.followBill(token: token!, billId: selected.legislation.bill_id);
+      } else if (selected is PoliticianItem) {
+        await AgoraRemote.followPolitician(token: token!, bioId: selected.politician.bio_id);
+      } 
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    }
   }
 
   // REFRESH AND PAGANATION OPERATIONS -----------------------------------------------------------------------------
@@ -508,8 +570,8 @@ class AgoraAppState extends ChangeNotifier {
   Future<void> _signUp() async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email!, password: _password!);
-    } on FirebaseAuthException {
-      //Deal with error
+    } on FirebaseAuthException catch (e) {
+      ErrorHandler.showError(_friendlyFirebaseError(e));
     }
   }
 
@@ -517,8 +579,8 @@ class AgoraAppState extends ChangeNotifier {
   Future<void> signIn(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException {
-      //Deal with error
+    } on FirebaseAuthException catch (e) {
+      ErrorHandler.showError(_friendlyFirebaseError(e));
     }
   }
 
@@ -534,8 +596,8 @@ class AgoraAppState extends ChangeNotifier {
 
       getHome();
 
-    } on FirebaseAuthException {
-      //Deal with error
+    } on FirebaseAuthException catch (e) {
+      ErrorHandler.showError(_friendlyFirebaseError(e));
     }
   }
 
@@ -713,6 +775,28 @@ class AgoraAppState extends ChangeNotifier {
 
     return "$firstAndMiddle $last";
   }
+
+  ///Makes firebase errors actually readable
+  String _friendlyFirebaseError(FirebaseAuthException e) {
+  switch (e.code) {
+    case 'invalid-email':
+      return "The email address is not valid.";
+    case 'user-disabled':
+      return "This user account has been disabled.";
+    case 'user-not-found':
+      return "No user found for that email.";
+    case 'wrong-password':
+      return "Incorrect password. Please try again.";
+    case 'email-already-in-use':
+      return "This email is already registered. Try logging in instead.";
+    case 'operation-not-allowed':
+      return "This operation is not allowed. Please contact support.";
+    case 'weak-password':
+      return "Your password is too weak. Try at least 6 characters with letters and numbers.";
+    default:
+      return e.message ?? "An unknown error occurred. Please try again.";
+  }
+}
 
   /// Gets the color for the border of the image in the poltician details page
   Color getBorderColor(String party) {

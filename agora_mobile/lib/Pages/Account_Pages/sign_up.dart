@@ -59,13 +59,16 @@ class _SignUpState extends State<SignUp> {
                   obscureText: true,
                   validator: MultiValidator([
                     RequiredValidator(errorText: "Please enter Email"),
-                    PatternValidator(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$',
-                      errorText: "Password must be at least 6 chars, include letters (at least one must be one capital) and numbers"),
+                    MinLengthValidator(6, errorText: "Password must be at least 6 characters"),
+                    PatternValidator(r'(?=.*[A-Z])', errorText: "Password must contain at least one uppercase letter"),
+                    PatternValidator(r'(?=.*[a-z])', errorText: "Password must contain at least one lowercase letter"),
+                    PatternValidator(r'(?=.*\d)', errorText: "Password must contain at least one number"),
                   ]).call,
                   decoration: InputDecoration(
                     labelText: "Password",
                     hintText: "Please Enter Your Password",
-                    errorStyle: TextStyle(fontSize: 18, overflow: TextOverflow.visible, height: 1.2),
+                    errorMaxLines: 3,
+                    errorStyle: TextStyle(fontSize: 18, overflow: TextOverflow.visible),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
                       borderRadius: BorderRadius.all(Radius.circular(9.0)),

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:agora_mobile/Database/network_helper.dart';
 import 'package:agora_mobile/Pages/List_Items/legislation_item.dart';
 import 'package:agora_mobile/Pages/List_Items/politician_item.dart';
 import 'package:agora_mobile/Pages/List_Items/topic_item.dart';
@@ -6,7 +7,6 @@ import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
 import 'package:agora_mobile/Types/votes.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
 
 /// Contains functions that perform queries to the database
@@ -18,7 +18,7 @@ class AgoraRemote {
   static Future<String> fetchLegisltors({required int numToReturn}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=$numToReturn');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     return response.body;
   }
@@ -27,7 +27,7 @@ class AgoraRemote {
   static Future<List<Politician>> fetchPoliticianSelection() async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=5000');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     final Map<String, dynamic> json = jsonDecode(response.body);
     final List<dynamic> data = json["members"] ?? [];
@@ -45,7 +45,7 @@ class AgoraRemote {
   static Future<List<Vote>> fetchVotes(String bioId, int numToReturn) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_member_most_recent_votes?bio_id="$bioId"&num_to_return=$numToReturn');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     final Map<String, dynamic> json = jsonDecode(response.body);
     final List<dynamic> data = json["votes"] ?? [];
@@ -66,7 +66,7 @@ class AgoraRemote {
 
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_bills?intro_date=["$startDate","$endDate"]&num_to_return=$numToReturn');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     return response.body;
   }
@@ -75,7 +75,7 @@ class AgoraRemote {
   static Future<String> fetchTrendingBills({required int numToReturn}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?num_to_return=$numToReturn');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     return response.body;
   }
@@ -84,7 +84,7 @@ class AgoraRemote {
   static Future<String> fetchTrendingBillsUser({required String token, required int numToReturn}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_bills?token="$token"&num_to_return=$numToReturn');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     return response.body;
   }
@@ -93,7 +93,7 @@ class AgoraRemote {
   static Future<String> fetchTrendingPoliticians({required int numToReturn}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?num_to_return=$numToReturn');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     return response.body;
   }
@@ -102,7 +102,7 @@ class AgoraRemote {
   static Future<String> fetchTrendingPoliticiansUser({required String token, required int numToReturn}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_trending_politicians?token="$token"&num_to_return=$numToReturn');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     return response.body;
   }
@@ -111,7 +111,7 @@ class AgoraRemote {
   static Future<List<PoliticianItem>> fetchFollowingPoliticians({required String token}) async {
     final url = Uri.parse('http://piece-o-pi.com/agora_api/get_user_info?token="$token"&us_members_followed=""');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     final Map<String, dynamic> json = jsonDecode(response.body);
     final List<dynamic> data = json["bio_ids"] ?? [];
@@ -129,7 +129,7 @@ class AgoraRemote {
   static Future<List<LegislationItem>> fetchFollowingBills({required String token}) async {
     final url = Uri.parse('http://piece-o-pi.com/agora_api/get_user_info?token="$token"&us_bills_followed=""');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     final Map<String, dynamic> json = jsonDecode(response.body);
     final List<dynamic> data = json["bill_ids"] ?? [];
@@ -147,7 +147,7 @@ class AgoraRemote {
   static Future<Set<Topic>> fetchAllTopics() async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_all_bill_topics');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     final List<dynamic> data = jsonDecode(response.body);
     final items = data
@@ -164,7 +164,7 @@ class AgoraRemote {
   static Future<Map<int, TopicItem>> fetchFollowingTopics({required String token}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_user_info?token="$token"&topics_following=""');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     final Map<String, dynamic> json = jsonDecode(response.body);
     final List<dynamic> data = json["topic_ids"] ?? [];
@@ -185,7 +185,7 @@ class AgoraRemote {
   static Future<List<PoliticianItem>> queryPoliticians({required String query}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?$query&num_to_return=100');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     final Map<String, dynamic> json = jsonDecode(response.body);
     final List<dynamic> data = json["members"] ?? [];
@@ -199,11 +199,33 @@ class AgoraRemote {
     return items;
   }
 
+  /// Query the database for politicians using various search options
+  static Future<List<PoliticianItem>> queryCongress({required int congress, required String chamber}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?congress=$congress&chamber_name="$chamber"&num_to_return=800');
+
+    final response = await NetworkHelper.safeGet(url);
+
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    final List<dynamic> data = json["members"] ?? [];
+    final items = data
+      .where((json) => 
+        json is Map && 
+        json.containsKey("bio_id") &&
+        (json["chamber"] == "Senate" ||
+        json["chamber"] == "House of Representatives"))
+      .map((json) {
+        final politician = Politician.fromJson(json);
+        return PoliticianItem(politician);
+      }).toList();
+
+    return items;
+  }
+
   /// Query the database for legislation using various search options
   static Future<List<LegislationItem>> queryLegislation({required String query}) async {
     final url = Uri.parse('https://piece-o-pi.com/agora_api/get_bills?$query&num_to_return=100');
 
-    final response = await http.get(url);
+    final response = await NetworkHelper.safeGet(url);
 
     final List<dynamic> data = jsonDecode(response.body);
     final items = data
@@ -235,7 +257,7 @@ class AgoraRemote {
       }
     ];
 
-    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+    await NetworkHelper.safePost(url, payload);(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
   }
 
   // Post request that follows a bill based on user
@@ -255,7 +277,7 @@ class AgoraRemote {
       }
     ];
 
-    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+    await NetworkHelper.safePost(url, payload);
   }
 
   /// Post request that unfollows a politcian based on user
@@ -275,7 +297,7 @@ class AgoraRemote {
       }
     ];
 
-    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+    await NetworkHelper.safePost(url, payload);
   }
 
   /// Post request that unfollows a politcian based on user
@@ -295,7 +317,7 @@ class AgoraRemote {
       }
     ];
 
-    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+    await NetworkHelper.safePost(url, payload);
   }
 
   /// POST request that updates a users topic list
@@ -315,7 +337,7 @@ class AgoraRemote {
       }
     ];
 
-    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+    await NetworkHelper.safePost(url, payload);
   }
 
   /// POST request to databse that adds a user
@@ -333,7 +355,7 @@ class AgoraRemote {
       }
     ];
 
-    await http.post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(payload));
+    await NetworkHelper.safePost(url, payload);
   }
 
 }

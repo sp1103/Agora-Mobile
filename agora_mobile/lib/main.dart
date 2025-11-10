@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'nav_frame.dart';
+import 'error_handler.dart'; 
 
 /// Starts Agora. Does Nothing else.
 void main() async {
@@ -31,7 +32,7 @@ class Agora extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
           useMaterial3: true,
         ),
-        home: NavFrame()
+        home: ErrorHandler.attachToApp(NavFrame()),
       ),
     );
   }

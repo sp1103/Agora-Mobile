@@ -72,6 +72,7 @@ class NavFrame extends StatelessWidget {
                   appState.openDetails(SearchPage(), true, false);
                   break;
                 case 'congress':
+                  appState.getCongressChart(118, "Senate");
                   break; 
               }
             }, 
