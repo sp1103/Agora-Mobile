@@ -1,18 +1,12 @@
 import 'dart:math';
+import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:agora_mobile/Types/politician.dart';
+import 'package:provider/provider.dart';
 
 class CongressChart extends StatefulWidget {
   final Map<Color, List<Politician>> partySeats;
-  final double width;
-  final double height;
-
-  const CongressChart({
-    super.key,
-    required this.partySeats,
-    this.width = 400,
-    this.height = 500,
-  });
+  const CongressChart({super.key, required this.partySeats});
 
   @override
   State<CongressChart> createState() => _CongressChartState();
@@ -21,238 +15,170 @@ class CongressChart extends StatefulWidget {
 class _CongressChartState extends State<CongressChart> {
   int? tappedIndex;
   double scale = 1.0;
+  Offset? tappedPos;
+  TransformationController controller = TransformationController();
 
   @override
   Widget build(BuildContext context) {
     final allSeats = widget.partySeats.values.expand((x) => x).toList();
+    var appState = context.watch<AgoraAppState>();
+    final canvasSize = Size(600, 400);
 
-    return SizedBox(
-      width: widget.width,
-      height: widget.height,
-      child: InteractiveViewer(
-        panEnabled: true,
-        scaleEnabled: true,
-        minScale: 1,
-        maxScale: 5,
-        onInteractionUpdate: (details) {
-          setState(() {
-            scale = details.scale;
-          });
+    return InteractiveViewer(
+      transformationController: controller,
+      panEnabled: true,
+      scaleEnabled: true,
+      minScale: 1,
+      maxScale: 6,
+      boundaryMargin: const EdgeInsets.all(0),
+      onInteractionUpdate: (details) {
+        setState(() => scale = controller.value.getMaxScaleOnAxis());
+      },
+      child: GestureDetector(
+        onTapDown: (details) {
+          // convert tap to chart-local coordinates accounting for pan/zoom
+          final localPos = controller.toScene(details.localPosition);
+          final seat = _HemicyclePainter.hitTestSeat(localPos, allSeats.length);
+          if (seat != null) {
+            setState(() {
+              tappedIndex = seat.index;
+              tappedPos = seat.position;
+            });
+          }
         },
-        child: LayoutBuilder(builder: (context, constraints) {
-          final size = Size(constraints.maxWidth, constraints.maxHeight);
-
-          final seatPositions = _calculateSeatPositions(size, allSeats.length);
-
-          return GestureDetector(
-            onTapDown: (details) {
-              final tapPos = details.localPosition;
-              const tapRadius = 12.0;
-
-              for (int i = 0; i < seatPositions.length; i++) {
-                if ((seatPositions[i] - tapPos).distance <= tapRadius) {
-                  setState(() => tappedIndex = i);
-                  final pol = allSeats[i];
-
-                  if (scale > 2.5) {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (_) => _SeatDetails(politician: pol),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("${pol.name} selected!")),
-                    );
-                  }
-                  break;
-                }
-              }
-            },
-            child: CustomPaint(
-              painter: _HemicyclePainter(
-                widget.partySeats,
-                tappedIndex,
-                seatPositions,
-                allSeats,
-                scale,
-              ),
-              size: size,
-            ),
-          );
-        }),
+        child: CustomPaint(
+          size: canvasSize,
+          painter: _HemicyclePainter(
+            widget.partySeats,
+            tappedIndex,
+            allSeats,
+            scale,
+            tappedPos,
+            appState,
+          ),
+        ),
       ),
     );
-  }
-
-  /// Calculate seat positions for a balanced semicircular arrangement.
-  List<Offset> _calculateSeatPositions(Size size, int totalSeats) {
-    final positions = <Offset>[];
-
-    final center = Offset(size.width / 2, size.height - 40);
-    const innerRadius = 50.0;
-    const centerGap = 10.0;
-    const minRowGap = 2.0;
-
-    int rows = (sqrt(totalSeats * 0.6)).ceil();
-    double maxRadius = size.height - 60;
-
-    double radiusStep =
-        (maxRadius - innerRadius - centerGap - 10) / rows;
-
-    int seatIndex = 0;
-
-    for (int r = 0; r < rows; r++) {
-      final radius = innerRadius + centerGap + r * (radiusStep + minRowGap);
-      final seatsInRow = max((pi * radius / 28).floor(), 2);
-      final angleStep = pi / (seatsInRow - 1);
-
-      for (int i = 0; i < seatsInRow && seatIndex < totalSeats; i++) {
-        final angle = pi - i * angleStep;
-        final x = center.dx + radius * cos(angle);
-        final y = center.dy - radius * sin(angle);
-        positions.add(Offset(x, y));
-        seatIndex++;
-      }
-    }
-
-    // Sort to paint columns top-down
-    positions.sort((a, b) {
-      int cmpX = a.dx.compareTo(b.dx);
-      if (cmpX == 0) return a.dy.compareTo(b.dy);
-      return cmpX;
-    });
-
-    return positions;
   }
 }
 
 class _HemicyclePainter extends CustomPainter {
   final Map<Color, List<Politician>> partySeats;
   final int? tappedIndex;
-  final List<Offset> seatPositions;
   final List<Politician> allSeats;
   final double zoomScale;
+  final Offset? tappedPos;
+  final AgoraAppState appState;
 
   _HemicyclePainter(
     this.partySeats,
     this.tappedIndex,
-    this.seatPositions,
     this.allSeats,
     this.zoomScale,
+    this.tappedPos,
+    this.appState,
   );
+
+  static final List<Offset> _lastSeatPositions = [];
+  static final List<Color> _lastSeatColors = [];
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()..style = PaintingStyle.fill;
-    final center = Offset(size.width / 2, size.height - 40);
+    final center = Offset(size.width / 2, size.height - 60);
+    final seatRadius = 10.0;
+    final minRowGap = seatRadius * 1.05;
+    final seatSpacing = seatRadius * 2.1;
 
-    // dynamic seat radius based on seat count (smaller for larger chambers)
-    final seatRadius = max(6.0, 14.0 - allSeats.length / 100.0);
+    canvas.drawCircle(center, 55, Paint()..color = Colors.white);
 
-    // draw center
-    canvas.drawCircle(center, 50, Paint()..color = Colors.white);
-
-    // flatten party color order
+    // create a top-down, left-to-right color array
     final seatColors = <Color>[];
-    for (final entry in partySeats.entries) {
-      seatColors.addAll(List.filled(entry.value.length, entry.key));
+    int totalSeats = allSeats.length;
+    final rows = (sqrt(totalSeats / 1.8)).ceil();
+    double radius = 55 + seatRadius * 2;
+    int seatIndex = 0;
+
+    final rowCounts = <int>[];
+    for (int r = 0; r < rows && seatIndex < totalSeats; r++) {
+      final seatsInRow = max((pi * radius / seatSpacing).floor(), 1);
+      rowCounts.add(seatsInRow);
+      seatIndex += seatsInRow;
+      radius += minRowGap + seatRadius * 0.9;
     }
 
-    // draw seats
-    for (int i = 0; i < seatPositions.length && i < allSeats.length; i++) {
-      paint.color = seatColors[i].withValues(alpha: i == tappedIndex ? 0.6 : 1.0);
-      canvas.drawCircle(seatPositions[i], seatRadius, paint);
+    // assign colors top-down, left-right
+    seatIndex = 0;
+    radius = 55 + seatRadius * 2;
+    _lastSeatPositions.clear();
+    _lastSeatColors.clear();
+    final partyList = partySeats.entries.toList();
+    int colorIndex = 0;
+    for (int r = 0; r < rowCounts.length; r++) {
+      final seatsInRow = rowCounts[r];
+      final angleStep = pi / (seatsInRow - 1);
 
-      // show individual names only when zoomed in enough
-      if (zoomScale > 2.5) {
-        final label = allSeats[i].name;
-        final textPainter = TextPainter(
-          text: TextSpan(
-            text: label,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 9 * min(zoomScale, 3),
+      for (int i = 0; i < seatsInRow && seatIndex < totalSeats; i++) {
+        final angle = pi - i * angleStep;
+        final pos = Offset(
+          center.dx + radius * cos(angle),
+          center.dy - radius * sin(angle),
+        );
+
+        // pick color by sequentially going through party lists
+        final colorEntry = partyList[colorIndex % partyList.length];
+        final color = colorEntry.key;
+        colorIndex++;
+        seatColors.add(color);
+
+        _lastSeatPositions.add(pos);
+        _lastSeatColors.add(color);
+
+        paint.color = color.withValues(alpha: seatIndex == tappedIndex ? 0.6 : 1.0);
+        canvas.drawCircle(pos, seatRadius, paint);
+
+        // label inside dot when zoomed
+        if (zoomScale > 4.2) {
+          final label = appState.formatPolticianName(allSeats[seatIndex].name);
+          final textPainter = TextPainter(
+            text: TextSpan(
+              text: label,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: seatRadius * 0.2,
+                  fontWeight: FontWeight.bold),
             ),
-          ),
-          textAlign: TextAlign.center,
-          textDirection: TextDirection.ltr,
-        );
-        textPainter.layout();
-        textPainter.paint(
-          canvas,
-          seatPositions[i] + Offset(-textPainter.width / 2, -textPainter.height - 6),
-        );
-      }
-    }
-
-    // === SHOW PARTY GROUP COUNTS WHEN ZOOMED OUT ===
-    if (zoomScale <= 2.5) {
-      double midY = size.height / 2.4;
-
-      // Calculate approximate label positions for each color group
-      final textPainter = TextPainter(
-        textAlign: TextAlign.center,
-        textDirection: TextDirection.ltr,
-      );
-
-      double textY = midY;
-
-      partySeats.forEach((color, list) {
-        String label;
-        if (color == Colors.red) {
-          label = "Republican (${list.length})";
-        } else if (color == Colors.blue) {
-          label = "Democrat (${list.length})";
-        } else if (color == Colors.green) {
-          label = "Independent (${list.length})";
-        } else {
-          label = "Other (${list.length})";
+            textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
+          );
+          textPainter.layout(maxWidth: seatRadius * 2);
+          final offset = pos -
+              Offset(textPainter.width / 2, textPainter.height / 2);
+          textPainter.paint(canvas, offset);
         }
 
-        textPainter.text = TextSpan(
-          text: label,
-          style: TextStyle(
-            color: color,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-        );
-        textPainter.layout();
-        textPainter.paint(
-          canvas,
-          Offset(center.dx - textPainter.width / 2, textY),
-        );
-        textY += textPainter.height + 8;
-      });
+        seatIndex++;
+      }
+      radius += minRowGap + seatRadius * 0.9;
     }
+  }
+
+  static _SeatHit? hitTestSeat(Offset tapPos, int totalSeats) {
+    if (_lastSeatPositions.isEmpty) return null;
+    for (int i = 0; i < _lastSeatPositions.length && i < totalSeats; i++) {
+      if ((tapPos - _lastSeatPositions[i]).distance < 12.0) {
+        return _SeatHit(i, _lastSeatPositions[i]);
+      }
+    }
+    return null;
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-class _SeatDetails extends StatelessWidget {
-  final Politician politician;
-  const _SeatDetails({required this.politician});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(politician.name, style: Theme.of(context).textTheme.titleLarge),
-          Text("${politician.party} — ${politician.state}"),
-          const SizedBox(height: 12),
-          ElevatedButton(
-            onPressed: () {
-              // navigate to politician page
-            },
-            child: const Text("View Member Page"),
-          ),
-        ],
-      ),
-    );
-  }
+class _SeatHit {
+  final int index;
+  final Offset position;
+  _SeatHit(this.index, this.position);
 }
