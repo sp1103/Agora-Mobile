@@ -268,9 +268,70 @@ class AgoraAppState extends ChangeNotifier {
     }
   }
 
-  Future<Map<Color, Politician>> getCongressChart(int congress, String chamber) async {
-    var p = await AgoraRemote.queryCongress(congress: congress, chamber: chamber);
-    return {};
+  /// Get and sanitize politicians for the desired congress
+  Future<List<Politician>> _getActiveCurrentCongress(int congress, String chamber, int session) async {
+    List<Politician> pols = [];
+    List<Politician> newPols = [];
+
+    try {
+      if (congress == 119) {
+        return await AgoraRemote.queryCongress119(chamber: chamber); //No need to sanatize
+      }
+      pols = await AgoraRemote.queryCongress(congress: congress, chamber: chamber);
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+    } 
+
+    final sessions = {
+      119: ["2025", "2026"], 
+      118: ["2023", "2024"], 
+      117: ["2021", "2022"]
+    };
+
+    final selectedYears = sessions[congress];
+    final targetYear = selectedYears![session - 1];
+
+
+    for (Politician p in pols) {
+      final matchingTerms = p.terms_served.where((t) {
+        if (t.congress != congress) return false;
+        if (t.chamber != chamber) return false;
+
+        final startYear = t.start_date.split("00:00:00").first.trim().split(' ').last.split('-').first;
+        return startYear == targetYear;
+      });
+
+      if (matchingTerms.isEmpty) continue;
+
+      newPols.add(p);
+    }
+
+    return newPols;
+
+  }
+
+  Future<Map<Color, List<Politician>>> getCongressChart(int congress, String chamber, int session) async {
+    List<Politician> democrats = [];
+    List<Politician> republican = [];
+    List<Politician> independent = [];
+    List<Politician> pols = await _getActiveCurrentCongress(congress, chamber, session);
+
+    for (Politician p in pols) {
+
+      if (p.party.toLowerCase().contains("republican")) {
+        republican.add(p);
+      }
+      else if (p.party.toLowerCase().contains("democratic")) {
+        democrats.add(p);
+      }
+      else {
+        independent.add(p);
+      }
+    }
+
+    Map<Color, List<Politician>> map = {Colors.blue: democrats, Colors.green: independent, Colors.red: republican};
+
+    return map;
   }
 
 

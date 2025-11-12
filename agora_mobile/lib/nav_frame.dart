@@ -1,5 +1,6 @@
 import 'package:agora_mobile/AgoraWidgets/search_app_bar.dart';
 import 'package:agora_mobile/Pages/Search_Pages/search_page.dart';
+import 'package:agora_mobile/Pages/congress_chart.dart';
 import 'package:agora_mobile/Pages/district_map.dart';
 import 'package:agora_mobile/Pages/favorites_page.dart';
 import 'package:agora_mobile/Pages/glossary_page.dart';
@@ -57,7 +58,7 @@ class NavFrame extends StatelessWidget {
           ? PopupMenuButton<String>( //If there is no details page show a menu button
             icon: Image.asset('assets/Agora_Logo.png', width: 55, height: 55),
             offset: Offset(0, 56),
-            onSelected: (value) {
+            onSelected: (value) async {
               switch (value) {
                 case 'home':
                   appState.navigationItemTapped(2);
@@ -72,7 +73,8 @@ class NavFrame extends StatelessWidget {
                   appState.openDetails(SearchPage(), true, false);
                   break;
                 case 'congress':
-                  appState.getCongressChart(118, "Senate");
+                  var map = await appState.getCongressChart(119, "Senate", 1);
+                  appState.openDetails(CongressChart(partySeats: map), false, false);
                   break; 
               }
             }, 
