@@ -275,39 +275,69 @@ class AgoraAppState extends ChangeNotifier {
 
     try {
       if (congress == 119) {
-        return await AgoraRemote.queryCongress119(chamber: chamber); //No need to sanatize
+        return await AgoraRemote.queryCongress119(chamber: chamber); //No need to sanitize
       }
       pols = await AgoraRemote.queryCongress(congress: congress, chamber: chamber);
     } on NetworkException catch (e) {
       ErrorHandler.showError(e.message, level: ErrorLevel.warning);
-    } 
+    }
 
     final sessions = {
-      119: ["2025", "2026"], 
-      118: ["2023", "2024"], 
-      117: ["2021", "2022"]
+      119: ["2025-01-01", "2026-01-01"], 
+      118: ["2023-01-01", "2024-01-01"], 
+      117: ["2021-01-01", "2022-01-01"]
     };
 
-    final selectedYears = sessions[congress];
-    final targetYear = selectedYears![session - 1];
-
+    final selectedDates = sessions[congress];
+    if (selectedDates == null) return pols;
+    
+    final sessionStartDate = DateTime.parse(selectedDates[session - 1]);
+    // Session typically runs through the full year, so check end of that year
+    final sessionEndDate = DateTime(sessionStartDate.year, 12, 31);
 
     for (Politician p in pols) {
-      final matchingTerms = p.terms_served.where((t) {
-        if (t.congress != congress) return false;
-        if (t.chamber != chamber) return false;
+      // Find all terms for this congress and chamber
+      final relevantTerms = p.terms_served.where((t) {
+        return t.congress == congress && t.chamber == chamber;
+      }).toList();
 
-        final startYear = t.start_date.split("00:00:00").first.trim().split(' ').last.split('-').first;
-        return startYear == targetYear;
-      });
+      if (relevantTerms.isEmpty) continue;
 
-      if (matchingTerms.isEmpty) continue;
+      // Check if any term overlaps with the session period
+      bool wasActiveInSession = false;
+      for (var term in relevantTerms) {
+        try {
+          // Parse the start date (format: "Wed, 01 Jan 2025 00:00:00 GMT")
+          final startDateStr = term.start_date.split("00:00:00").first.trim();
+          final dateParts = startDateStr.split(' ');
+          final day = dateParts[1];
+          final month = dateParts[2];
+          final year = dateParts[3];
+          
+          final monthMap = {
+            'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04',
+            'May': '05', 'Jun': '06', 'Jul': '07', 'Aug': '08',
+            'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'
+          };
+          
+          final termStart = DateTime.parse('$year-${monthMap[month]}-$day');
+          
+          if (termStart.isBefore(sessionEndDate) || termStart.isAtSameMomentAs(sessionStartDate)) {
+            wasActiveInSession = true;
+            break;
+          }
+        } catch (e) {
+          print('Error parsing date for ${p.name}: $e');
+          continue;
+        }
+      }
 
-      newPols.add(p);
+      if (wasActiveInSession) {
+        newPols.add(p);
+      }
     }
 
     return newPols;
-
   }
 
   Future<Map<Color, List<Politician>>> getCongressChart(int congress, String chamber, int session) async {
