@@ -1,0 +1,3522 @@
+[
+    {
+        "bio_id": "C001087",
+        "name": "Crawford, Eric A. \"Rick\"",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arkansas",
+        "district": 1
+    },
+    {
+        "bio_id": "S001208",
+        "name": "Slotkin, Elissa",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 7
+    },
+    {
+        "bio_id": "S001150",
+        "name": "Schiff, Adam B.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 28
+    },
+    {
+        "bio_id": "K000394",
+        "name": "Kim, Andy",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 3
+    },
+    {
+        "bio_id": "G000574",
+        "name": "Gallego, Ruben",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 3
+    },
+    {
+        "bio_id": "C001114",
+        "name": "Curtis, John R.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Utah",
+        "district": 3
+    },
+    {
+        "bio_id": "B001299",
+        "name": "Banks, Jim",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 3
+    },
+    {
+        "bio_id": "B001303",
+        "name": "Blunt Rochester, Lisa",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Delaware",
+        "district": null
+    },
+    {
+        "bio_id": "M001218",
+        "name": "McCormick, Richard",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 6
+    },
+    {
+        "bio_id": "W000829",
+        "name": "Wied, Tony",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Wisconsin",
+        "district": 8
+    },
+    {
+        "bio_id": "M001229",
+        "name": "McIver, LaMonica",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 10
+    },
+    {
+        "bio_id": "R000619",
+        "name": "Rulli, Michael A.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 6
+    },
+    {
+        "bio_id": "F000480",
+        "name": "Fong, Vince",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 20
+    },
+    {
+        "bio_id": "K000402",
+        "name": "Kennedy, Timothy M.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 26
+    },
+    {
+        "bio_id": "M001228",
+        "name": "Maloy, Celeste",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Utah",
+        "district": 2
+    },
+    {
+        "bio_id": "A000380",
+        "name": "Amo, Gabe",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Rhode Island",
+        "district": 1
+    },
+    {
+        "bio_id": "M001227",
+        "name": "McClellan, Jennifer L.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 4
+    },
+    {
+        "bio_id": "V000135",
+        "name": "Van Orden, Derrick",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Wisconsin",
+        "district": 3
+    },
+    {
+        "bio_id": "S001224",
+        "name": "Self, Keith",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 3
+    },
+    {
+        "bio_id": "G000600",
+        "name": "Perez, Marie Gluesenkamp",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 3
+    },
+    {
+        "bio_id": "O000175",
+        "name": "Ogles, Andrew",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 5
+    },
+    {
+        "bio_id": "M001224",
+        "name": "Moran, Nathaniel",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 1
+    },
+    {
+        "bio_id": "M001223",
+        "name": "Magaziner, Seth",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Rhode Island",
+        "district": 2
+    },
+    {
+        "bio_id": "L000603",
+        "name": "Luttrell, Morgan",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 8
+    },
+    {
+        "bio_id": "L000602",
+        "name": "Lee, Summer L.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 12
+    },
+    {
+        "bio_id": "K000399",
+        "name": "Kiggans, Jennifer A.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 2
+    },
+    {
+        "bio_id": "H001095",
+        "name": "Hunt, Wesley",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 38
+    },
+    {
+        "bio_id": "H001096",
+        "name": "Hageman, Harriet M.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Wyoming",
+        "district": null
+    },
+    {
+        "bio_id": "F000478",
+        "name": "Fry, Russell",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "South Carolina",
+        "district": 7
+    },
+    {
+        "bio_id": "D000530",
+        "name": "Deluzio, Christopher R.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 17
+    },
+    {
+        "bio_id": "D000594",
+        "name": "De La Cruz, Monica",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 15
+    },
+    {
+        "bio_id": "C001130",
+        "name": "Crockett, Jasmine",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 30
+    },
+    {
+        "bio_id": "C001131",
+        "name": "Casar, Greg",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 35
+    },
+    {
+        "bio_id": "B001318",
+        "name": "Balint, Becca",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Vermont",
+        "district": null
+    },
+    {
+        "bio_id": "M001212",
+        "name": "Moore, Barry",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Alabama",
+        "district": 2
+    },
+    {
+        "bio_id": "G000596",
+        "name": "Greene, Marjorie Taylor",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 14
+    },
+    {
+        "bio_id": "F000472",
+        "name": "Franklin, Scott",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 18
+    },
+    {
+        "bio_id": "B000825",
+        "name": "Boebert, Lauren",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Colorado",
+        "district": 3
+    },
+    {
+        "bio_id": "M001205",
+        "name": "Miller, Carol D.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "West Virginia",
+        "district": 1
+    },
+    {
+        "bio_id": "M001208",
+        "name": "McBath, Lucy",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 7
+    },
+    {
+        "bio_id": "S001205",
+        "name": "Scanlon, Mary Gay",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 5
+    },
+    {
+        "bio_id": "G000581",
+        "name": "Gonzalez, Vicente",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 34
+    },
+    {
+        "bio_id": "S001201",
+        "name": "Suozzi, Thomas R.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 3
+    },
+    {
+        "bio_id": "G000553",
+        "name": "Green, Al",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 9
+    },
+    {
+        "bio_id": "D000399",
+        "name": "Doggett, Lloyd",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 37
+    },
+    {
+        "bio_id": "V000136",
+        "name": "Vasquez, Gabe",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Mexico",
+        "district": 2
+    },
+    {
+        "bio_id": "T000487",
+        "name": "Tokuda, Jill N.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Hawaii",
+        "district": 2
+    },
+    {
+        "bio_id": "T000488",
+        "name": "Thanedar, Shri",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 13
+    },
+    {
+        "bio_id": "S001223",
+        "name": "Sykes, Emilia Strong",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 13
+    },
+    {
+        "bio_id": "S001225",
+        "name": "Sorensen, Eric",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 17
+    },
+    {
+        "bio_id": "S001221",
+        "name": "Scholten, Hillary J.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 3
+    },
+    {
+        "bio_id": "S001226",
+        "name": "Salinas, Andrea",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Oregon",
+        "district": 6
+    },
+    {
+        "bio_id": "R000617",
+        "name": "Ramirez, Delia C.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 3
+    },
+    {
+        "bio_id": "N000193",
+        "name": "Nunn, Zachary",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Iowa",
+        "district": 3
+    },
+    {
+        "bio_id": "M001219",
+        "name": "Moylan, James C.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Guam",
+        "district": null
+    },
+    {
+        "bio_id": "M001217",
+        "name": "Moskowitz, Jared",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 23
+    },
+    {
+        "bio_id": "M001216",
+        "name": "Mills, Cory",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 7
+    },
+    {
+        "bio_id": "M001222",
+        "name": "Miller, Max L.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 7
+    },
+    {
+        "bio_id": "M001226",
+        "name": "Menendez, Robert",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 8
+    },
+    {
+        "bio_id": "M001220",
+        "name": "McGarvey, Morgan",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Kentucky",
+        "district": 3
+    },
+    {
+        "bio_id": "L000596",
+        "name": "Luna, Anna Paulina",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 13
+    },
+    {
+        "bio_id": "L000597",
+        "name": "Lee, Laurel M.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 15
+    },
+    {
+        "bio_id": "L000599",
+        "name": "Lawler, Michael",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 17
+    },
+    {
+        "bio_id": "L000600",
+        "name": "Langworthy, Nicholas A.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 23
+    },
+    {
+        "bio_id": "L000601",
+        "name": "Landsman, Greg",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 1
+    },
+    {
+        "bio_id": "L000598",
+        "name": "LaLota, Nick",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 1
+    },
+    {
+        "bio_id": "K000398",
+        "name": "Kean, Thomas H.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 7
+    },
+    {
+        "bio_id": "J000307",
+        "name": "James, John",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 10
+    },
+    {
+        "bio_id": "J000309",
+        "name": "Jackson, Jonathan L.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 1
+    },
+    {
+        "bio_id": "I000058",
+        "name": "Ivey, Glenn",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maryland",
+        "district": 4
+    },
+    {
+        "bio_id": "H001094",
+        "name": "Hoyle, Val T.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Oregon",
+        "district": 4
+    },
+    {
+        "bio_id": "H001093",
+        "name": "Houchin, Erin",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 9
+    },
+    {
+        "bio_id": "G000599",
+        "name": "Goldman, Daniel S.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 10
+    },
+    {
+        "bio_id": "F000476",
+        "name": "Frost, Maxwell",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 10
+    },
+    {
+        "bio_id": "F000477",
+        "name": "Foushee, Valerie P.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 4
+    },
+    {
+        "bio_id": "E000235",
+        "name": "Ezell, Mike",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Mississippi",
+        "district": 4
+    },
+    {
+        "bio_id": "E000246",
+        "name": "Edwards, Chuck",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 11
+    },
+    {
+        "bio_id": "D000230",
+        "name": "Davis, Donald G.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 1
+    },
+    {
+        "bio_id": "C001129",
+        "name": "Collins, Mike",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 10
+    },
+    {
+        "bio_id": "B001316",
+        "name": "Burlison, Eric",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Missouri",
+        "district": 7
+    },
+    {
+        "bio_id": "B001315",
+        "name": "Budzinski, Nikki",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 13
+    },
+    {
+        "bio_id": "B001317",
+        "name": "Brecheen, Josh",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Oklahoma",
+        "district": 2
+    },
+    {
+        "bio_id": "A000379",
+        "name": "Alford, Mark",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Missouri",
+        "district": 4
+    },
+    {
+        "bio_id": "R000579",
+        "name": "Ryan, Patrick",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 18
+    },
+    {
+        "bio_id": "M001215",
+        "name": "Miller-Meeks, Mariannette",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Iowa",
+        "district": 1
+    },
+    {
+        "bio_id": "M001136",
+        "name": "McClain, Lisa C.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 9
+    },
+    {
+        "bio_id": "H001091",
+        "name": "Hinson, Ashley",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Iowa",
+        "district": 2
+    },
+    {
+        "bio_id": "G000593",
+        "name": "Gimenez, Carlos A.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 28
+    },
+    {
+        "bio_id": "T000481",
+        "name": "Tlaib, Rashida",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 12
+    },
+    {
+        "bio_id": "T000478",
+        "name": "Tenney, Claudia",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 24
+    },
+    {
+        "bio_id": "M001199",
+        "name": "Mast, Brian J.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 21
+    },
+    {
+        "bio_id": "R000609",
+        "name": "Rutherford, John H.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 5
+    },
+    {
+        "bio_id": "L000585",
+        "name": "LaHood, Darin",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 16
+    },
+    {
+        "bio_id": "Z000018",
+        "name": "Zinke, Ryan K.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Montana",
+        "district": 1
+    },
+    {
+        "bio_id": "D000624",
+        "name": "Dingell, Debbie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 6
+    },
+    {
+        "bio_id": "M001194",
+        "name": "Moolenaar, John R.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 2
+    },
+    {
+        "bio_id": "H001067",
+        "name": "Hudson, Richard",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 9
+    },
+    {
+        "bio_id": "F000462",
+        "name": "Frankel, Lois",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 22
+    },
+    {
+        "bio_id": "H001058",
+        "name": "Huizenga, Bill",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 4
+    },
+    {
+        "bio_id": "W000798",
+        "name": "Walberg, Tim",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 5
+    },
+    {
+        "bio_id": "N000002",
+        "name": "Nadler, Jerrold",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 12
+    },
+    {
+        "bio_id": "W000797",
+        "name": "Wasserman Schultz, Debbie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 25
+    },
+    {
+        "bio_id": "D000600",
+        "name": "Diaz-Balart, Mario",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 26
+    },
+    {
+        "bio_id": "S001220",
+        "name": "Strong, Dale W.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Alabama",
+        "district": 5
+    },
+    {
+        "bio_id": "P000620",
+        "name": "Pettersen, Brittany",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Colorado",
+        "district": 7
+    },
+    {
+        "bio_id": "M001225",
+        "name": "Mullin, Kevin",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 15
+    },
+    {
+        "bio_id": "K000401",
+        "name": "Kiley, Kevin",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 3
+    },
+    {
+        "bio_id": "K000400",
+        "name": "Kamlager-Dove, Sydney",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 37
+    },
+    {
+        "bio_id": "G000598",
+        "name": "Garcia, Robert",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 42
+    },
+    {
+        "bio_id": "C001132",
+        "name": "Crane, Elijah",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 2
+    },
+    {
+        "bio_id": "C001133",
+        "name": "Ciscomani, Juan",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 6
+    },
+    {
+        "bio_id": "B001314",
+        "name": "Bean, Aaron",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 4
+    },
+    {
+        "bio_id": "Y000067",
+        "name": "Yakym, Rudy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 2
+    },
+    {
+        "bio_id": "F000475",
+        "name": "Finstad, Brad",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Minnesota",
+        "district": 1
+    },
+    {
+        "bio_id": "F000474",
+        "name": "Flood, Mike",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Nebraska",
+        "district": 1
+    },
+    {
+        "bio_id": "C001127",
+        "name": "Cherfilus-McCormick, Sheila",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 20
+    },
+    {
+        "bio_id": "C001126",
+        "name": "Carey, Mike",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 15
+    },
+    {
+        "bio_id": "B001313",
+        "name": "Brown, Shontel M.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 11
+    },
+    {
+        "bio_id": "E000071",
+        "name": "Ellzey, Jake",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 6
+    },
+    {
+        "bio_id": "S001218",
+        "name": "Stansbury, Melanie A.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Mexico",
+        "district": 1
+    },
+    {
+        "bio_id": "C001125",
+        "name": "Carter, Troy A.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Louisiana",
+        "district": 2
+    },
+    {
+        "bio_id": "L000595",
+        "name": "Letlow, Julia",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Louisiana",
+        "district": 5
+    },
+    {
+        "bio_id": "O000019",
+        "name": "Obernolte, Jay",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 23
+    },
+    {
+        "bio_id": "K000397",
+        "name": "Kim, Young",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 40
+    },
+    {
+        "bio_id": "V000134",
+        "name": "Van Duyne, Beth",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 24
+    },
+    {
+        "bio_id": "S001159",
+        "name": "Strickland, Marilyn",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 10
+    },
+    {
+        "bio_id": "O000086",
+        "name": "Owens, Burgess",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Utah",
+        "district": 4
+    },
+    {
+        "bio_id": "N000026",
+        "name": "Nehls, Troy E.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 22
+    },
+    {
+        "bio_id": "M001213",
+        "name": "Moore, Blake D.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Utah",
+        "district": 1
+    },
+    {
+        "bio_id": "J000305",
+        "name": "Jacobs, Sara",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 51
+    },
+    {
+        "bio_id": "J000304",
+        "name": "Jackson, Ronny",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 13
+    },
+    {
+        "bio_id": "G000594",
+        "name": "Gonzales, Tony",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 23
+    },
+    {
+        "bio_id": "F000471",
+        "name": "Fitzgerald, Scott",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Wisconsin",
+        "district": 5
+    },
+    {
+        "bio_id": "H001090",
+        "name": "Harder, Josh",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 9
+    },
+    {
+        "bio_id": "S001211",
+        "name": "Stanton, Greg",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 4
+    },
+    {
+        "bio_id": "P000613",
+        "name": "Panetta, Jimmy",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 19
+    },
+    {
+        "bio_id": "L000582",
+        "name": "Lieu, Ted",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 36
+    },
+    {
+        "bio_id": "A000371",
+        "name": "Aguilar, Pete",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 33
+    },
+    {
+        "bio_id": "D000623",
+        "name": "DeSaulnier, Mark",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 10
+    },
+    {
+        "bio_id": "P000608",
+        "name": "Peters, Scott H.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 50
+    },
+    {
+        "bio_id": "V000130",
+        "name": "Vargas, Juan",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 52
+    },
+    {
+        "bio_id": "T000472",
+        "name": "Takano, Mark",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 39
+    },
+    {
+        "bio_id": "R000599",
+        "name": "Ruiz, Raul",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 25
+    },
+    {
+        "bio_id": "V000129",
+        "name": "Valadao, David G.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 22
+    },
+    {
+        "bio_id": "S001193",
+        "name": "Swalwell, Eric",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 14
+    },
+    {
+        "bio_id": "B001287",
+        "name": "Bera, Ami",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 6
+    },
+    {
+        "bio_id": "G000559",
+        "name": "Garamendi, John",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 8
+    },
+    {
+        "bio_id": "S001183",
+        "name": "Schweikert, David",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 1
+    },
+    {
+        "bio_id": "G000565",
+        "name": "Gosar, Paul A.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 9
+    },
+    {
+        "bio_id": "M001177",
+        "name": "McClintock, Tom",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 5
+    },
+    {
+        "bio_id": "M001163",
+        "name": "Matsui, Doris O.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 7
+    },
+    {
+        "bio_id": "P000197",
+        "name": "Pelosi, Nancy",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 11
+    },
+    {
+        "bio_id": "T000460",
+        "name": "Thompson, Mike",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 4
+    },
+    {
+        "bio_id": "S000344",
+        "name": "Sherman, Brad",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 32
+    },
+    {
+        "bio_id": "S000250",
+        "name": "Sessions, Pete",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 17
+    },
+    {
+        "bio_id": "C001059",
+        "name": "Costa, Jim",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 21
+    },
+    {
+        "bio_id": "I000056",
+        "name": "Issa, Darrell",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 48
+    },
+    {
+        "bio_id": "C000059",
+        "name": "Calvert, Ken",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 41
+    },
+    {
+        "bio_id": "L000397",
+        "name": "Lofgren, Zoe",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 18
+    },
+    {
+        "bio_id": "W000788",
+        "name": "Williams, Nikema",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 5
+    },
+    {
+        "bio_id": "T000486",
+        "name": "Torres, Ritchie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 15
+    },
+    {
+        "bio_id": "S000929",
+        "name": "Spartz, Victoria",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 5
+    },
+    {
+        "bio_id": "S000168",
+        "name": "Salazar, Maria Elvira",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 27
+    },
+    {
+        "bio_id": "R000305",
+        "name": "Ross, Deborah K.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 2
+    },
+    {
+        "bio_id": "P000048",
+        "name": "Pfluger, August",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 11
+    },
+    {
+        "bio_id": "M001214",
+        "name": "Mrvan, Frank J.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 1
+    },
+    {
+        "bio_id": "M001211",
+        "name": "Miller, Mary E.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 15
+    },
+    {
+        "bio_id": "M000871",
+        "name": "Mann, Tracey",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Kansas",
+        "district": 1
+    },
+    {
+        "bio_id": "M000317",
+        "name": "Malliotakis, Nicole",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 11
+    },
+    {
+        "bio_id": "M000194",
+        "name": "Mace, Nancy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "South Carolina",
+        "district": 1
+    },
+    {
+        "bio_id": "L000273",
+        "name": "Leger Fernandez, Teresa",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Mexico",
+        "district": 3
+    },
+    {
+        "bio_id": "H001086",
+        "name": "Harshbarger, Diana",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 1
+    },
+    {
+        "bio_id": "G000597",
+        "name": "Garbarino, Andrew R.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 2
+    },
+    {
+        "bio_id": "F000470",
+        "name": "Fischbach, Michelle",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Minnesota",
+        "district": 7
+    },
+    {
+        "bio_id": "F000446",
+        "name": "Feenstra, Randy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Iowa",
+        "district": 4
+    },
+    {
+        "bio_id": "F000246",
+        "name": "Fallon, Pat",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 4
+    },
+    {
+        "bio_id": "D000032",
+        "name": "Donalds, Byron",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 19
+    },
+    {
+        "bio_id": "C001116",
+        "name": "Clyde, Andrew S.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 9
+    },
+    {
+        "bio_id": "C001039",
+        "name": "Cammack, Kat",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 3
+    },
+    {
+        "bio_id": "B000740",
+        "name": "Bice, Stephanie I.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Oklahoma",
+        "district": 5
+    },
+    {
+        "bio_id": "B000668",
+        "name": "Bentz, Cliff",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Oregon",
+        "district": 2
+    },
+    {
+        "bio_id": "A000148",
+        "name": "Auchincloss, Jake",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 4
+    },
+    {
+        "bio_id": "T000165",
+        "name": "Tiffany, Thomas P.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Wisconsin",
+        "district": 7
+    },
+    {
+        "bio_id": "M001210",
+        "name": "Murphy, Gregory F.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 3
+    },
+    {
+        "bio_id": "G000592",
+        "name": "Golden, Jared F.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maine",
+        "district": 2
+    },
+    {
+        "bio_id": "S001213",
+        "name": "Steil, Bryan",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Wisconsin",
+        "district": 1
+    },
+    {
+        "bio_id": "S001216",
+        "name": "Schrier, Kim",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 8
+    },
+    {
+        "bio_id": "C001118",
+        "name": "Cline, Ben",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 6
+    },
+    {
+        "bio_id": "G000587",
+        "name": "Garcia, Sylvia R.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 29
+    },
+    {
+        "bio_id": "R000614",
+        "name": "Roy, Chip",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 21
+    },
+    {
+        "bio_id": "E000299",
+        "name": "Escobar, Veronica",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 16
+    },
+    {
+        "bio_id": "F000468",
+        "name": "Fletcher, Lizzie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 7
+    },
+    {
+        "bio_id": "G000589",
+        "name": "Gooden, Lance",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 5
+    },
+    {
+        "bio_id": "C001120",
+        "name": "Crenshaw, Dan",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 2
+    },
+    {
+        "bio_id": "R000612",
+        "name": "Rose, John W.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 6
+    },
+    {
+        "bio_id": "B001309",
+        "name": "Burchett, Tim",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 2
+    },
+    {
+        "bio_id": "J000301",
+        "name": "Johnson, Dusty",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "South Dakota",
+        "district": null
+    },
+    {
+        "bio_id": "T000480",
+        "name": "Timmons, William R.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "South Carolina",
+        "district": 4
+    },
+    {
+        "bio_id": "R000610",
+        "name": "Reschenthaler, Guy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 14
+    },
+    {
+        "bio_id": "J000302",
+        "name": "Joyce, John",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 13
+    },
+    {
+        "bio_id": "M001204",
+        "name": "Meuser, Daniel",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 9
+    },
+    {
+        "bio_id": "H001085",
+        "name": "Houlahan, Chrissy",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 6
+    },
+    {
+        "bio_id": "D000631",
+        "name": "Dean, Madeleine",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 4
+    },
+    {
+        "bio_id": "V000133",
+        "name": "Van Drew, Jefferson",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 2
+    },
+    {
+        "bio_id": "C001119",
+        "name": "Craig, Angie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Minnesota",
+        "district": 2
+    },
+    {
+        "bio_id": "G000586",
+        "name": "García, Jesús G. \"Chuy\"",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 4
+    },
+    {
+        "bio_id": "S001199",
+        "name": "Smucker, Lloyd",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 11
+    },
+    {
+        "bio_id": "E000296",
+        "name": "Evans, Dwight",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 3
+    },
+    {
+        "bio_id": "B001296",
+        "name": "Boyle, Brendan F.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 2
+    },
+    {
+        "bio_id": "P000605",
+        "name": "Perry, Scott",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 10
+    },
+    {
+        "bio_id": "K000376",
+        "name": "Kelly, Mike",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 16
+    },
+    {
+        "bio_id": "T000467",
+        "name": "Thompson, Glenn",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 15
+    },
+    {
+        "bio_id": "M000687",
+        "name": "Mfume, Kweisi",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maryland",
+        "district": 7
+    },
+    {
+        "bio_id": "O000172",
+        "name": "Ocasio-Cortez, Alexandria",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 14
+    },
+    {
+        "bio_id": "L000590",
+        "name": "Lee, Susie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Nevada",
+        "district": 3
+    },
+    {
+        "bio_id": "S001207",
+        "name": "Sherrill, Mikie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 11
+    },
+    {
+        "bio_id": "P000614",
+        "name": "Pappas, Chris",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Hampshire",
+        "district": 1
+    },
+    {
+        "bio_id": "G000591",
+        "name": "Guest, Michael",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Mississippi",
+        "district": 3
+    },
+    {
+        "bio_id": "S001212",
+        "name": "Stauber, Pete",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Minnesota",
+        "district": 8
+    },
+    {
+        "bio_id": "O000173",
+        "name": "Omar, Ilhan",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Minnesota",
+        "district": 5
+    },
+    {
+        "bio_id": "S001215",
+        "name": "Stevens, Haley M.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 11
+    },
+    {
+        "bio_id": "P000617",
+        "name": "Pressley, Ayanna",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 7
+    },
+    {
+        "bio_id": "T000482",
+        "name": "Trahan, Lori",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 3
+    },
+    {
+        "bio_id": "D000629",
+        "name": "Davids, Sharice",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Kansas",
+        "district": 3
+    },
+    {
+        "bio_id": "B001307",
+        "name": "Baird, James R.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 4
+    },
+    {
+        "bio_id": "U000040",
+        "name": "Underwood, Lauren",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 14
+    },
+    {
+        "bio_id": "C001117",
+        "name": "Casten, Sean",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 6
+    },
+    {
+        "bio_id": "F000469",
+        "name": "Fulcher, Russ",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Idaho",
+        "district": 1
+    },
+    {
+        "bio_id": "S001214",
+        "name": "Steube, W. Gregory",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 17
+    },
+    {
+        "bio_id": "H001081",
+        "name": "Hayes, Jahana",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Connecticut",
+        "district": 5
+    },
+    {
+        "bio_id": "C001121",
+        "name": "Crow, Jason",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Colorado",
+        "district": 6
+    },
+    {
+        "bio_id": "N000191",
+        "name": "Neguse, Joe",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Colorado",
+        "district": 2
+    },
+    {
+        "bio_id": "L000593",
+        "name": "Levin, Mike",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 49
+    },
+    {
+        "bio_id": "H001082",
+        "name": "Hern, Kevin",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Oklahoma",
+        "district": 1
+    },
+    {
+        "bio_id": "M001206",
+        "name": "Morelle, Joseph D.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 25
+    },
+    {
+        "bio_id": "B001306",
+        "name": "Balderson, Troy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 12
+    },
+    {
+        "bio_id": "C001115",
+        "name": "Cloud, Michael",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 27
+    },
+    {
+        "bio_id": "G000585",
+        "name": "Gomez, Jimmy",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 34
+    },
+    {
+        "bio_id": "N000190",
+        "name": "Norman, Ralph",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "South Carolina",
+        "district": 5
+    },
+    {
+        "bio_id": "E000298",
+        "name": "Estes, Ron",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Kansas",
+        "district": 4
+    },
+    {
+        "bio_id": "J000298",
+        "name": "Jayapal, Pramila",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 7
+    },
+    {
+        "bio_id": "A000375",
+        "name": "Arrington, Jodey C.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 19
+    },
+    {
+        "bio_id": "K000392",
+        "name": "Kustoff, David",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 8
+    },
+    {
+        "bio_id": "F000466",
+        "name": "Fitzpatrick, Brian K.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 1
+    },
+    {
+        "bio_id": "E000297",
+        "name": "Espaillat, Adriano",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 13
+    },
+    {
+        "bio_id": "G000583",
+        "name": "Gottheimer, Josh",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 5
+    },
+    {
+        "bio_id": "B001298",
+        "name": "Bacon, Don",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Nebraska",
+        "district": 2
+    },
+    {
+        "bio_id": "B001301",
+        "name": "Bergman, Jack",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 1
+    },
+    {
+        "bio_id": "R000606",
+        "name": "Raskin, Jamie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maryland",
+        "district": 8
+    },
+    {
+        "bio_id": "J000299",
+        "name": "Johnson, Mike",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Louisiana",
+        "district": 4
+    },
+    {
+        "bio_id": "H001077",
+        "name": "Higgins, Clay",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Louisiana",
+        "district": 3
+    },
+    {
+        "bio_id": "K000391",
+        "name": "Krishnamoorthi, Raja",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 8
+    },
+    {
+        "bio_id": "S001200",
+        "name": "Soto, Darren",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 9
+    },
+    {
+        "bio_id": "D000628",
+        "name": "Dunn, Neal P.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 2
+    },
+    {
+        "bio_id": "C001110",
+        "name": "Correa, J. Luis",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 46
+    },
+    {
+        "bio_id": "B001300",
+        "name": "Barragán, Nanette Diaz",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 44
+    },
+    {
+        "bio_id": "C001112",
+        "name": "Carbajal, Salud O.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 24
+    },
+    {
+        "bio_id": "H001066",
+        "name": "Horsford, Steven",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Nevada",
+        "district": 4
+    },
+    {
+        "bio_id": "S001190",
+        "name": "Schneider, Bradley Scott",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 10
+    },
+    {
+        "bio_id": "W000806",
+        "name": "Webster, Daniel",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 11
+    },
+    {
+        "bio_id": "C001055",
+        "name": "Case, Ed",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Hawaii",
+        "district": 1
+    },
+    {
+        "bio_id": "B001302",
+        "name": "Biggs, Andy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 5
+    },
+    {
+        "bio_id": "K000389",
+        "name": "Khanna, Ro",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 17
+    },
+    {
+        "bio_id": "C001108",
+        "name": "Comer, James",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Kentucky",
+        "district": 1
+    },
+    {
+        "bio_id": "D000626",
+        "name": "Davidson, Warren",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 8
+    },
+    {
+        "bio_id": "K000388",
+        "name": "Kelly, Trent",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Mississippi",
+        "district": 1
+    },
+    {
+        "bio_id": "G000576",
+        "name": "Grothman, Glenn",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Wisconsin",
+        "district": 6
+    },
+    {
+        "bio_id": "N000189",
+        "name": "Newhouse, Dan",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 4
+    },
+    {
+        "bio_id": "P000610",
+        "name": "Plaskett, Stacey E.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Virgin Islands",
+        "district": null
+    },
+    {
+        "bio_id": "B001292",
+        "name": "Beyer, Donald S.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 8
+    },
+    {
+        "bio_id": "B001291",
+        "name": "Babin, Brian",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 36
+    },
+    {
+        "bio_id": "S001196",
+        "name": "Stefanik, Elise M.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 21
+    },
+    {
+        "bio_id": "W000822",
+        "name": "Watson Coleman, Bonnie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 12
+    },
+    {
+        "bio_id": "R000603",
+        "name": "Rouzer, David",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 7
+    },
+    {
+        "bio_id": "E000294",
+        "name": "Emmer, Tom",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Minnesota",
+        "district": 6
+    },
+    {
+        "bio_id": "M001196",
+        "name": "Moulton, Seth",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 6
+    },
+    {
+        "bio_id": "B001295",
+        "name": "Bost, Mike",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 12
+    },
+    {
+        "bio_id": "A000372",
+        "name": "Allen, Rick W.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 12
+    },
+    {
+        "bio_id": "L000583",
+        "name": "Loudermilk, Barry",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 11
+    },
+    {
+        "bio_id": "C001103",
+        "name": "Carter, Earl L. \"Buddy\"",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 1
+    },
+    {
+        "bio_id": "T000474",
+        "name": "Torres, Norma J.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 35
+    },
+    {
+        "bio_id": "W000821",
+        "name": "Westerman, Bruce",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arkansas",
+        "district": 4
+    },
+    {
+        "bio_id": "H001072",
+        "name": "Hill, J. French",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arkansas",
+        "district": 2
+    },
+    {
+        "bio_id": "R000600",
+        "name": "Radewagen, Aumua Amata Coleman",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "American Samoa",
+        "district": null
+    },
+    {
+        "bio_id": "P000609",
+        "name": "Palmer, Gary J.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Alabama",
+        "district": 6
+    },
+    {
+        "bio_id": "N000188",
+        "name": "Norcross, Donald",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 1
+    },
+    {
+        "bio_id": "A000370",
+        "name": "Adams, Alma S.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 12
+    },
+    {
+        "bio_id": "C001101",
+        "name": "Clark, Katherine M.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 5
+    },
+    {
+        "bio_id": "S001195",
+        "name": "Smith, Jason",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Missouri",
+        "district": 8
+    },
+    {
+        "bio_id": "B001282",
+        "name": "Barr, Andy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Kentucky",
+        "district": 6
+    },
+    {
+        "bio_id": "C001067",
+        "name": "Clarke, Yvette D.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 9
+    },
+    {
+        "bio_id": "T000469",
+        "name": "Tonko, Paul",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 20
+    },
+    {
+        "bio_id": "K000385",
+        "name": "Kelly, Robin L.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 2
+    },
+    {
+        "bio_id": "M001137",
+        "name": "Meeks, Gregory W.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 5
+    },
+    {
+        "bio_id": "V000081",
+        "name": "Velázquez, Nydia M.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 7
+    },
+    {
+        "bio_id": "T000463",
+        "name": "Turner, Michael R.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 10
+    },
+    {
+        "bio_id": "P000607",
+        "name": "Pocan, Mark",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Wisconsin",
+        "district": 2
+    },
+    {
+        "bio_id": "V000131",
+        "name": "Veasey, Marc A.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 33
+    },
+    {
+        "bio_id": "W000816",
+        "name": "Williams, Roger",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 25
+    },
+    {
+        "bio_id": "C001091",
+        "name": "Castro, Joaquin",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 20
+    },
+    {
+        "bio_id": "W000814",
+        "name": "Weber, Randy K. Sr.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 14
+    },
+    {
+        "bio_id": "J000295",
+        "name": "Joyce, David P.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 14
+    },
+    {
+        "bio_id": "B001281",
+        "name": "Beatty, Joyce",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 3
+    },
+    {
+        "bio_id": "J000294",
+        "name": "Jeffries, Hakeem S.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 8
+    },
+    {
+        "bio_id": "M001188",
+        "name": "Meng, Grace",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 6
+    },
+    {
+        "bio_id": "W000812",
+        "name": "Wagner, Ann",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Missouri",
+        "district": 2
+    },
+    {
+        "bio_id": "B001285",
+        "name": "Brownley, Julia",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 26
+    },
+    {
+        "bio_id": "H001068",
+        "name": "Huffman, Jared",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 2
+    },
+    {
+        "bio_id": "L000578",
+        "name": "LaMalfa, Doug",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 1
+    },
+    {
+        "bio_id": "D000617",
+        "name": "DelBene, Suzan K.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 1
+    },
+    {
+        "bio_id": "M001184",
+        "name": "Massie, Thomas",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Kentucky",
+        "district": 4
+    },
+    {
+        "bio_id": "B001278",
+        "name": "Bonamici, Suzanne",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Oregon",
+        "district": 1
+    },
+    {
+        "bio_id": "A000369",
+        "name": "Amodei, Mark E.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Nevada",
+        "district": 2
+    },
+    {
+        "bio_id": "W000804",
+        "name": "Wittman, Robert J.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 1
+    },
+    {
+        "bio_id": "L000566",
+        "name": "Latta, Robert E.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 5
+    },
+    {
+        "bio_id": "G000568",
+        "name": "Griffith, H. Morgan",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 9
+    },
+    {
+        "bio_id": "D000616",
+        "name": "DesJarlais, Scott",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 4
+    },
+    {
+        "bio_id": "F000459",
+        "name": "Fleischmann, Charles J. \"Chuck\"",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 3
+    },
+    {
+        "bio_id": "H001052",
+        "name": "Harris, Andy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Maryland",
+        "district": 1
+    },
+    {
+        "bio_id": "K000375",
+        "name": "Keating, William R.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 9
+    },
+    {
+        "bio_id": "S001189",
+        "name": "Scott, Austin",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 8
+    },
+    {
+        "bio_id": "W000808",
+        "name": "Wilson, Frederica S.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 24
+    },
+    {
+        "bio_id": "W000809",
+        "name": "Womack, Steve",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arkansas",
+        "district": 3
+    },
+    {
+        "bio_id": "S001185",
+        "name": "Sewell, Terri A.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Alabama",
+        "district": 7
+    },
+    {
+        "bio_id": "C001068",
+        "name": "Cohen, Steve",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 9
+    },
+    {
+        "bio_id": "J000289",
+        "name": "Jordan, Jim",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 4
+    },
+    {
+        "bio_id": "B001260",
+        "name": "Buchanan, Vern",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 16
+    },
+    {
+        "bio_id": "C001066",
+        "name": "Castor, Kathy",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 14
+    },
+    {
+        "bio_id": "B001257",
+        "name": "Bilirakis, Gus M.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 12
+    },
+    {
+        "bio_id": "Q000023",
+        "name": "Quigley, Mike",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 5
+    },
+    {
+        "bio_id": "T000468",
+        "name": "Titus, Dina",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Nevada",
+        "district": 1
+    },
+    {
+        "bio_id": "P000597",
+        "name": "Pingree, Chellie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maine",
+        "district": 1
+    },
+    {
+        "bio_id": "G000558",
+        "name": "Guthrie, Brett",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Kentucky",
+        "district": 2
+    },
+    {
+        "bio_id": "H001047",
+        "name": "Himes, James A.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Connecticut",
+        "district": 4
+    },
+    {
+        "bio_id": "S001176",
+        "name": "Scalise, Steve",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Louisiana",
+        "district": 1
+    },
+    {
+        "bio_id": "F000454",
+        "name": "Foster, Bill",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 11
+    },
+    {
+        "bio_id": "C001072",
+        "name": "Carson, André",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 7
+    },
+    {
+        "bio_id": "M000312",
+        "name": "McGovern, James P.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 2
+    },
+    {
+        "bio_id": "W000187",
+        "name": "Waters, Maxine",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 43
+    },
+    {
+        "bio_id": "N000015",
+        "name": "Neal, Richard E.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 1
+    },
+    {
+        "bio_id": "N000147",
+        "name": "Norton, Eleanor Holmes",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "District of Columbia",
+        "district": null
+    },
+    {
+        "bio_id": "M001160",
+        "name": "Moore, Gwen",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Wisconsin",
+        "district": 4
+    },
+    {
+        "bio_id": "S001157",
+        "name": "Scott, David",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 13
+    },
+    {
+        "bio_id": "S001156",
+        "name": "Sánchez, Linda T.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 38
+    },
+    {
+        "bio_id": "L000562",
+        "name": "Lynch, Stephen F.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Massachusetts",
+        "district": 8
+    },
+    {
+        "bio_id": "S001172",
+        "name": "Smith, Adrian",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Nebraska",
+        "district": 3
+    },
+    {
+        "bio_id": "J000288",
+        "name": "Johnson, Henry C. \"Hank\"",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 4
+    },
+    {
+        "bio_id": "C001069",
+        "name": "Courtney, Joe",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Connecticut",
+        "district": 2
+    },
+    {
+        "bio_id": "P000034",
+        "name": "Pallone, Frank",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 6
+    },
+    {
+        "bio_id": "S001148",
+        "name": "Simpson, Michael K.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Idaho",
+        "district": 2
+    },
+    {
+        "bio_id": "S001145",
+        "name": "Schakowsky, Janice D.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 9
+    },
+    {
+        "bio_id": "L000557",
+        "name": "Larson, John B.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Connecticut",
+        "district": 1
+    },
+    {
+        "bio_id": "S000510",
+        "name": "Smith, Adam",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 9
+    },
+    {
+        "bio_id": "D000197",
+        "name": "DeGette, Diana",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Colorado",
+        "district": 1
+    },
+    {
+        "bio_id": "D000096",
+        "name": "Davis, Danny K.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Illinois",
+        "district": 7
+    },
+    {
+        "bio_id": "A000055",
+        "name": "Aderholt, Robert B.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Alabama",
+        "district": 4
+    },
+    {
+        "bio_id": "T000193",
+        "name": "Thompson, Bennie G.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Mississippi",
+        "district": 2
+    },
+    {
+        "bio_id": "S000522",
+        "name": "Smith, Christopher H.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 4
+    },
+    {
+        "bio_id": "S000185",
+        "name": "Scott, Robert C. \"Bobby\"",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 3
+    },
+    {
+        "bio_id": "R000395",
+        "name": "Rogers, Harold",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Kentucky",
+        "district": 5
+    },
+    {
+        "bio_id": "B000490",
+        "name": "Bishop, Sanford D.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 2
+    },
+    {
+        "bio_id": "L000491",
+        "name": "Lucas, Frank D.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Oklahoma",
+        "district": 3
+    },
+    {
+        "bio_id": "C001063",
+        "name": "Cuellar, Henry",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 28
+    },
+    {
+        "bio_id": "M001157",
+        "name": "McCaul, Michael T.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 10
+    },
+    {
+        "bio_id": "F000450",
+        "name": "Foxx, Virginia",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 5
+    },
+    {
+        "bio_id": "C001061",
+        "name": "Cleaver, Emanuel",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Missouri",
+        "district": 5
+    },
+    {
+        "bio_id": "C001051",
+        "name": "Carter, John R.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 31
+    },
+    {
+        "bio_id": "C001053",
+        "name": "Cole, Tom",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Oklahoma",
+        "district": 4
+    },
+    {
+        "bio_id": "R000575",
+        "name": "Rogers, Mike D.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Alabama",
+        "district": 3
+    },
+    {
+        "bio_id": "W000795",
+        "name": "Wilson, Joe",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "South Carolina",
+        "district": 2
+    },
+    {
+        "bio_id": "L000560",
+        "name": "Larsen, Rick",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 2
+    },
+    {
+        "bio_id": "G000546",
+        "name": "Graves, Sam",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Missouri",
+        "district": 6
+    },
+    {
+        "bio_id": "M001143",
+        "name": "McCollum, Betty",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Minnesota",
+        "district": 4
+    },
+    {
+        "bio_id": "C000537",
+        "name": "Clyburn, James E.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "South Carolina",
+        "district": 6
+    },
+    {
+        "bio_id": "D000216",
+        "name": "DeLauro, Rosa L.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Connecticut",
+        "district": 3
+    },
+    {
+        "bio_id": "K000009",
+        "name": "Kaptur, Marcy",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 9
+    },
+    {
+        "bio_id": "H000874",
+        "name": "Hoyer, Steny H.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maryland",
+        "district": 5
+    },
+    {
+        "bio_id": "W000823",
+        "name": "Waltz, Michael",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 6
+    },
+    {
+        "bio_id": "G000578",
+        "name": "Gaetz, Matt",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 1
+    },
+    {
+        "bio_id": "G000590",
+        "name": "Green, Mark E.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Tennessee",
+        "district": 7
+    },
+    {
+        "bio_id": "C001078",
+        "name": "Connolly, Gerald E.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 11
+    },
+    {
+        "bio_id": "G000551",
+        "name": "Grijalva, Raúl M.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 7
+    },
+    {
+        "bio_id": "G000595",
+        "name": "Good, Bob",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 5
+    },
+    {
+        "bio_id": "P000096",
+        "name": "Pascrell, Bill",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Jersey",
+        "district": 9
+    },
+    {
+        "bio_id": "A000377",
+        "name": "Armstrong, Kelly",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "North Dakota",
+        "district": null
+    },
+    {
+        "bio_id": "W000828",
+        "name": "Williams, Brandon",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 22
+    },
+    {
+        "bio_id": "W000826",
+        "name": "Wild, Susan",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 7
+    },
+    {
+        "bio_id": "W000825",
+        "name": "Wexton, Jennifer",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 10
+    },
+    {
+        "bio_id": "W000815",
+        "name": "Wenstrup, Brad R.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Ohio",
+        "district": 2
+    },
+    {
+        "bio_id": "T000483",
+        "name": "Trone, David J.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maryland",
+        "district": 6
+    },
+    {
+        "bio_id": "S001209",
+        "name": "Spanberger, Abigail Davis",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Virginia",
+        "district": 7
+    },
+    {
+        "bio_id": "S001177",
+        "name": "Sablan, Gregorio Kilili Camacho",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Northern Mariana Islands",
+        "district": null
+    },
+    {
+        "bio_id": "S001168",
+        "name": "Sarbanes, John P.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maryland",
+        "district": 3
+    },
+    {
+        "bio_id": "S001135",
+        "name": "Steel, Michelle",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 45
+    },
+    {
+        "bio_id": "R000576",
+        "name": "Ruppersberger, C. A. Dutch",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Maryland",
+        "district": 2
+    },
+    {
+        "bio_id": "R000103",
+        "name": "Rosendale, Matthew M.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Montana",
+        "district": 2
+    },
+    {
+        "bio_id": "P000619",
+        "name": "Peltola, Mary Sattler",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Alaska",
+        "district": null
+    },
+    {
+        "bio_id": "P000618",
+        "name": "Porter, Katie",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 47
+    },
+    {
+        "bio_id": "P000616",
+        "name": "Phillips, Dean",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Minnesota",
+        "district": 3
+    },
+    {
+        "bio_id": "P000615",
+        "name": "Pence, Greg",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 6
+    },
+    {
+        "bio_id": "P000599",
+        "name": "Posey, Bill",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Florida",
+        "district": 8
+    },
+    {
+        "bio_id": "N000194",
+        "name": "Nickel, Wiley",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 13
+    },
+    {
+        "bio_id": "N000179",
+        "name": "Napolitano, Grace F.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 31
+    },
+    {
+        "bio_id": "M001221",
+        "name": "Molinaro, Marcus J.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 19
+    },
+    {
+        "bio_id": "M001195",
+        "name": "Mooney, Alexander X.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "West Virginia",
+        "district": 2
+    },
+    {
+        "bio_id": "M001159",
+        "name": "McMorris Rodgers, Cathy",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 5
+    },
+    {
+        "bio_id": "M001156",
+        "name": "McHenry, Patrick T.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 10
+    },
+    {
+        "bio_id": "M001135",
+        "name": "Manning, Kathy E.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 6
+    },
+    {
+        "bio_id": "L000605",
+        "name": "Lee Carter, Erica",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 18
+    },
+    {
+        "bio_id": "L000604",
+        "name": "Lopez, Greg",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Colorado",
+        "district": 4
+    },
+    {
+        "bio_id": "L000589",
+        "name": "Lesko, Debbie",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Arizona",
+        "district": 8
+    },
+    {
+        "bio_id": "L000569",
+        "name": "Luetkemeyer, Blaine",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Missouri",
+        "district": 3
+    },
+    {
+        "bio_id": "L000564",
+        "name": "Lamborn, Doug",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Colorado",
+        "district": 5
+    },
+    {
+        "bio_id": "L000551",
+        "name": "Lee, Barbara",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 12
+    },
+    {
+        "bio_id": "L000266",
+        "name": "LaTurner, Jake",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Kansas",
+        "district": 2
+    },
+    {
+        "bio_id": "K000382",
+        "name": "Kuster, Ann M.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New Hampshire",
+        "district": 2
+    },
+    {
+        "bio_id": "K000381",
+        "name": "Kilmer, Derek",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Washington",
+        "district": 6
+    },
+    {
+        "bio_id": "K000380",
+        "name": "Kildee, Daniel T.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Michigan",
+        "district": 8
+    },
+    {
+        "bio_id": "G000577",
+        "name": "Graves, Garret",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Louisiana",
+        "district": 6
+    },
+    {
+        "bio_id": "G000377",
+        "name": "Granger, Kay",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 12
+    },
+    {
+        "bio_id": "G000061",
+        "name": "Garcia, Mike",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 27
+    },
+    {
+        "bio_id": "F000465",
+        "name": "Ferguson, A. Drew",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Georgia",
+        "district": 3
+    },
+    {
+        "bio_id": "E000215",
+        "name": "Eshoo, Anna G.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 16
+    },
+    {
+        "bio_id": "D000633",
+        "name": "Duarte, John S.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 13
+    },
+    {
+        "bio_id": "D000632",
+        "name": "D'Esposito, Anthony",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 4
+    },
+    {
+        "bio_id": "D000615",
+        "name": "Duncan, Jeff",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "South Carolina",
+        "district": 3
+    },
+    {
+        "bio_id": "C001135",
+        "name": "Chavez-DeRemer, Lori",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Oregon",
+        "district": 5
+    },
+    {
+        "bio_id": "C001134",
+        "name": "Caraveo, Yadira",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Colorado",
+        "district": 8
+    },
+    {
+        "bio_id": "C001097",
+        "name": "Cárdenas, Tony",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "California",
+        "district": 29
+    },
+    {
+        "bio_id": "C001090",
+        "name": "Cartwright, Matt",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Pennsylvania",
+        "district": 8
+    },
+    {
+        "bio_id": "C001054",
+        "name": "Carl, Jerry L.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Alabama",
+        "district": 1
+    },
+    {
+        "bio_id": "B001311",
+        "name": "Bishop, Dan",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 8
+    },
+    {
+        "bio_id": "B001275",
+        "name": "Bucshon, Larry",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Indiana",
+        "district": 8
+    },
+    {
+        "bio_id": "B001248",
+        "name": "Burgess, Michael C.",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 26
+    },
+    {
+        "bio_id": "B001224",
+        "name": "Bush, Cori",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Missouri",
+        "district": 1
+    },
+    {
+        "bio_id": "B001223",
+        "name": "Bowman, Jamaal",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "New York",
+        "district": 16
+    },
+    {
+        "bio_id": "B000574",
+        "name": "Blumenauer, Earl",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Oregon",
+        "district": 3
+    },
+    {
+        "bio_id": "A000376",
+        "name": "Allred, Colin Z.",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "Texas",
+        "district": 32
+    },
+    {
+        "bio_id": "J000308",
+        "name": "Jackson, Jeff",
+        "party": "Democratic",
+        "chamber": "house of representatives",
+        "state": "North Carolina",
+        "district": 14
+    },
+    {
+        "bio_id": "G000582",
+        "name": "González-Colón, Jenniffer",
+        "party": "Republican",
+        "chamber": "house of representatives",
+        "state": "Puerto Rico",
+        "district": null
+    }
+]

@@ -85,6 +85,7 @@ flutter:
     - assets/us-capitol.jpg
     - assets/States/
     - assets/States-Local/Utah/
+    - assets/Congress/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

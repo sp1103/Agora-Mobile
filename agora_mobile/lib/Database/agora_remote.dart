@@ -200,47 +200,16 @@ class AgoraRemote {
   }
 
   /// Query the database for politicians using congress and chamber
-  static Future<List<Politician>> queryCongress({required int congress, required String chamber}) async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?congress=$congress&chamber_name="$chamber"&num_to_return=800');
+  static Future<Politician> queryBioId({required String bioId}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?bio_id="$bioId"&num_to_return=1');
 
     final response = await NetworkHelper.safeGet(url);
 
     final Map<String, dynamic> json = jsonDecode(response.body);
     final List<dynamic> data = json["members"] ?? [];
-    final items = data
-      .where((json) => 
-        json is Map && 
-        json.containsKey("bio_id") &&
-        (json["chamber"] == "Senate" ||
-        json["chamber"] == "House of Representatives"))
-      .map((json) {
-        final politician = Politician.fromJson(json);
-        return politician;
-      }).toList();
+    final item = data.first;
 
-    return items;
-  }
-
-   /// Query the database for politicians from 119th congress using chamber
-  static Future<List<Politician>> queryCongress119({required String chamber}) async {
-    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?congress=119&current_chamber="$chamber"&active="true"&num_to_return=800');
-
-    final response = await NetworkHelper.safeGet(url);
-
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    final List<dynamic> data = json["members"] ?? [];
-    final items = data
-      .where((json) => 
-        json is Map && 
-        json.containsKey("bio_id") &&
-        (json["chamber"] == "Senate" ||
-        json["chamber"] == "House of Representatives"))
-      .map((json) {
-        final politician = Politician.fromJson(json);
-        return politician;
-      }).toList();
-
-    return items;
+    return Politician.fromJson(item);
   }
 
   /// Query the database for legislation using various search options
