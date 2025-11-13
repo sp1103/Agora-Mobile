@@ -2,7 +2,7 @@ import requests
 import json
 import os
 
-API_KEY = "8UBZO8vs7QIrZjlErsOO7PX9Kap1J3HHterlY6qa"  # Insert your Congress API key
+API_KEY = "---"  # Insert your Congress API key
 
 CONGRESS_YEAR = {
     115: 2017,
