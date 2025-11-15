@@ -1,5 +1,7 @@
 import 'package:agora_mobile/Types/chat_message.dart';
 import 'package:agora_mobile/Types/legislation.dart';
+import 'package:provider/provider.dart';
+import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 
 class LegislationChatTab extends StatefulWidget {
@@ -12,7 +14,7 @@ class LegislationChatTab extends StatefulWidget {
 }
 
 class _LegislationChatTabState extends State<LegislationChatTab> {
-  List<ChatMessage> _messages = [];
+  // List<ChatMessage> _messages = appState.getChatHistory(widget.legislation.bill_id);
 
   TextEditingController _messageController = TextEditingController();
 
@@ -31,14 +33,19 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.watch<AgoraAppState>();
+    final messages = appState.getChatHistory(widget.legislation.bill_id);
+    final isLoading = appState.isChatLoading;
+    final error = appState.chatError;
+
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Expanded(
         child: ListView.builder(
           controller: _scrollController,
-          itemCount: _messages.length,
+          itemCount: messages.length,
           itemBuilder: (context, index) {
-            final message = _messages[index];
-            final isUser = _messages[index].role == "user";
+            final message = messages[index];
+            final isUser = messages[index].role == "user";
             return Container(
               alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
               padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
@@ -69,12 +76,12 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
                 border: OutlineInputBorder(),
               ),
               onSubmitted: (value) => _sendMessage(),
-              enabled: !_isLoading,
+              enabled: !isLoading,
             ),
           ),
           IconButton(
             icon: Icon(Icons.send),
-            onPressed: _isLoading ? null : _sendMessage,
+            onPressed: isLoading ? null : _sendMessage,
           ),
         ]),
       )
@@ -87,19 +94,27 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
     }
   }
 
-  void _sendMessage() {
+  void _sendMessage() async {
     final text = _messageController.text.trim();
     if (text.isEmpty) return;
 
-    setState(() {
-      _messages.add(ChatMessage(role: "user", content: text));
+    final appState = context.read<AgoraAppState>();
+    final uid = appState.user?.uid;
 
-      _messageController.clear();
-    });
+    if (uid == null) {
+      //Not logged in
+      setState(() {
+        _errorMessage = "You must be logged in to chat";
+      });
+      return;
+    }
+
+    _messageController.clear();
+
+    await appState.sendChatMessage(uid, widget.legislation.bill_id, text);
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToBottom();
     });
-
-    //TODO: Call Deepseek API to get response
   }
 }

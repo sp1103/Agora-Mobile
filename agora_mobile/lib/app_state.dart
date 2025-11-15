@@ -9,6 +9,7 @@ import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/Types/politician.dart';
 import 'package:agora_mobile/Types/topic.dart';
 import 'package:agora_mobile/Types/votes.dart';
+import 'package:agora_mobile/Types/chat_message.dart';
 import 'package:agora_mobile/error_handler.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/foundation.dart';
@@ -72,7 +73,7 @@ class AgoraAppState extends ChangeNotifier {
   /// If the app bar of the nav frame should be displayed
   bool hideAppBar = false;
 
-  /// If the bottom bar of the nav frame should be displayed 
+  /// If the bottom bar of the nav frame should be displayed
   bool hideBottomBar = false;
 
   /// Whether we need to show the sign up process or not
@@ -85,13 +86,13 @@ class AgoraAppState extends ChangeNotifier {
   bool mapStep = false;
 
   ///Whether or not legislation is trying to get more data
-  bool loadingBills = false; 
+  bool loadingBills = false;
 
   ///Whether or not home is trying to get more data
-  bool loadingHome = false; 
+  bool loadingHome = false;
 
   ///Whether or not politicians is trying to get more data
-  bool loadingPoliticians = false; 
+  bool loadingPoliticians = false;
 
   /// Onboarding process selected topics
   var selectedTopics = <String>[];
@@ -127,13 +128,22 @@ class AgoraAppState extends ChangeNotifier {
   String? _password;
 
   /// Temporarily stores email during onboarding
-  String?_email;
+  String? _email;
 
   /// The controller for the legislation search bar
   TextEditingController legislationSearchController = TextEditingController();
 
   /// The controller for the poltician search bar
   TextEditingController polticianSearchController = TextEditingController();
+
+  ///The map for the chat history
+  Map<int, List<ChatMessage>> _chatHistory = {};
+
+  /// Is chat loading
+  bool _chatLoading = false;
+
+  /// Is error with chat
+  String? _chatError;
 
   AgoraAppState() {
     //Setting up Authentication listener
@@ -166,7 +176,8 @@ class AgoraAppState extends ChangeNotifier {
   Future<void> getHome() async {
     try {
       final rawBills = AgoraRemote.fetchTrendingBills(numToReturn: 50);
-      final rawPolticians = AgoraRemote.fetchTrendingPoliticians(numToReturn: 50);
+      final rawPolticians =
+          AgoraRemote.fetchTrendingPoliticians(numToReturn: 50);
 
       final res = await Future.wait([
         compute(_decodeBillsFiltered, await rawBills),
@@ -185,7 +196,7 @@ class AgoraAppState extends ChangeNotifier {
   }
 
   ///Get polticians votes
-  void getVotes(String bioId)  async {
+  void getVotes(String bioId) async {
     try {
       votes.clear();
       votes = await AgoraRemote.fetchVotes(bioId, 100);
@@ -200,8 +211,10 @@ class AgoraAppState extends ChangeNotifier {
   Future<void> getHomeUser() async {
     try {
       final token = await _user!.getIdToken();
-      final rawBills = AgoraRemote.fetchTrendingBillsUser(token: token!, numToReturn: 50);
-      final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(token: token, numToReturn: 50);
+      final rawBills =
+          AgoraRemote.fetchTrendingBillsUser(token: token!, numToReturn: 50);
+      final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(
+          token: token, numToReturn: 50);
 
       final res = await Future.wait([
         compute(_decodeBillsFiltered, await rawBills),
@@ -268,18 +281,20 @@ class AgoraAppState extends ChangeNotifier {
     }
   }
 
-  Future<Map<Color, Politician>> getCongressChart(int congress, String chamber) async {
-    var p = await AgoraRemote.queryCongress(congress: congress, chamber: chamber);
+  Future<Map<Color, Politician>> getCongressChart(
+      int congress, String chamber) async {
+    var p =
+        await AgoraRemote.queryCongress(congress: congress, chamber: chamber);
     return {};
   }
-
 
   /// Gets the list of topics user is following
   void getUserTopics() async {
     try {
       final token = await _user!.getIdToken();
 
-      Map<int, TopicItem> topicMap = await AgoraRemote.fetchFollowingTopics(token: token!);
+      Map<int, TopicItem> topicMap =
+          await AgoraRemote.fetchFollowingTopics(token: token!);
       favoritesList.addAll(topicMap.values);
       userTopicIds.addAll(topicMap.keys);
     } on NetworkException catch (e) {
@@ -304,8 +319,10 @@ class AgoraAppState extends ChangeNotifier {
   void getFavorites() async {
     try {
       final token = await _user!.getIdToken();
-      final List<PoliticianItem> favoritePolticians = await AgoraRemote.fetchFollowingPoliticians(token: token!);
-      final List<LegislationItem> favoriteLegislations = await AgoraRemote.fetchFollowingBills(token: token);
+      final List<PoliticianItem> favoritePolticians =
+          await AgoraRemote.fetchFollowingPoliticians(token: token!);
+      final List<LegislationItem> favoriteLegislations =
+          await AgoraRemote.fetchFollowingBills(token: token);
       favorites.addAll(favoritePolticians);
       favoritesList.addAll(favoritePolticians);
       favorites.addAll(favoriteLegislations);
@@ -322,7 +339,8 @@ class AgoraAppState extends ChangeNotifier {
     try {
       final token = await _user!.getIdToken();
 
-      await AgoraRemote.updateTopics(token: token!, topics: userTopicIds.toList());
+      await AgoraRemote.updateTopics(
+          token: token!, topics: userTopicIds.toList());
     } on NetworkException catch (e) {
       ErrorHandler.showError(e.message, level: ErrorLevel.warning);
     }
@@ -334,9 +352,11 @@ class AgoraAppState extends ChangeNotifier {
       final token = await _user!.getIdToken();
 
       if (selected is LegislationItem) {
-        await AgoraRemote.unfollowBill(token: token!, billId: selected.legislation.bill_id);
+        await AgoraRemote.unfollowBill(
+            token: token!, billId: selected.legislation.bill_id);
       } else if (selected is PoliticianItem) {
-        await AgoraRemote.unfollowPolitician(token: token!, bioId: selected.politician.bio_id);
+        await AgoraRemote.unfollowPolitician(
+            token: token!, bioId: selected.politician.bio_id);
       }
     } on NetworkException catch (e) {
       ErrorHandler.showError(e.message, level: ErrorLevel.warning);
@@ -349,10 +369,12 @@ class AgoraAppState extends ChangeNotifier {
       final token = await _user!.getIdToken();
 
       if (selected is LegislationItem) {
-        await AgoraRemote.followBill(token: token!, billId: selected.legislation.bill_id);
+        await AgoraRemote.followBill(
+            token: token!, billId: selected.legislation.bill_id);
       } else if (selected is PoliticianItem) {
-        await AgoraRemote.followPolitician(token: token!, bioId: selected.politician.bio_id);
-      } 
+        await AgoraRemote.followPolitician(
+            token: token!, bioId: selected.politician.bio_id);
+      }
     } on NetworkException catch (e) {
       ErrorHandler.showError(e.message, level: ErrorLevel.warning);
     }
@@ -363,7 +385,7 @@ class AgoraAppState extends ChangeNotifier {
   /// Clears home list and then refreshes home
   Future<void> refreshHome() async {
     home.clear();
-    if (user != null ) {
+    if (user != null) {
       await getHomeUser();
     } else {
       await getHome();
@@ -375,7 +397,7 @@ class AgoraAppState extends ChangeNotifier {
     if (loadingBills) return;
 
     loadingBills = true;
-    
+
     try {
       int ntr = legislation.length + 100;
 
@@ -383,8 +405,7 @@ class AgoraAppState extends ChangeNotifier {
       var decodedBills = await compute(_decodeBills, rawBills);
       legislation.addAll(decodedBills.skip(legislation.length));
       notifyListeners();
-    }
-    finally {
+    } finally {
       loadingBills = false;
     }
   }
@@ -399,12 +420,11 @@ class AgoraAppState extends ChangeNotifier {
       int ntr = politician.length + 100;
 
       final rawMembers = await AgoraRemote.fetchLegisltors(numToReturn: ntr);
-      var decodedMembers= await compute(_decodePolticians, rawMembers);
+      var decodedMembers = await compute(_decodePolticians, rawMembers);
       politician.addAll(decodedMembers.skip(politician.length));
       notifyListeners();
-    }
-    finally {
-     loadingPoliticians = false;
+    } finally {
+      loadingPoliticians = false;
     }
   }
 
@@ -418,8 +438,10 @@ class AgoraAppState extends ChangeNotifier {
       int ntr = (home.length ~/ 2) + 50;
 
       final token = await _user!.getIdToken();
-      final rawBills = AgoraRemote.fetchTrendingBillsUser(token: token!, numToReturn: ntr);
-      final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(token: token, numToReturn: ntr);
+      final rawBills =
+          AgoraRemote.fetchTrendingBillsUser(token: token!, numToReturn: ntr);
+      final rawPolticians = AgoraRemote.fetchTrendingPoliticiansUser(
+          token: token, numToReturn: ntr);
 
       final res = await Future.wait([
         compute(_decodeBillsFiltered, await rawBills),
@@ -431,13 +453,12 @@ class AgoraAppState extends ChangeNotifier {
 
       interleaveRandomly([trendingBills, trendingPolticians]);
       notifyListeners();
-    }
-    finally {
+    } finally {
       loadingHome = false;
     }
   }
 
-   /// Loads more home data from the database
+  /// Loads more home data from the database
   Future<void> loadMoreHome() async {
     if (loadingHome) return;
 
@@ -447,7 +468,8 @@ class AgoraAppState extends ChangeNotifier {
       int ntr = (home.length ~/ 2) + 50;
 
       final rawBills = AgoraRemote.fetchTrendingBills(numToReturn: ntr);
-      final rawPolticians = AgoraRemote.fetchTrendingPoliticians(numToReturn: ntr);
+      final rawPolticians =
+          AgoraRemote.fetchTrendingPoliticians(numToReturn: ntr);
 
       final res = await Future.wait([
         compute(_decodeBillsFiltered, await rawBills),
@@ -459,8 +481,7 @@ class AgoraAppState extends ChangeNotifier {
 
       interleaveRandomly([trendingBills, trendingPolticians]);
       notifyListeners();
-    }
-    finally {
+    } finally {
       loadingHome = false;
     }
   }
@@ -569,7 +590,8 @@ class AgoraAppState extends ChangeNotifier {
   /// Creates a new user using email and password
   Future<void> _signUp() async {
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email!, password: _password!);
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: _email!, password: _password!);
     } on FirebaseAuthException catch (e) {
       ErrorHandler.showError(_friendlyFirebaseError(e));
     }
@@ -578,7 +600,8 @@ class AgoraAppState extends ChangeNotifier {
   /// Signs in a user that is registered with email and password
   Future<void> signIn(String email, String password) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       ErrorHandler.showError(_friendlyFirebaseError(e));
     }
@@ -595,7 +618,6 @@ class AgoraAppState extends ChangeNotifier {
       home.clear();
 
       getHome();
-
     } on FirebaseAuthException catch (e) {
       ErrorHandler.showError(_friendlyFirebaseError(e));
     }
@@ -638,7 +660,19 @@ class AgoraAppState extends ChangeNotifier {
   // SEARCHING ----------------------------------------------------------------------------------------------------
 
   /// Performs and advanced search for a poltician or legislation
-  Future<void> advancedSearch(String searchMode, String name, Topic? topic, String? status, String? billType, String? congressSessionLegislation, DateTime? dateIntroduced, DateTime? lastUpdateDate, String? chamber, String? state, DateTime? startYear, String? congressSessionPolitician) async {
+  Future<void> advancedSearch(
+      String searchMode,
+      String name,
+      Topic? topic,
+      String? status,
+      String? billType,
+      String? congressSessionLegislation,
+      DateTime? dateIntroduced,
+      DateTime? lastUpdateDate,
+      String? chamber,
+      String? state,
+      DateTime? startYear,
+      String? congressSessionPolitician) async {
     String query = "";
     if (searchMode == 'Politicians') {
       query += 'name_search="$name"';
@@ -651,7 +685,8 @@ class AgoraAppState extends ChangeNotifier {
       if (startYear != null) {
         query += '&start_year=${startYear.year}';
       }
-      if (congressSessionPolitician != null && congressSessionPolitician.isNotEmpty) {
+      if (congressSessionPolitician != null &&
+          congressSessionPolitician.isNotEmpty) {
         query += '&congress=$congressSessionPolitician';
       }
 
@@ -670,14 +705,17 @@ class AgoraAppState extends ChangeNotifier {
       if (billType != null && billType.isNotEmpty) {
         query += '&type="$billType"';
       }
-      if (congressSessionLegislation != null && congressSessionLegislation.isNotEmpty) {
+      if (congressSessionLegislation != null &&
+          congressSessionLegislation.isNotEmpty) {
         query += '&congress=$congressSessionLegislation';
       }
       if (dateIntroduced != null) {
-        query += '&intro_date=["${dateIntroduced.toIso8601String().split("T")[0]}", "${DateTime.now().toIso8601String().split("T")[0]}"]';
+        query +=
+            '&intro_date=["${dateIntroduced.toIso8601String().split("T")[0]}", "${DateTime.now().toIso8601String().split("T")[0]}"]';
       }
       if (lastUpdateDate != null) {
-        query += '&status_update_date=["${lastUpdateDate.toIso8601String().split("T")[0]}", "${DateTime.now().toIso8601String().split("T")[0]}"]';
+        query +=
+            '&status_update_date=["${lastUpdateDate.toIso8601String().split("T")[0]}", "${DateTime.now().toIso8601String().split("T")[0]}"]';
       }
 
       searchResults = await AgoraRemote.queryLegislation(query: query);
@@ -686,7 +724,8 @@ class AgoraAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> searchByDistrict(String state, String district, bool moreThanOne, bool isFed, bool localSenate, bool localHouse) async {
+  Future<void> searchByDistrict(String state, String district, bool moreThanOne,
+      bool isFed, bool localSenate, bool localHouse) async {
     searchResults.clear();
 
     final reps = AgoraRemote.queryPoliticians(
@@ -729,21 +768,22 @@ class AgoraAppState extends ChangeNotifier {
 
     searchResults.addAll(results);
 
-    openDetails(SearchResults(query: "$state, District $district"), true, false);
-  } 
-
-
+    openDetails(
+        SearchResults(query: "$state, District $district"), true, false);
+  }
 
   /// Queries Databse and searches poltician by name
   Future<void> searchPoliticians(String query) async {
-    searchedPoliticians = await AgoraRemote.queryPoliticians(query: 'name_search="$query"&');
+    searchedPoliticians =
+        await AgoraRemote.queryPoliticians(query: 'name_search="$query"&');
     itemsToDisplayPolitician = searchedPoliticians;
     notifyListeners();
   }
 
   /// Queries Databse and searches legislation by title
   Future<void> searchLegislation(String query) async {
-    searchedLegislation = await AgoraRemote.queryLegislation(query: 'title="$query"');
+    searchedLegislation =
+        await AgoraRemote.queryLegislation(query: 'title="$query"');
     itemsToDisplayLegislation = searchedLegislation;
     notifyListeners();
   }
@@ -778,25 +818,25 @@ class AgoraAppState extends ChangeNotifier {
 
   ///Makes firebase errors actually readable
   String _friendlyFirebaseError(FirebaseAuthException e) {
-  switch (e.code) {
-    case 'invalid-email':
-      return "The email address is not valid.";
-    case 'user-disabled':
-      return "This user account has been disabled.";
-    case 'user-not-found':
-      return "No user found for that email.";
-    case 'wrong-password':
-      return "Incorrect password. Please try again.";
-    case 'email-already-in-use':
-      return "This email is already registered. Try logging in instead.";
-    case 'operation-not-allowed':
-      return "This operation is not allowed. Please contact support.";
-    case 'weak-password':
-      return "Your password is too weak. Try at least 6 characters with letters and numbers.";
-    default:
-      return e.message ?? "An unknown error occurred. Please try again.";
+    switch (e.code) {
+      case 'invalid-email':
+        return "The email address is not valid.";
+      case 'user-disabled':
+        return "This user account has been disabled.";
+      case 'user-not-found':
+        return "No user found for that email.";
+      case 'wrong-password':
+        return "Incorrect password. Please try again.";
+      case 'email-already-in-use':
+        return "This email is already registered. Try logging in instead.";
+      case 'operation-not-allowed':
+        return "This operation is not allowed. Please contact support.";
+      case 'weak-password':
+        return "Your password is too weak. Try at least 6 characters with letters and numbers.";
+      default:
+        return e.message ?? "An unknown error occurred. Please try again.";
+    }
   }
-}
 
   /// Gets the color for the border of the image in the poltician details page
   Color getBorderColor(String party) {
@@ -855,7 +895,10 @@ class AgoraAppState extends ChangeNotifier {
 
   /// Returns false if it is a senate or true if it is house
   bool houseOrSenate(String type) {
-    return type == "hr" || type == "hrjres" ||  type == "hconres" ||  type == "hres"; 
+    return type == "hr" ||
+        type == "hrjres" ||
+        type == "hconres" ||
+        type == "hres";
   }
 
   //AI GENERATED CODE START
@@ -912,6 +955,40 @@ class AgoraAppState extends ChangeNotifier {
     }
   }
   //AI GENERATED CODE END
+
+  // CHAT RELATED METHODS ----------------------------------------------------------------------------------------------------
+  List<ChatMessage> getChatHistory(int billId) {
+    return _chatHistory[billId] ?? [];
+  }
+
+  bool get isChatLoading => _chatLoading;
+
+  String? get chatError => _chatError;
+
+  Future<void> sendChatMessage(
+      String uid, int billId, String userMessage) async {
+    _chatLoading = true;
+    _chatError = null;
+
+    ChatMessage userChatMessage =
+        ChatMessage(role: 'user', content: userMessage);
+
+    _chatHistory[billId] = (_chatHistory[billId] ?? [])..add(userChatMessage);
+    notifyListeners();
+
+    try {
+      String response = await AgoraRemote.sendChatMessage(
+          uid: uid, messages: (_chatHistory[billId] ?? []));
+
+      ChatMessage chatM = ChatMessage(role: 'assistant', content: response);
+
+      _chatHistory[billId] = (_chatHistory[billId] ?? [])..add(chatM);
+    } catch (e) {
+      _chatError = e.toString();
+    }
+    _chatLoading = false;
+    notifyListeners();
+  }
 }
 
 // JSON DECODE ----------------------------------------------------------------------------------------------------
