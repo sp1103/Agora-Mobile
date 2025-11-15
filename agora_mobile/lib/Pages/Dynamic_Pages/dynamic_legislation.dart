@@ -1,23 +1,23 @@
 import 'package:agora_mobile/Pages/Tab_Views/legislation_info_tab.dart';
 import 'package:agora_mobile/Pages/Tab_Views/legislation_sponsor_tab.dart';
+import 'package:agora_mobile/Pages/Tab_Views/legislation_chat_tab.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 
-class DynamicLegislation extends StatelessWidget{
-
+class DynamicLegislation extends StatelessWidget {
   final Legislation legislation;
 
   const DynamicLegislation({super.key, required this.legislation});
-  
+
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AgoraAppState>();
 
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(
@@ -31,8 +31,8 @@ class DynamicLegislation extends StatelessWidget{
                   top: 140,
                   left: 20,
                   child: appState.houseOrSenate(legislation.type)
-                          ? Image.asset('assets/us-h.png', width: 110, height: 110)
-                          : Image.asset('assets/us-s.png', width: 110, height: 110),
+                      ? Image.asset('assets/us-h.png', width: 110, height: 110)
+                      : Image.asset('assets/us-s.png', width: 110, height: 110),
                 ),
                 Positioned(
                   top: 40,
@@ -81,6 +81,7 @@ class DynamicLegislation extends StatelessWidget{
                 Tab(text: "Summary"),
                 Tab(text: "Info"),
                 Tab(text: "Sponsors"),
+                Tab(text: "Chat"),
               ],
             ),
             Expanded(
@@ -89,6 +90,7 @@ class DynamicLegislation extends StatelessWidget{
                   SingleChildScrollView(child: Html(data: legislation.summary)),
                   LegislationInfoTab(legislation: legislation),
                   LegislationSponsorTab(legislation: legislation),
+                  LegislationChatTab(legislation: legislation),
                 ],
               ),
             ),
