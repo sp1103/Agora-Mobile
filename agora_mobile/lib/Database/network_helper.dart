@@ -19,29 +19,39 @@ class NetworkHelper {
       }
       return response;
     } on TimeoutException {
-      throw NetworkException("Request timed out. Please check your internet connection.");
+      throw NetworkException(
+          "Request timed out. Please check your internet connection.");
     } on http.ClientException {
-      throw NetworkException("Network error. Please check your internet connection.");
+      throw NetworkException(
+          "Network error. Please check your internet connection.");
     } on Exception catch (e) {
       throw NetworkException("Unexpected error: $e");
     }
   }
 
-  static Future<http.Response> safePost(Uri url, Object body) async {
+  static Future<http.Response> safePost(Uri url, Object body,
+      {Map<String, String>? headers}) async {
     try {
+      final finalHeaders = {
+        "Content-Type": "application/json",
+        ...?headers,
+      };
+
       final response = await http
-          .post(url, headers: {"Content-Type": "application/json"}, body: jsonEncode(body))
+          .post(url, headers: finalHeaders, body: jsonEncode(body))
           .timeout(const Duration(seconds: 10));
 
-      if (response.statusCode != 200) {
-        throw NetworkException("Server error (${response.statusCode})");
+      if (response.statusCode >= 200 && response.statusCode < 400) {
+        return response;
       }
 
-      return response;
+      throw NetworkException("Server error (${response.statusCode})");
     } on TimeoutException {
-      throw NetworkException("Request timed out. Please check your internet connection.");
+      throw NetworkException(
+          "Request timed out. Please check your internet connection.");
     } on http.ClientException {
-      throw NetworkException("Network error. Please check your internet connection.");
+      throw NetworkException(
+          "Network error. Please check your internet connection.");
     } on Exception catch (e) {
       throw NetworkException("Unexpected error: $e");
     }
