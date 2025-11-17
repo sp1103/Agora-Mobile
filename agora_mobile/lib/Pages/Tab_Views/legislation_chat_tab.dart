@@ -1,5 +1,4 @@
 import 'package:agora_mobile/Types/character.dart';
-import 'package:agora_mobile/Types/chat_message.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:provider/provider.dart';
 import 'package:agora_mobile/app_state.dart';
@@ -15,15 +14,12 @@ class LegislationChatTab extends StatefulWidget {
 }
 
 class _LegislationChatTabState extends State<LegislationChatTab> {
-  // List<ChatMessage> _messages = appState.getChatHistory(widget.legislation.bill_id);
 
-  TextEditingController _messageController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
 
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   Character _selectedCharacter = Character.allCharacters[0];
-
-  bool _isLoading = false;
 
   String? _errorMessage;
 
@@ -162,25 +158,23 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
           padding: EdgeInsets.all(8),
           child: CircularProgressIndicator(),
         ),
-      Container(
-        child: Row(children: [
-          Expanded(
-            child: TextField(
-              controller: _messageController,
-              decoration: InputDecoration(
-                hintText: 'Type a message...',
-                border: OutlineInputBorder(),
-              ),
-              onSubmitted: (value) => _sendMessage(),
-              enabled: !isLoading,
+      Row(children: [
+        Expanded(
+          child: TextField(
+            controller: _messageController,
+            decoration: InputDecoration(
+              hintText: 'Type a message...',
+              border: OutlineInputBorder(),
             ),
+            onSubmitted: (value) => _sendMessage(),
+            enabled: !isLoading,
           ),
-          IconButton(
-            icon: Icon(Icons.send),
-            onPressed: isLoading ? null : _sendMessage,
-          ),
-        ]),
-      )
+        ),
+        IconButton(
+          icon: Icon(Icons.send),
+          onPressed: isLoading ? null : _sendMessage,
+        ),
+      ])
     ]);
   }
 

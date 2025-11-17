@@ -389,7 +389,6 @@ class AgoraRemote {
 
   static Future<String> sendChatMessage(
       {required String uid, required List<ChatMessage> messages}) async {
-    print("Sending Message");
     try {
       final url = Uri.parse('https://www.agoraforthepeople.net/api/chat');
 

@@ -137,7 +137,7 @@ class AgoraAppState extends ChangeNotifier {
   TextEditingController polticianSearchController = TextEditingController();
 
   ///The map for the chat history
-  Map<int, List<ChatMessage>> _chatHistory = {};
+  final Map<int, List<ChatMessage>> _chatHistory = {};
 
   /// Is chat loading
   bool _chatLoading = false;
