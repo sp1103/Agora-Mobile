@@ -126,6 +126,42 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
           },
         ),
       ),
+      if (error != null || _errorMessage != null)
+        Container(
+          padding: EdgeInsets.all(8),
+          margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.red[100],
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: Colors.red[300]!),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.error_outline, color: Colors.red[900]),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  error ?? _errorMessage ?? '',
+                  style: TextStyle(color: Colors.red[900]),
+                ),
+              ),
+              IconButton(
+                icon: Icon(Icons.close, size: 18),
+                color: Colors.red[900],
+                onPressed: () {
+                  setState(() {
+                    _errorMessage = null;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+      if (isLoading)
+        Padding(
+          padding: EdgeInsets.all(8),
+          child: CircularProgressIndicator(),
+        ),
       Container(
         child: Row(children: [
           Expanded(
@@ -166,6 +202,13 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
       setState(() {
         _errorMessage = "You must be logged in to chat";
       });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('You must be logged in to chat'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+        ),
+      );
       return;
     }
 
