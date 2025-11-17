@@ -1,5 +1,6 @@
 import 'package:agora_mobile/AgoraWidgets/search_app_bar.dart';
 import 'package:agora_mobile/Pages/Search_Pages/search_page.dart';
+import 'package:agora_mobile/Pages/congress_page.dart';
 import 'package:agora_mobile/Pages/district_map.dart';
 import 'package:agora_mobile/Pages/favorites_page.dart';
 import 'package:agora_mobile/Pages/glossary_page.dart';
@@ -72,7 +73,7 @@ class NavFrame extends StatelessWidget {
                   appState.openDetails(SearchPage(), true, false);
                   break;
                 case 'congress':
-                  appState.getCongressChart(118, "Senate");
+                  appState.openDetails(CongressPage(), true, false);
                   break; 
               }
             }, 

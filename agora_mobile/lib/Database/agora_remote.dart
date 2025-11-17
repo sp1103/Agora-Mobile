@@ -221,28 +221,17 @@ class AgoraRemote {
     return items;
   }
 
-  /// Query the database for politicians using various search options
-  static Future<List<PoliticianItem>> queryCongress(
-      {required int congress, required String chamber}) async {
-    final url = Uri.parse(
-        'https://piece-o-pi.com/agora_api/get_us_members?congress=$congress&chamber_name="$chamber"&num_to_return=800');
+  /// Query the database for politicians using congress and chamber
+  static Future<Politician> queryBioId({required String bioId}) async {
+    final url = Uri.parse('https://piece-o-pi.com/agora_api/get_us_members?bio_id="$bioId"&num_to_return=1');
 
     final response = await NetworkHelper.safeGet(url);
 
     final Map<String, dynamic> json = jsonDecode(response.body);
     final List<dynamic> data = json["members"] ?? [];
-    final items = data
-        .where((json) =>
-            json is Map &&
-            json.containsKey("bio_id") &&
-            (json["chamber"] == "Senate" ||
-                json["chamber"] == "House of Representatives"))
-        .map((json) {
-      final politician = Politician.fromJson(json);
-      return PoliticianItem(politician);
-    }).toList();
+    final item = data.first;
 
-    return items;
+    return Politician.fromJson(item);
   }
 
   /// Query the database for legislation using various search options

@@ -281,11 +281,18 @@ class AgoraAppState extends ChangeNotifier {
     }
   }
 
-  Future<Map<Color, Politician>> getCongressChart(
-      int congress, String chamber) async {
-    var p =
-        await AgoraRemote.queryCongress(congress: congress, chamber: chamber);
-    return {};
+  Future<Politician?> queryPoliticianByBioId(String bioId) async {
+    try {
+      // Query your database/API to get full politician data
+      final politician = await AgoraRemote.queryBioId(bioId: bioId);
+      return politician;
+    } on NetworkException catch (e) {
+      ErrorHandler.showError(e.message, level: ErrorLevel.warning);
+      return null;
+    } catch (e) {
+      ErrorHandler.showError("No Politician Page Available", level: ErrorLevel.info);
+      return null;
+    }
   }
 
   /// Gets the list of topics user is following
