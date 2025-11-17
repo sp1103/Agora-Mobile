@@ -965,8 +965,8 @@ class AgoraAppState extends ChangeNotifier {
 
   String? get chatError => _chatError;
 
-  Future<void> sendChatMessage(
-      String uid, int billId, String userMessage) async {
+  Future<void> sendChatMessage(String uid, int billId, String userMessage,
+      {String? systemPrompt}) async {
     _chatLoading = true;
     _chatError = null;
 
@@ -977,8 +977,16 @@ class AgoraAppState extends ChangeNotifier {
     notifyListeners();
 
     try {
-      String response = await AgoraRemote.sendChatMessage(
-          uid: uid, messages: (_chatHistory[billId] ?? []));
+      List<ChatMessage> messagesToSend = _chatHistory[billId]!;
+      if (systemPrompt != null) {
+        messagesToSend = [
+          ChatMessage(role: 'system', content: systemPrompt),
+          ...messagesToSend,
+        ];
+      }
+
+      String response =
+          await AgoraRemote.sendChatMessage(uid: uid, messages: messagesToSend);
 
       ChatMessage chatM = ChatMessage(role: 'assistant', content: response);
 

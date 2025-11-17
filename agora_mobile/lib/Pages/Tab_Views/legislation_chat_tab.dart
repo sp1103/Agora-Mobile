@@ -1,3 +1,4 @@
+import 'package:agora_mobile/Types/character.dart';
 import 'package:agora_mobile/Types/chat_message.dart';
 import 'package:agora_mobile/Types/legislation.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,8 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
 
   ScrollController _scrollController = ScrollController();
 
+  Character _selectedCharacter = Character.allCharacters[0];
+
   bool _isLoading = false;
 
   String? _errorMessage;
@@ -39,28 +42,85 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
     final error = appState.chatError;
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
+          ),
+          child: Row(
+            children: [
+              Text("Chat with: ",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              SizedBox(width: 8),
+              DropdownButton<Character>(
+                  value: _selectedCharacter,
+                  items: Character.allCharacters.map((character) {
+                    return DropdownMenuItem(
+                      value: character,
+                      child: Text(character.name),
+                    );
+                  }).toList(),
+                  onChanged: (Character? newCharacter) {
+                    if (newCharacter != null) {
+                      setState(() {
+                        _selectedCharacter = newCharacter;
+                      });
+                    }
+                  })
+            ],
+          )),
       Expanded(
         child: ListView.builder(
           controller: _scrollController,
           itemCount: messages.length,
           itemBuilder: (context, index) {
             final message = messages[index];
-            final isUser = messages[index].role == "user";
+            final isUser = message.role == "user";
+
             return Container(
               alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
               padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              child: Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: isUser ? Colors.blue : Colors.grey,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  message.content,
-                  style: TextStyle(
-                    color: isUser ? Colors.white : Colors.black,
+              child: Row(
+                mainAxisAlignment:
+                    isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (!isUser) ...[
+                    CircleAvatar(
+                      radius: 16,
+                      backgroundImage: _selectedCharacter.photoUrl.isNotEmpty
+                          ? AssetImage(_selectedCharacter.photoUrl)
+                          : null,
+                      backgroundColor: Colors.indigo,
+                      child: _selectedCharacter.photoUrl.isEmpty
+                          ? Text(
+                              _selectedCharacter.name[0],
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          : null,
+                    ),
+                    SizedBox(width: 8),
+                  ],
+                  Flexible(
+                    child: Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: isUser ? Colors.blue : Colors.grey[200],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        message.content,
+                        style: TextStyle(
+                          color: isUser ? Colors.white : Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             );
           },
@@ -111,10 +171,30 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
 
     _messageController.clear();
 
-    await appState.sendChatMessage(uid, widget.legislation.bill_id, text);
+    final messages = appState.getChatHistory(widget.legislation.bill_id);
+    String? systemPrompt;
+    if (messages.isEmpty) {
+      systemPrompt = _buildSystemPrompt(_selectedCharacter);
+      // messageToSend = "$context\n\nUser question: $text";
+    }
+
+    await appState.sendChatMessage(uid, widget.legislation.bill_id, text,
+        systemPrompt: systemPrompt);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToBottom();
     });
+  }
+
+  String _buildSystemPrompt(Character character) {
+    final legislationContext = """Title: ${widget.legislation.title}
+    Bill Number: ${widget.legislation.number}
+    Summary: ${widget.legislation.summary}
+    Answer questions about this legislation based on the above given info.""";
+
+    // [FULL TEXT START]
+    // $fullText
+    // [FULL TEXT END]
+    return Character.createMessage(character, legislationContext);
   }
 }
