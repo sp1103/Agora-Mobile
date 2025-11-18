@@ -42,13 +42,21 @@ class LegislationItem implements ListItem {
               Row(
                 children: [
                   appState.houseOrSenate(legislation.type)
-                  ? Image.asset('assets/us-h.png', width: 24.04, height: 24)
-                  : Image.asset('assets/us-s.png', width: 24.04, height: 24),
+                  ? (legislation.type == "HB"
+                    ? Image.asset('assets/u-h.png', width: 24.04, height: 24)
+                    : Image.asset('assets/us-h.png', width: 24.04, height: 24))
+                  : (legislation.type == "SB"
+                    ? Image.asset('assets/u-s.png', width: 24.04, height: 24)
+                    : Image.asset('assets/us-s.png', width: 24.04, height: 24)),
                   SizedBox(width: 10),
                   Text(
                     appState.houseOrSenate(legislation.type)
-                    ? "House of Repersentatives"
-                    : "Senate",
+                    ? (legislation.type == "HB"
+                      ? "Utah House of Reps"
+                      : "House of Repersentatives")
+                    : (legislation.type == "SB"
+                      ? "Utah Senate"
+                      : "Senate"),
                     style: TextStyle(fontWeight: FontWeight.bold)
                   ),
                   Spacer(flex: 2),

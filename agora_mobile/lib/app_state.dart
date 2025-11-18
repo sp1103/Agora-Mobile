@@ -905,6 +905,7 @@ class AgoraAppState extends ChangeNotifier {
     return type == "hr" ||
         type == "hrjres" ||
         type == "hconres" ||
+        type == "HB" ||
         type == "hres";
   }
 

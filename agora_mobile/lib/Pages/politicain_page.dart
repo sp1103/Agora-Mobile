@@ -11,10 +11,15 @@ class PoliticianPage extends StatefulWidget {
 
 class _PoliticianPageState extends State<PoliticianPage> {
   final _scrollController = ScrollController();
+  bool _showRefresh = false;
 
   @override
   void initState() {
     super.initState();
+
+    Future.delayed(const Duration(seconds: 10), () {
+      if (mounted) setState(() => _showRefresh = true);
+    });
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
@@ -42,7 +47,23 @@ class _PoliticianPageState extends State<PoliticianPage> {
     var politician = appState.itemsToDisplayPolitician;
 
     if (politician.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (!_showRefresh)
+              const CircularProgressIndicator(),
+            if (_showRefresh)
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: IconButton(
+                  icon: const Icon(Icons.refresh, size: 50),
+                  onPressed: _refreshPolitician,
+                ),
+              ),
+          ],
+        ),
+      );
     }
 
     return RefreshIndicator(

@@ -79,8 +79,12 @@ class DynamicPolitician extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text(
                           politician.chamber == "Senate"
-                              ? "U.S. Senator from ${politician.state}\nParty - ${politician.party}"
-                              : "U.S. Rep. from ${politician.state}, District ${politician.district}\nParty - ${politician.party}",
+                              ? (politician.chamber.contains("Utah")
+                                ? "Utah Senator \nParty - ${politician.party}"
+                                : "U.S. Senator from ${politician.state}\nParty - ${politician.party}")
+                              : (politician.chamber.contains("Utah")
+                                ? "Utah Rep. - District ${politician.district}\nParty - ${politician.party}"
+                                : "U.S. Rep. from ${politician.state}, District ${politician.district}\nParty - ${politician.party}"),
                           style: const TextStyle(color: Colors.grey),
                         ),
                       ],

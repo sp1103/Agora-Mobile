@@ -42,8 +42,12 @@ class PoliticianItem implements ListItem {
               Row(
                 children: [
                   politician.chamber == "Senate"
-                  ? Image.asset('assets/us-s.png', width: 24.04, height: 24)
-                  : Image.asset('assets/us-h.png', width: 24.04, height: 24),
+                  ? (politician.chamber.contains("Utah")
+                    ? Image.asset('assets/u-s.png', width: 24.04, height: 24)
+                    : Image.asset('assets/us-s.png', width: 24.04, height: 24))
+                  : (politician.chamber.contains("Utah")
+                    ? Image.asset('assets/u-h.png', width: 24.04, height: 24)
+                    : Image.asset('assets/us-h.png', width: 24.04, height: 24)),
                   SizedBox(width: 10),
                   Text(politician.chamber,
                       style: TextStyle(fontWeight: FontWeight.bold)),

@@ -31,8 +31,12 @@ class DynamicLegislation extends StatelessWidget {
                   top: 140,
                   left: 20,
                   child: appState.houseOrSenate(legislation.type)
-                      ? Image.asset('assets/us-h.png', width: 110, height: 110)
-                      : Image.asset('assets/us-s.png', width: 110, height: 110),
+                  ? (legislation.type == "HB"
+                    ? Image.asset('assets/u-h.png', width: 110, height: 110)
+                    : Image.asset('assets/us-h.png', width: 110, height: 110))
+                  : (legislation.type == "SB"
+                    ? Image.asset('assets/u-s.png', width: 110, height: 110)
+                    : Image.asset('assets/us-s.png', width: 110, height: 110)),
                 ),
                 Positioned(
                   top: 40,
