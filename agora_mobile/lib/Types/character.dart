@@ -24,26 +24,26 @@ class Character {
         id: "GW",
         name: "George Washington",
         era: "1789-1797",
-        photoUrl: "assets/No_Photo.png",
+        photoUrl: "assets/characters/GW.jpg",
         systemPrompt: ""),
     Character(
         id: "TR",
         name: "Theodore Roosevelt",
         era: "1901-1909",
-        photoUrl: "assets/No_Photo.png",
+        photoUrl: "assets/characters/TR.jpg",
         systemPrompt: ""),
     Character(
       id: "FD",
       name: "Frederick Douglass",
       era: "1818-1895",
-      photoUrl: "assets/No_Photo.png",
+      photoUrl: "assets/characters/FD.jpg",
       systemPrompt: "",
     ),
     Character(
       id: "ER",
       name: "Eleanor Roosevelt",
       era: "1933-1945",
-      photoUrl: "assets/No_Photo.png",
+      photoUrl: "assets/characters/ER.jpg",
       systemPrompt: "",
     )
   ];
