@@ -290,7 +290,8 @@ class AgoraAppState extends ChangeNotifier {
       ErrorHandler.showError(e.message, level: ErrorLevel.warning);
       return null;
     } catch (e) {
-      ErrorHandler.showError("No Politician Page Available", level: ErrorLevel.info);
+      ErrorHandler.showError("No Politician Page Available",
+          level: ErrorLevel.info);
       return null;
     }
   }
@@ -967,6 +968,11 @@ class AgoraAppState extends ChangeNotifier {
   // CHAT RELATED METHODS ----------------------------------------------------------------------------------------------------
   List<ChatMessage> getChatHistory(int billId) {
     return _chatHistory[billId] ?? [];
+  }
+
+  clearChatHistory(int billId) {
+    _chatHistory[billId] = [];
+    notifyListeners();
   }
 
   bool get isChatLoading => _chatLoading;
