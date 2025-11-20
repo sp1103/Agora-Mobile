@@ -3,6 +3,7 @@ import 'package:agora_mobile/Types/legislation.dart';
 import 'package:provider/provider.dart';
 import 'package:agora_mobile/app_state.dart';
 import 'package:flutter/material.dart';
+
 ///Creates a page that holds a hemicycle chart and seat change list
 class LegislationChatTab extends StatefulWidget {
   final Legislation legislation;
@@ -14,7 +15,6 @@ class LegislationChatTab extends StatefulWidget {
 }
 
 class _LegislationChatTabState extends State<LegislationChatTab> {
-
   final TextEditingController _messageController = TextEditingController();
 
   final ScrollController _scrollController = ScrollController();
@@ -62,6 +62,7 @@ class _LegislationChatTabState extends State<LegislationChatTab> {
                       setState(() {
                         _selectedCharacter = newCharacter;
                       });
+                      appState.clearChatHistory(widget.legislation.bill_id);
                     }
                   })
             ],
