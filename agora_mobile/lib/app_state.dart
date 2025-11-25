@@ -640,7 +640,6 @@ class AgoraAppState extends ChangeNotifier {
     _password = null;
     _email = null;
 
-    topics.clear();
     polticianSelecttionList.clear();
 
     notifyListeners();

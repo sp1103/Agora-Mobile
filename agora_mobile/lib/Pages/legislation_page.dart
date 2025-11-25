@@ -13,13 +13,17 @@ class _LegislationPageState extends State<LegislationPage> {
   final _scrollController = ScrollController();
   bool _showRefresh = false;
 
+  void startTimer() {
+    Future.delayed(const Duration(seconds: 10), () {
+      if (mounted) setState(() => _showRefresh = true);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 10), () {
-      if (mounted) setState(() => _showRefresh = true);
-    });
+    startTimer();
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
@@ -38,6 +42,8 @@ class _LegislationPageState extends State<LegislationPage> {
 
   Future<void> _refreshLegislation() async {
     var appState = context.read<AgoraAppState>();
+    _showRefresh = false;
+    startTimer();
     await appState.getLegislation();
   }
 
