@@ -94,3 +94,7 @@ Open the project file and click run and debug. Ensure that you turn off uncaught
 debugger. This is becuase the debugger believes that there are uncaught errors but they are 
 actually caught. 
 
+## Note
+
+You will need to step up firebase configurations for email login on your own in order to use this.
+
