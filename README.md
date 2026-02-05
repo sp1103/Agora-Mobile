@@ -6,7 +6,7 @@ levels, consolidating key updates in one convenient location. Its goal is to kee
 with comprehensive legislation summaries, personalized home feeds, and in-depth information about 
 representatives.
 
-Website: [](https://agoraforthepeople.net
+Website: [Agora](https://agoraforthepeople.net)
 
 ## Disclaimer
 
