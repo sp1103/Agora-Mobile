@@ -96,9 +96,5 @@ To use the app as is you can download the apk here:
 
 Open the project file and click run and debug. Ensure that you turn off uncaught exceptions in the 
 debugger. This is becuase the debugger believes that there are uncaught errors but they are 
-actually caught. 
-
-## Note
-
-You will need to step up firebase configurations for email login on your own in order to use this.
+actually caught. Note: You will have to set up firebase configurations and your own database.
 
