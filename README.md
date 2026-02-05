@@ -6,7 +6,11 @@ levels, consolidating key updates in one convenient location. Its goal is to kee
 with comprehensive legislation summaries, personalized home feeds, and in-depth information about 
 representatives.
 
-Website: [](https://agoraforthepeople.net/)
+Website: [](https://agoraforthepeople.net
+
+## Disclaimer
+
+Unfortuntely, the code itself won't work becuase the firebase intergration info has been removed and it won't work with the database. Feel free to look at the code however, if you wish to use it please download the apk. 
 
 
 ## Getting Started
