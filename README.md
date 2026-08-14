@@ -1,100 +1,61 @@
-# agora_mobile
+# Agora Mobile
 
-An androind app for the Agora Capstone project. Agora is a web and mobile application that 
-provides real-time tracking of government legislation and legislators at the local and federal 
-levels, consolidating key updates in one convenient location. Its goal is to keep users informed 
-with comprehensive legislation summaries, personalized home feeds, and in-depth information about 
-representatives.
+A Flutter mobile application that helps users follow government legislation and legislators at the local and federal levels. Agora brings legislative information, representative details, personalized content, and saved items into a single mobile experience.
 
-Website: [Agora](https://agoraforthepeople.net)
+**Website:** [Agora for the People](https://agoraforthepeople.net)
 
-## Disclaimer
+## Overview
 
-Unfortuntely, the code itself won't work becuase the firebase intergration info has been removed and it won't work with the database. Feel free to look at the code however, if you wish to use it please download the apk. 
+Agora Mobile was developed as part of the University of Utah Computer Science capstone project. The application provides a mobile interface for exploring political and legislative information while supporting authenticated, personalized user experiences.
 
+The project demonstrates mobile application development, UI design, application state management, authentication, local persistence, remote data integration, and error handling using Flutter and Firebase-backed services.
 
-## Getting Started
+## Key Features
 
-To use the app as is you can download the apk here: 
-[Agora APK](https://drive.google.com/file/d/16zFuzTw1NEfqoKmUXI5pqXVMRPSgsxnl/view?usp=sharing)
+- Browse legislators and legislation from a mobile interface
+- View detailed information about representatives and legislative activity
+- Authenticate users through Firebase
+- Save and manage favorite content
+- Persist selected application data locally
+- Retrieve legislative and political data from remote services
+- Provide personalized application views and navigation
+- Handle application state and errors across multiple screens and workflows
 
-## Setting Up Flutter
+## Technology Stack
 
-1. Launch VS Code
-2. Add the Flutter extension to VS Code
-    To add the Dart and Flutter extensions to VS Code, visit the Flutter extension's marketplace page, 
-    then click Install. If prompted by your browser, allow it to open VS Code.
-3. Install Flutter with VS Code
-    1. Open the command palette in VS Code.
-        Go to View > Command Palette or press Control + Shift + P.
-    2. In the command palette, type flutter.
-    3. Select Flutter: New Project.
-    4. VS Code prompts you to locate the Flutter SDK on your computer. Select Download SDK.
-    5. When the Select Folder for Flutter SDK dialog displays, choose where you want to install Flutter.
-    6. Click Clone Flutter.
-    7. Click Add SDK to PATH.
+- **Flutter / Dart** — cross-platform mobile application development
+- **Firebase** — authentication and supporting cloud services
+- **SQL / SQLite** — application data and local persistence
+- **Android Studio / Android SDK** — Android development and testing
+- **Git / GitHub** — source control and collaborative development
 
-## Setting Up Andriod Studio
+## Project Structure
 
-1. Install Android Studio
-2. Install Android SDK and tools
-    1. Launch Android Studio.
-    2. Open the SDK Manager settings dialog.
-        a. If the Welcome to Android Studio dialog is open, click the More Actions 
-        button that follows the New Project and Open buttons, then click SDK Manager 
-        from the dropdown menu.
-        b. If you have a project open, go to Tools > SDK Manager.
-    3. If the SDK Platforms tab is not open, switch to it.
-    4. Verify that the first entry with an API Level of 36 has been selected.
-        If the Status column displays Update available or Not installed:
-            a. Select the checkbox for that entry or row.
-            b. Click Apply.
-            c. When the Confirm Change dialog displays, click OK.
-            d. The SDK Component Installer dialog displays with a progress indicator.
-            e. When the installation finishes, click Finish.
-    5. Switch to the SDK Tools tab.
-    6. Verify that the following SDK Tools have been selected:
-        - Android SDK Build-Tools
-        - Android SDK Command-line Tools
-        - Android Emulator
-        - Android SDK Platform-Tools
-    7. If the Status column for any of the preceding tools displays Update available or Not installed:
-        a. Select the checkbox for the necessary tools.
-        b. Click Apply.
-        c. When the Confirm Change dialog displays, click OK.
-        d. When the installation finishes, click Finish.
-4. Agree to the Android licenses
-    1. Open your preferred terminal.
-    2. Run the following command to review and sign the SDK licenses. 
-        $ flutter doctor --android-licenses
-    3. Read and accept any necessary licenses.
+The application is organized into components for pages, reusable widgets, data access, application state, domain types, and error handling. This separation keeps UI code distinct from data and application logic and makes the project easier to maintain and extend.
 
-## Set Up Android Emulator
+## Running the Project
 
-1. Set up your development device
-2. Set up a new emulator
-    1. Start Android Studio.
-    2. Open the Device Manager settings dialog.
-    3. Click the Create Virtual Device button that appears as a + icon.
-    4. Select either Phone under Form Factor.
-    5. Select a device definition. You can browse or search for the device.
-    6. Click Next.
-    7. If the option is provided, select either x86 Images or ARM Images depending on if 
-        your development computer is an x64 or Arm64 device.
-    8. Select one system image for the Android version you want to emulate.
-        a. If the desired image has a Download icon to the left of the system image name, click it.
-        b. When the download completes, click Finish.
-    9. Click Additional settings in the top tab bar and scroll to Emulated Performance.
-    10. From the Graphics acceleration dropdown menu, select an option that mentions Hardware.
-    11. Verify your virtual device configuration. If it is correct, click Finish.
-3. Try running the emulator
-    In the Device Manager dialog, click the Run icon to the right of your desired virtual device.
-    The emulator should start up and display the default canvas for your 
-    selected Android OS version and device.
+The public repository intentionally does **not** include the Firebase configuration or production database credentials used by the original project. As a result, cloning the repository alone will not connect to the original backend services.
 
-## Running the project
+To run the source locally, you will need:
 
-Open the project file and click run and debug. Ensure that you turn off uncaught exceptions in the 
-debugger. This is becuase the debugger believes that there are uncaught errors but they are 
-actually caught. Note: You will have to set up firebase configurations and your own database.
+1. A working Flutter development environment
+2. Android Studio or another supported Flutter development environment
+3. Your own Firebase project and configuration
+4. Your own compatible database/backend configuration
 
+After configuring those dependencies, install the Flutter packages and launch the application using the standard Flutter development workflow.
+
+## Android Build
+
+A prebuilt Android APK of the capstone version is available here:
+
+[Download the Agora APK](https://drive.google.com/file/d/16zFuzTw1NEfqoKmUXI5pqXVMRPSgsxnl/view?usp=sharing)
+
+## Security Note
+
+Credentials, Firebase configuration, and production database connection information have intentionally been removed from this public repository. This repository is intended to demonstrate the application's source code and engineering approach without exposing private configuration.
+
+## About the Project
+
+Agora was built to make government information easier to access from a single application. The mobile project provided experience building a multi-screen application, integrating local and remote data, implementing authentication, managing application state, troubleshooting integration issues, and delivering a working Android application as part of a collaborative capstone effort.
